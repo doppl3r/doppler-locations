@@ -5,10 +5,8 @@ class Doppler_Locator_Public {
 	private $version;
 
 	public function __construct( $doppler_locator, $version ) {
-
 		$this->doppler_locator = $doppler_locator;
 		$this->version = $version;
-
 	}
 
 	public function enqueue_styles() {

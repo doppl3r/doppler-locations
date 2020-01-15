@@ -7,22 +7,15 @@ class Doppler_Locator {
 	public function __construct() {
 		$this->doppler_locator = 'doppler-locator';
 		$this->load_dependencies();
-		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 	}
 
 	private function load_dependencies() {
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-doppler-locator-loader.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-doppler-locator-i18n.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-doppler-locator-admin.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-doppler-locator-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-public.php';
 		$this->loader = new Doppler_Locator_Loader();
-	}
-
-	private function set_locale() {
-		$plugin_i18n = new Doppler_Locator_i18n();
-		$this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
 	}
 
 	private function define_admin_hooks() {

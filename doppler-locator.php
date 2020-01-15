@@ -21,17 +21,17 @@ global $wpdb, $doppler_locator_table_name;
 $doppler_locator_table_name = $wpdb->prefix . 'doppler_locator';
 
 function activate_doppler_locator() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-doppler-locator-activator.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-activator.php';
 	Doppler_Locator_Activator::activate();
 }
 
 function deactivate_doppler_locator() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-doppler-locator-deactivator.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-deactivator.php';
 	Doppler_Locator_Deactivator::deactivate();
 }
 
 function uninstall_doppler_locator() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-doppler-locator-uninstaller.php';
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-uninstaller.php';
 	Doppler_Locator_Uninstaller::uninstall();
 }
 
@@ -41,7 +41,7 @@ register_deactivation_hook( __FILE__, 'deactivate_doppler_locator' );
 register_uninstall_hook(__FILE__, 'uninstall_doppler_locator');
 
 // Evaluate the main file and include classes
-require plugin_dir_path( __FILE__ ) . 'includes/class-doppler-locator.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-plugin.php';
 
 // Run the plugin
 function run_doppler_locator() {

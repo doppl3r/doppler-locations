@@ -16,8 +16,9 @@
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) { die; }
 
-// Control version of extension
-define( 'DOPPLER_LOCATOR_VERSION', '1.0.0' );
+// Declare global variables
+global $wpdb, $doppler_locator_table_name;
+$doppler_locator_table_name = $wpdb->prefix . 'doppler_locator';
 
 function activate_doppler_locator() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-doppler-locator-activator.php';
@@ -29,9 +30,15 @@ function deactivate_doppler_locator() {
 	Doppler_Locator_Deactivator::deactivate();
 }
 
+function uninstall_doppler_locator() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-doppler-locator-uninstaller.php';
+	Doppler_Locator_Uninstaller::uninstall();
+}
+
 // Use core activation/deactivation hooks
 register_activation_hook( __FILE__, 'activate_doppler_locator' );
 register_deactivation_hook( __FILE__, 'deactivate_doppler_locator' );
+register_uninstall_hook(__FILE__, 'uninstall_doppler_locator');
 
 // Evaluate the main file and include classes
 require plugin_dir_path( __FILE__ ) . 'includes/class-doppler-locator.php';

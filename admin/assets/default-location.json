@@ -1,0 +1,26 @@
+{
+    "title": "Location",
+    "template": "default",
+    "status": "Open",
+    "name": "Location",
+    "hours": {
+        "Mon": "7:00am-7:00pm",
+        "Tue": "7:00am-7:00pm",
+        "Wed": "7:00am-7:00pm",
+        "Thu": "7:00am-7:00pm",
+        "Fri": "7:00am-7:00pm",
+        "Sat": "7:00am-7:00pm",
+        "Sun": "7:00am-7:00pm"
+    },
+    "city": "",
+    "state": "",
+    "zip": "",
+    "phone": "",
+    "street": "",
+    "latitude": "37.7441807",
+    "longitude": "-122.4236523",
+    "guide": "Entrance facing the street",
+    "posts": [],
+    "links": [],
+    "users": []
+}

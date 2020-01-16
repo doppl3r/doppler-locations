@@ -12,9 +12,9 @@ class Doppler_Locator {
 	}
 
 	private function load_dependencies() {
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-loader.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-admin.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-public.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-loader.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-admin.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-public.php';
 		$this->loader = new Doppler_Locator_Loader();
 	}
 

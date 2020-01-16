@@ -2,27 +2,32 @@
 
 class Doppler_Locator_Activator {
 	public static function activate() {
-        // TODO: Check to see if any posts with post_type = "template" and generate defaults posts if it does not exist
+        // Initialize post query
+        $post_type = 'template';
+        $args = array('numberposts' => -1, 'post_type' => $post_type);
+        $template_count = count(get_posts($args));
 
-
-        /*
-        global $wpdb, $doppler_locator_table_name;
-		$charset_collate = $wpdb->get_charset_collate();
-		$table_name = $doppler_locator_table_name;
-
-        if ($wpdb->get_var("SHOW TABLES LIKE '" . $table_name . "'") != $table_name) 
-        {
-			$sql = "CREATE TABLE " . $table_name . " 
-			( 
-                id MEDIUMINT(8) UNSIGNED NOT NULL AUTO_INCREMENT,
-                name VARCHAR(50) NOT NULL,
-                points INT(6) NOT NULL,
-                PRIMARY KEY (id)
-			) " . $charset_collate . ";";
-
-            require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-            dbDelta($sql);
+        // Register post types
+        $post_types = array('location', 'template');
+        foreach($post_types as $post_type) {
+            register_post_type($post_type);
         }
-        */
+
+        // Check if no post_type "template" exists
+        if ($template_count <= 0) {
+            // Add new post with post_type "template"
+            $json = file_get_contents(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/default-template.json');
+            $default = json_decode($json, true);
+            $postarr = array(
+                'post_type'             => $post_type,
+                'post_title'            => $default['title'],
+                'post_excerpt'          => $default['description'],
+                'post_content'          => $default['content']
+            );
+            wp_insert_post($postarr);
+        }
+
+        // Clear the permalinks after the post type has been registered
+        flush_rewrite_rules();
 	}
 }

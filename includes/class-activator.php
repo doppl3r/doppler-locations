@@ -17,6 +17,7 @@ class Doppler_Locator_Activator {
 
         // Check if any templates exist
         if (count($results) <= 0) {
+            // Add new page with default template
             $json = file_get_contents(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/default-template.json');
             $default = json_decode($json, true);
             $postarr = array(

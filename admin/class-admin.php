@@ -103,24 +103,9 @@ class Doppler_Locator_Admin {
 		// Add postmeta to newly inserted page
 		add_post_meta($post_id, 'template', $default['template']);
 		add_post_meta($post_id, 'status', $default['status']);
-
+		
 
 		echo $post_id; // Return post ID
-	}
-
-	public function delete_post_by_type($post_id, $post_type) {
-		global $wpdb;
-		$result = $wpdb->query( 
-			$wpdb->prepare("
-				DELETE posts, terms, meta
-				FROM wp_posts posts
-				LEFT JOIN wp_term_relationships terms ON terms.object_id = posts.ID
-				LEFT JOIN wp_postmeta meta ON meta.post_id = posts.ID
-				WHERE posts.ID = %s AND posts.post_type = %s
-				",
-				$post_id, $post_type
-			) 
-		);
 	}
 
 	public function delete_posts_by_type($post_type) {

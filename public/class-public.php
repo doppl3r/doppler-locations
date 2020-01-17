@@ -17,7 +17,7 @@ class Doppler_Locator_Public {
 
 	public function enqueue_scripts() {
 		// Register scripts
-		wp_register_script('scripts', plugin_dir_url(__FILE__) . 'assets/js/scripts.js', array( 'jquery' ), false, false);
+		wp_register_script('scripts', plugin_dir_url(__FILE__) . 'assets/js/scripts.js', array( 'jquery' ));
 
 		// Enqueue scripts
 		wp_enqueue_script('scripts');

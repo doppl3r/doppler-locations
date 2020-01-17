@@ -1,5 +1,5 @@
 {
-    "title": "Location",
+    "title": "Default",
     "description": "Default page template",
     "content": "<h1>[name]<\/h1>\n<p>[status]<\/p>\n<p>[street],<br>[city] [state], [zip]<br>[guide]<\/p>\n\n<h2>Gallery<\/h2>\n[media id=\"gallery\"]\n\n<h2>News<\/h2>\n[posts type=\"news\"]\n\n<h2>Contact Us<\/h2>\n[link text=\"email\"]\n[map]"
 }

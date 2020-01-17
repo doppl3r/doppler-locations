@@ -8,17 +8,22 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; }
 
 /* Navigation */
 .doppler-body .nav { padding-bottom: 36px; }
-.doppler-body .nav .col-6 { display: flex; align-items: center; }
-.doppler-body .nav .col-6:last-of-type { justify-content: flex-end; }
+.doppler-body .nav .col-6-m { display: flex; align-items: center; }
+.doppler-body .nav .col-6-m:last-of-type { justify-content: flex-end; }
 .doppler-body .nav h1 { color: #333; font-size: 24px; }
 .doppler-body .nav .btn { background-color: #0088FF; border-radius: 999px; box-shadow: 0 3px 6px rgba(0, 136, 255, 0.25); color: #fff; font-size: 16px; font-weight: bold; padding: 8px 24px; text-decoration: none; }
 
 /* Container */
 .doppler-body .container { background-color: #fff; padding: 16px; border-radius: 8px; }
-.doppler-body .container label { color: #333; font-size: 16px; font-weight: bold; margin-bottom: 12px; display: inline-block; }
+.doppler-body .container label { color: #333; font-size: 16px; font-weight: bold; margin-bottom: 12px; display: inline-block; cursor: default }
 .doppler-body .container label.small { color: #999; font-size: 12px; margin-bottom: 8px; }
 .doppler-body .container .btn { background-color: #f1f1f1; border-radius: 8px; color: #333; display: block; font-size: 16px; font-weight: normal; padding: 8px 0; text-decoration: none; text-align: center; }
 
+/* Media Query */
+@media (max-width: 768px) {
+    .doppler-body { padding: 12px; }
+}
+
 /* Font Family */
-@font-face { font-family: 'Roboto'; src: url('Roboto-Regular.woff2') format('woff2'); font-weight: normal; font-style: normal; }
-@font-face { font-family: 'Roboto'; src: url('Roboto-Bold.woff2') format('woff2'); font-weight: bold; font-style: normal; }
+@font-face { font-family: 'Roboto'; src: url('../fonts/Roboto-Regular.woff2') format('woff2'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'Roboto'; src: url('../fonts/Roboto-Bold.woff2') format('woff2'); font-weight: bold; font-style: normal; }

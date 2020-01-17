@@ -16,10 +16,6 @@
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) { die; }
 
-// Declare global variables
-global $wpdb, $doppler_locator_table_name;
-$doppler_locator_table_name = $wpdb->prefix . 'doppler_locator';
-
 function activate_doppler_locator() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-activator.php';
 	Doppler_Locator_Activator::activate();
@@ -45,8 +41,9 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-plugin.php';
 
 // Run the plugin
 function run_doppler_locator() {
-	$plugin = new Doppler_Locator();
-	$plugin->run();
+	global $doppler_locator_plugin; // Make available for other classes
+	$doppler_locator_plugin = new Doppler_Locator();
+	$doppler_locator_plugin->run();
 }
 
 // Call the plugin

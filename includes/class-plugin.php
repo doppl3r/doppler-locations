@@ -3,6 +3,8 @@
 class Doppler_Locator {
 	protected $loader;
 	protected $doppler_locator;
+	protected $plugin_admin;
+	protected $plugin_public;
 
 	public function __construct() {
 		$this->doppler_locator = 'doppler-locator';
@@ -19,15 +21,15 @@ class Doppler_Locator {
 	}
 
 	private function define_admin_hooks() {
-		$plugin_admin = new Doppler_Locator_Admin($this->get_doppler_locator());
-		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_styles');
-		$this->loader->add_action('admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts');
+		$this->plugin_admin = new Doppler_Locator_Admin($this->get_doppler_locator());
+		$this->loader->add_action('admin_enqueue_scripts', $this->plugin_admin, 'enqueue_styles');
+		$this->loader->add_action('admin_enqueue_scripts', $this->plugin_admin, 'enqueue_scripts');
 	}
-
+	
 	private function define_public_hooks() {
-		$plugin_public = new Doppler_Locator_Public($this->get_doppler_locator());
-		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_styles');
-		$this->loader->add_action('wp_enqueue_scripts', $plugin_public, 'enqueue_scripts');
+		$this->plugin_public = new Doppler_Locator_Public($this->get_doppler_locator());
+		$this->loader->add_action('wp_enqueue_scripts', $this->plugin_public, 'enqueue_styles');
+		$this->loader->add_action('wp_enqueue_scripts', $this->plugin_public, 'enqueue_scripts');
 	}
 
 	public function run() {
@@ -40,5 +42,13 @@ class Doppler_Locator {
 
 	public function get_loader() {
 		return $this->loader;
+	}
+
+	public function get_plugin_admin() {
+		return $this->plugin_admin;
+	}
+
+	public function get_plugin_public() {
+		return $this->plugin_public;
 	}
 }

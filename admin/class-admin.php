@@ -5,7 +5,8 @@ class Doppler_Locator_Admin {
 
 	public function __construct($doppler_locator) {
 		$this->doppler_locator = $doppler_locator;
-		add_action( 'admin_menu', array( $this, 'add_menu_page' ) ); /* Add admin menu and page */
+		add_action('admin_menu', array($this, 'add_menu_page')); /* Add admin menu and page */
+		add_action('wp_ajax_add_location', array($this, 'add_location'));
 	}
 
 	public function add_menu_page() {
@@ -41,7 +42,7 @@ class Doppler_Locator_Admin {
 
 	public function enqueue_scripts() {
 		// Register scripts
-		wp_register_script('scripts', plugin_dir_url(__FILE__) . 'assets/js/scripts.js');
+		wp_register_script('scripts', plugin_dir_url(__FILE__) . 'assets/js/scripts.js', array( 'jquery' ));
 		
 		// Enqueue scripts
 		wp_enqueue_script('scripts');
@@ -53,5 +54,87 @@ class Doppler_Locator_Admin {
 
 	public function render_template() {
 		require_once(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/templates.php');
+	}
+
+	public function get_template_count() {
+		// Initialize post query
+        global $wpdb;
+        $post_type = 'template';
+        $results = $wpdb->get_results( 
+            $wpdb->prepare("
+                SELECT post_type
+                    FROM wp_posts
+                    WHERE post_type = %s
+                ", 
+                $post_type
+            ) 
+		);
+		return count($results);
+	}
+
+	public function add_template() {
+		// Initialize variables
+        $post_type = 'template';
+        
+		// Add new page with default template
+		$json = file_get_contents(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/json/default-template.json');
+		$default = json_decode($json, true);
+		$postarr = array(
+			'post_type'             => $post_type,
+			'post_title'            => $default['title'],
+			'post_excerpt'          => $default['description'],
+			'post_content'          => $default['content']
+		);
+		wp_insert_post($postarr);
+	}
+
+	public function add_location() {
+		// Add new page with default template
+		$post_type = 'location';
+		$json = file_get_contents(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/json/default-location.json');
+		$default = json_decode($json, true);
+		$post_arr = array(
+			'post_type'             => $post_type,
+			'post_status'			=> 'publish',
+			'post_title' 			=> $default['title']
+		);
+		$post_id = wp_insert_post($post_arr);
+
+		// Add postmeta to newly inserted page
+		add_post_meta($post_id, 'template', $default['template']);
+		add_post_meta($post_id, 'status', $default['status']);
+
+
+		echo $post_id; // Return post ID
+	}
+
+	public function delete_post_by_type($post_id, $post_type) {
+		global $wpdb;
+		$result = $wpdb->query( 
+			$wpdb->prepare("
+				DELETE posts, terms, meta
+				FROM wp_posts posts
+				LEFT JOIN wp_term_relationships terms ON terms.object_id = posts.ID
+				LEFT JOIN wp_postmeta meta ON meta.post_id = posts.ID
+				WHERE posts.ID = %s AND posts.post_type = %s
+				",
+				$post_id, $post_type
+			) 
+		);
+	}
+
+	public function delete_posts_by_type($post_type) {
+		global $wpdb;
+		$result = $wpdb->query( 
+			$wpdb->prepare("
+				DELETE posts, terms, meta
+				FROM wp_posts posts
+				LEFT JOIN wp_term_relationships terms ON terms.object_id = posts.ID
+				LEFT JOIN wp_postmeta meta ON meta.post_id = posts.ID
+				WHERE posts.post_type = %s
+				",
+				$post_type
+			) 
+		);
 	}
 }

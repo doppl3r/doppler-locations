@@ -1,0 +1,8 @@
+/* Doppler Locator Admin CSS */
+h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; }
+.doppler-locator-body { padding: 64px; }
+.doppler-locator-body .btn { border-radius: 999px; }
+
+/* Font Family */
+@font-face { font-family: 'Roboto'; src: url('Roboto-Regular.woff2') format('woff2'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'Roboto'; src: url('Roboto-Bold.woff2') format('woff2'); font-weight: bold; font-style: normal; }

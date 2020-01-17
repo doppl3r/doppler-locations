@@ -30,11 +30,21 @@ class Doppler_Locator_Admin {
 	}
 
 	public function enqueue_styles() {
-		wp_enqueue_style( $this->doppler_locator, plugin_dir_url( __FILE__ ) . 'assets/css/doppler-locator-admin.css', array(), false, 'all' );
+		// Register stylesheets
+		wp_register_style('grix', plugin_dir_url(__FILE__) . 'assets/css/grix.css');
+		wp_register_style('stylesheet', plugin_dir_url(__FILE__) . 'assets/css/stylesheet.css');
+
+		// Enqueue stylesheets
+		wp_enqueue_style('grix');
+		wp_enqueue_style('stylesheet');
 	}
 
 	public function enqueue_scripts() {
-		wp_enqueue_script( $this->doppler_locator, plugin_dir_url( __FILE__ ) . 'assets/js/doppler-locator-admin.js', array( 'jquery' ), false, false );
+		// Register scripts
+		wp_register_script('scripts', plugin_dir_url(__FILE__) . 'assets/js/scripts.js');
+		
+		// Enqueue scripts
+		wp_enqueue_script('scripts');
 	}
 
 	public function render() {

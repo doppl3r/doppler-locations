@@ -8,10 +8,10 @@ class Doppler_Locator_Public {
 	}
 
 	public function enqueue_styles() {
-		wp_enqueue_style($this->doppler_locator, plugin_dir_url( __FILE__ ) . 'css/doppler-locator-public.css', array(), false, 'all');
+		wp_enqueue_style($this->doppler_locator, plugin_dir_url( __FILE__ ) . 'assets/css/doppler-locator-public.css', array(), false, 'all');
 	}
 
 	public function enqueue_scripts() {
-		wp_enqueue_script($this->doppler_locator, plugin_dir_url( __FILE__ ) . 'js/doppler-locator-public.js', array( 'jquery' ), false, false);
+		wp_enqueue_script($this->doppler_locator, plugin_dir_url( __FILE__ ) . 'assets/js/doppler-locator-public.js', array( 'jquery' ), false, false);
 	}
 }

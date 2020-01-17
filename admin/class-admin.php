@@ -6,7 +6,7 @@ class Doppler_Locator_Admin {
 	public function __construct($doppler_locator) {
 		$this->doppler_locator = $doppler_locator;
 		add_action('admin_menu', array($this, 'add_menu_page')); /* Add admin menu and page */
-		add_action('wp_ajax_add_location', array($this, 'add_location'));
+		add_action('wp_ajax_add_post', array($this, 'add_post'));
 	}
 
 	public function add_menu_page() {
@@ -56,56 +56,70 @@ class Doppler_Locator_Admin {
 		require_once(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/templates.php');
 	}
 
-	public function get_template_count() {
-		// Initialize post query
-        global $wpdb;
-        $post_type = 'template';
-        $results = $wpdb->get_results( 
-            $wpdb->prepare("
-                SELECT post_type
-                    FROM wp_posts
-                    WHERE post_type = %s
-                ", 
-                $post_type
-            ) 
-		);
-		return count($results);
+	public function add_post($post_type) {
+		// Define post_type by AJAX post value
+		if (isset($_POST['post_type'])) $post_type = $_POST['post_type'];
+
+		// Determine specific post_type
+		if ($post_type == "template") {
+			// Add new page with default template
+			$json = file_get_contents(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/json/default-template.json');
+			$default = json_decode($json, true);
+			$post_arr = array(
+				'post_type'             => $post_type,
+				'post_title'            => $default['title'],
+				'post_excerpt'          => $default['description'],
+				'post_content'          => $default['content']
+			);
+			wp_insert_post($post_arr);
+		}
+		else if ($post_type == "location") {
+			// Add new page with default template
+			$json = file_get_contents(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/json/default-location.json');
+			$default = json_decode($json, true);
+			$post_arr = array(
+				'post_type'             => $post_type,
+				'post_status'			=> 'publish',
+				'post_title' 			=> $default['title']
+			);
+			$post_id = wp_insert_post($post_arr);
+
+			// Add postmeta to newly inserted page
+			add_post_meta($post_id, 'template', $default['template']);
+			add_post_meta($post_id, 'status', $default['status']);
+			add_post_meta($post_id, 'name', $default['name']);
+			add_post_meta($post_id, 'hours', json_encode($default['hours'])); // TODO - might need to use json_encode()
+			add_post_meta($post_id, 'city', $default['city']);
+			add_post_meta($post_id, 'state', $default['state']);
+			add_post_meta($post_id, 'zip', $default['zip']);
+			add_post_meta($post_id, 'phone', $default['phone']);
+			add_post_meta($post_id, 'street', $default['street']);
+			add_post_meta($post_id, 'latitude', $default['latitude']);
+			add_post_meta($post_id, 'longitude', $default['longitude']);
+			add_post_meta($post_id, 'guide', $default['guide']);
+			add_post_meta($post_id, 'posts', json_encode($default['posts']));
+			add_post_meta($post_id, 'links', json_encode($default['links']));
+			add_post_meta($post_id, 'users', json_encode($default['users']));
+
+			// Return post ID
+			echo $post_id;
+			wp_die();
+		}
 	}
 
-	public function add_template() {
-		// Initialize variables
-        $post_type = 'template';
-        
-		// Add new page with default template
-		$json = file_get_contents(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/json/default-template.json');
-		$default = json_decode($json, true);
-		$postarr = array(
-			'post_type'             => $post_type,
-			'post_title'            => $default['title'],
-			'post_excerpt'          => $default['description'],
-			'post_content'          => $default['content']
+	public function delete_post_by_id($post_id) {
+		global $wpdb;
+		$result = $wpdb->query( 
+			$wpdb->prepare("
+				DELETE posts, terms, meta
+				FROM wp_posts posts
+				LEFT JOIN wp_term_relationships terms ON terms.object_id = posts.ID
+				LEFT JOIN wp_postmeta meta ON meta.post_id = posts.ID
+				WHERE posts.ID = %s
+				",
+				$post_id
+			) 
 		);
-		wp_insert_post($postarr);
-	}
-
-	public function add_location() {
-		// Add new page with default template
-		$post_type = 'location';
-		$json = file_get_contents(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/json/default-location.json');
-		$default = json_decode($json, true);
-		$post_arr = array(
-			'post_type'             => $post_type,
-			'post_status'			=> 'publish',
-			'post_title' 			=> $default['title']
-		);
-		$post_id = wp_insert_post($post_arr);
-
-		// Add postmeta to newly inserted page
-		add_post_meta($post_id, 'template', $default['template']);
-		add_post_meta($post_id, 'status', $default['status']);
-		
-
-		echo $post_id; // Return post ID
 	}
 
 	public function delete_posts_by_type($post_type) {
@@ -121,5 +135,23 @@ class Doppler_Locator_Admin {
 				$post_type
 			) 
 		);
+	}
+
+	public function get_post_count($post_type) {
+		// Define post_type by AJAX post value
+		if (isset($_POST['post_type'])) $post_type = $_POST['post_type'];
+
+		// Initialize post query
+        global $wpdb;
+        $results = $wpdb->get_results( 
+            $wpdb->prepare("
+                SELECT post_type
+                    FROM wp_posts
+                    WHERE post_type = %s
+                ", 
+                $post_type
+            ) 
+		);
+		return count($results);
 	}
 }

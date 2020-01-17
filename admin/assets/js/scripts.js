@@ -5,7 +5,7 @@
 	$(document).ready(function(){
 		$('[href*="#add-location"]').on('click', function(e){
 			e.preventDefault();
-			$.post(ajaxurl, { 'action': 'add_location', 'name': 'test-name' }, function(response) { 
+			$.post(ajaxurl, { 'action': 'add_post', 'post_type': 'location' }, function(response) { 
 				console.log(response);
 			});
 		});

@@ -22,6 +22,9 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; }
 
 .doppler-body .container .locations .row { padding: 8px 12px; border: 2px solid #f1f1f1; border-radius: 8px; margin: 0 0 8px; font-size: 16px; align-items: center; }
 .doppler-body .container .locations .row label { margin: 0 16px 0 0; }
+.doppler-body .container .locations .row label.status { line-height: 12px; display: flex; }
+.doppler-body .container .locations .row label.status:before { background-color: #f1f1f1; content: ''; display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 12px; }
+.doppler-body .container .locations .row label.status.open:before { background-color: #00D17D; }
 
 /* Media Query */
 @media (max-width: 768px) {

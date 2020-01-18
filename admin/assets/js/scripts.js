@@ -1,13 +1,24 @@
 (function($) {
 	'use strict';
-	console.log('doppler-locator-admin.js');
 	
 	$(document).ready(function(){
-		$('[href*="#add-location"]').on('click', function(e){
+		// Add location button(s)
+		$(document).on('click', '[href*="#add-location"]', function(e){
 			e.preventDefault();
 			$.post(ajaxurl, { 'action': 'add_post', 'post_type': 'location' }, function(response) { 
 				// Append new row
-				$('.locations').append(response);
+				var row = response;
+				$('.locations').append(row);
+			});
+		});
+
+		// Delete location button(s)
+		$(document).on('click', '[href*="#delete-location"]', function(e){
+			e.preventDefault();
+			var locationId = $(this).closest('.row').attr('data-post');
+			$.post(ajaxurl, { 'action': 'delete_post', 'post_id': locationId }, function(response) { 
+				// Remove row
+				$('.locations [data-post=' + locationId + ']').remove();
 			});
 		});
 	});

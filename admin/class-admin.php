@@ -7,6 +7,7 @@ class Doppler_Locator_Admin {
 		$this->doppler_locator = $doppler_locator;
 		add_action('admin_menu', array($this, 'add_menu_page')); /* Add admin menu and page */
 		add_action('wp_ajax_add_post', array($this, 'add_post'));
+		add_action('wp_ajax_delete_post', array($this, 'delete_post'));
 	}
 
 	public function add_menu_page() {
@@ -143,6 +144,10 @@ class Doppler_Locator_Admin {
 	}
 
 	public function delete_post($post_id) {
+		// Define post_type by AJAX post value
+		if (isset($_POST['post_id'])) $post_id = $_POST['post_id'];
+
+		// Run delete query
 		global $wpdb;
 		$result = $wpdb->query( 
 			$wpdb->prepare("
@@ -155,6 +160,8 @@ class Doppler_Locator_Admin {
 				$post_id
 			) 
 		);
+		echo $result;
+		wp_die();
 	}
 
 	public function delete_posts_by_type($post_type) {

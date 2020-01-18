@@ -205,16 +205,18 @@ class Doppler_Locator_Admin {
 		}
 	}
 
-	function remove_custom_slug( $post_link, $post, $leavename) {
+	function remove_custom_slug( $post_link, $post) {
+		// Replace and return link of custom post type
 		if ('location' != $post->post_type || 'publish' != $post->post_status) { return $post_link; }
 		$post_link = str_replace( '/' . $post->post_type . '/', '/', $post_link );
 		return $post_link;
 	}
 
 	function parse_custom_request($query) {
-		if (!$query->is_main_query() || 2 != count( $query->query ) || ! isset( $query->query['page'] )) { return; }
-		if (!empty( $query->query['name'])) {
-			$query->set( 'post_type', array( 'post', 'location', 'page' ) );
+		// Allow WordPress to accept custom post type "location"
+		if (!$query->is_main_query() || 2 != count($query->query) || ! isset($query->query['page'])) { return; }
+		if (!empty($query->query['name'])) {
+			$query->set('post_type', array( 'post', 'location', 'page'));
 		}
 	}
 }

@@ -11,8 +11,8 @@
         <label>Locations</label>
         <div class="row">
             <label class="small col-3-m">Status</label>
-            <label class="small col-6-m">Page Title</label>
-            <label class="small col-3-m">Action</label>
+            <label class="small col-3-m">Page Title</label>
+            <label class="small col-6-m">Options</label>
         </div>
         <div class="locations">
             <?php

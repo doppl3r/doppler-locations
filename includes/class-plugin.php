@@ -24,6 +24,9 @@ class Doppler_Locator {
 		$this->plugin_admin = new Doppler_Locator_Admin($this->get_doppler_locator());
 		$this->loader->add_action('admin_enqueue_scripts', $this->plugin_admin, 'enqueue_styles');
 		$this->loader->add_action('admin_enqueue_scripts', $this->plugin_admin, 'enqueue_scripts');
+		$this->loader->add_action('init', $this->plugin_admin, 'register_custom_posts');
+		$this->loader->add_action('post_type_link', $this->plugin_admin, 'remove_custom_slug', 10, 3);
+		$this->loader->add_action('pre_get_posts', $this->plugin_admin, 'parse_custom_request');
 	}
 	
 	private function define_public_hooks() {

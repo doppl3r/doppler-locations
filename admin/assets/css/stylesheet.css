@@ -1,6 +1,7 @@
 /* Doppler Locator Admin CSS */
 h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; }
 .doppler-body { padding: 64px; user-select: none; }
+.doppler-body * { box-sizing: border-box; }
 .doppler-body a { text-decoration: none; color: inherit; }
 .doppler-body a:focus { outline: none; box-shadow: none; }
 
@@ -17,22 +18,28 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; }
 .doppler-body .nav .btn:hover { background-color: #fff; color: #0088FF; box-shadow: none; }
 
 /* Container */
-.doppler-body .container { background-color: #fff; padding: 16px; border-radius: 8px; }
+.doppler-body .container { background-color: #fff; padding: 16px; border-radius: 8px; position: relative; overflow: hidden; }
 .doppler-body .container label { color: #333; font-size: 16px; font-weight: bold; margin-bottom: 12px; display: inline-block; cursor: default }
 .doppler-body .container label.small { color: #999; font-size: 12px; margin-bottom: 8px; }
 .doppler-body .container .btn { background-color: #f1f1f1; border-radius: 8px; color: #333; display: block; font-size: 16px; font-weight: normal; padding: 8px 0; text-decoration: none; text-align: center; }
 .doppler-body .container .btn:hover { background-color: #0088FF; color: #fff; }
-
-.doppler-body .container .locations .row { padding: 0px 12px; border: 2px solid #f1f1f1; border-radius: 8px; margin: 0 0 8px; font-size: 16px; align-items: center; }
+.doppler-body .container .locations .row { animation: fade-in 1s ease-in-out; padding: 0px 12px; border: 2px solid #f1f1f1; border-radius: 8px; margin: 0 0 8px; font-size: 16px; align-items: center; }
 .doppler-body .container .locations .row label { margin: 4px 0px; }
 .doppler-body .container .locations .row label.disabled { display: none; }
 .doppler-body .container .locations .row label a { padding: 4px 16px; display: block; border-radius: 999px; background-color: #fff; }
 .doppler-body .container .locations .row label a:hover { background-color: #f1f1f1; }
-.doppler-body .container .locations .row label a[href*="delete"]:hover,
 .doppler-body .container .locations .row label a[href*="confirm"]:hover { background-color: #ff0000; color: #fff; }
 .doppler-body .container .locations .row .status label { line-height: 12px; display: flex; }
 .doppler-body .container .locations .row .status label:before { background-color: #f1f1f1; content: ''; display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 12px; }
 .doppler-body .container .locations .row .status.open label:before { background-color: #00D17D; }
+.doppler-body .container:before { content: ''; transition: all 0.25s ease-in-out; position: absolute; top: 0; left: 0; bottom: 0; right: 0; background-color: rgba(200, 200, 200, 0.5); opacity: 0; pointer-events: none; z-index: 1; }
+.doppler-body .container:after { content: ''; transition: all 0.25s ease-in-out; position: absolute; border: 3px solid #fff; border-radius: 50%; border-top: 3px solid #0088FF; width: 24px; height: 24px; animation: spin 1s ease-in-out infinite; left: calc(50% - 12px); top: calc(50% - 12px); opacity: 0; pointer-events: none; z-index: 1; }
+.doppler-body.loading .container:before { opacity: 1; }
+.doppler-body.loading .container:after { opacity: 1; }
+
+/* Animations */
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(720deg); }}
+@keyframes fade-in { 0% { opacity: 0; } 100% { opacity: 1; } }
 
 /* Media Query */
 @media (max-width: 768px) {

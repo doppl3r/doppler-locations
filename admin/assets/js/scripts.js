@@ -5,10 +5,12 @@
 		// Add location button(s)
 		$(document).on('click', '[href*="#add-location"]', function(e){
 			e.preventDefault();
+			$('.doppler-body').addClass('loading');
 			$.post(ajaxurl, { 'action': 'add_post', 'post_type': 'location' }, function(response) { 
 				// Append new row
 				var row = response;
 				$('.locations').append(row);
+				$('.doppler-body').removeClass('loading');
 			});
 		});
 
@@ -32,8 +34,10 @@
 		$(document).on('click', '[href*="#confirm"]', function(e){
 			e.preventDefault();
 			var locationId = $(this).closest('.row').attr('data-post');
+			$('.doppler-body').addClass('loading');
 			$.post(ajaxurl, { 'action': 'delete_post', 'post_id': locationId }, function(response) { 
 				// Remove row
+				$('.doppler-body').removeClass('loading');
 				$('.locations [data-post=' + locationId + ']').remove();
 			});
 		});

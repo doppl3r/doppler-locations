@@ -6,7 +6,8 @@
 		$('[href*="#add-location"]').on('click', function(e){
 			e.preventDefault();
 			$.post(ajaxurl, { 'action': 'add_post', 'post_type': 'location' }, function(response) { 
-				console.log(response);
+				// Append new row
+				$('.locations').append(response);
 			});
 		});
 	});

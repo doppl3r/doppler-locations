@@ -14,6 +14,19 @@
             <label class="small col-6-m">Page Title</label>
             <label class="small col-3-m">Action</label>
         </div>
+        <div class="locations">
+            <?php
+                // Query for results
+                global $doppler_locator_plugin;
+                $results = $doppler_locator_plugin->get_plugin_admin()->get_posts_by_type("location");
+
+                // Render each row using a basic template
+                foreach ($results as $row) {
+                    $status = get_post_meta($row->ID, "status")[0];
+                    $doppler_locator_plugin->get_plugin_admin()->render_location_row($row->ID, $status, $row->post_title);
+                }
+            ?>
+        </div>
         <a class="btn" href="#add-location">Add New Location</a>
     </div>
 </div>

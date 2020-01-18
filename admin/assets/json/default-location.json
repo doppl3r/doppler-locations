@@ -1,8 +1,8 @@
 {
-    "title": "Location",
+    "title": "New Location",
     "template": "Default",
     "status": "Open",
-    "name": "Location",
+    "name": "New Location",
     "hours": {
         "Mon": "7:00am-7:00pm",
         "Tue": "7:00am-7:00pm",

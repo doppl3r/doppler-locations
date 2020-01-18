@@ -15,7 +15,7 @@ class Doppler_Locator_Admin {
 		$menu_title = 'Locations';
 		$capability = 'manage_options';
 		$menu_slug = $this->doppler_locator;
-		$function = array($this, 'render');
+		$function = array($this, 'render_locations');
 		$icon_url = 'dashicons-location-alt';
 		//$icon_url = plugin_dir_url(__FILE__) . 'images/icon_wporg.png';
 		add_menu_page($page_title, $menu_title, $capability, $menu_slug, $function, $icon_url);
@@ -48,7 +48,7 @@ class Doppler_Locator_Admin {
 		wp_enqueue_script('scripts');
 	}
 
-	public function render() {
+	public function render_locations() {
 		require_once(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/locations.php');
 	}
 
@@ -101,13 +101,48 @@ class Doppler_Locator_Admin {
 			add_post_meta($post_id, 'links', json_encode($default['links']));
 			add_post_meta($post_id, 'users', json_encode($default['users']));
 
-			// Return post ID
-			echo $post_id;
+			// Return row HTML/PHP template
+			echo $this->render_location_row($post_id, $default['status'], $default['title']);
 			wp_die();
 		}
 	}
 
-	public function delete_post_by_id($post_id) {
+	public function render_location_row($post_id, $status, $title) {
+		include(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/location-row.php');
+	}
+
+	public function get_post($post_id) {
+
+	}
+
+	public function get_posts_by_type($post_type) {
+		// Define post_type by AJAX post value
+		$use_return = true;
+		if (isset($_POST['post_type'])) {
+			$post_type = $_POST['post_type'];
+			$use_return = false;
+		}
+		
+		global $wpdb;
+		$results = $wpdb->get_results(
+			$wpdb->prepare("
+				SELECT *
+				FROM wp_posts
+				WHERE post_type = %s
+				",
+				$post_type
+			) 
+		);
+
+		// Echo results if called by AJAX
+		if ($use_return == false) {
+			echo $results;
+			wp_die();
+		}
+		return $results;
+	}
+
+	public function delete_post($post_id) {
 		global $wpdb;
 		$result = $wpdb->query( 
 			$wpdb->prepare("
@@ -124,7 +159,7 @@ class Doppler_Locator_Admin {
 
 	public function delete_posts_by_type($post_type) {
 		global $wpdb;
-		$result = $wpdb->query( 
+		$result = $wpdb->query(
 			$wpdb->prepare("
 				DELETE posts, terms, meta
 				FROM wp_posts posts
@@ -143,7 +178,7 @@ class Doppler_Locator_Admin {
 
 		// Initialize post query
         global $wpdb;
-        $results = $wpdb->get_results( 
+        $results = $wpdb->get_results(
             $wpdb->prepare("
                 SELECT post_type
                     FROM wp_posts

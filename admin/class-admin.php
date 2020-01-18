@@ -74,6 +74,10 @@ class Doppler_Locator_Admin {
 				'post_content'          => $default['content']
 			);
 			$post_id = wp_insert_post($post_arr);
+			// Return row HTML/PHP template
+			$row = get_post($post_id);
+			echo $this->render_template_row($row);
+			wp_die();
 		}
 		else if ($post_type == "location") {
 			// Add new page with default template
@@ -112,6 +116,10 @@ class Doppler_Locator_Admin {
 
 	public function render_location_row($row) {
 		include(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/location-row.php');
+	}
+
+	public function render_template_row($row) {
+		include(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/template-row.php');
 	}
 
 	public function delete_post($post_id) {

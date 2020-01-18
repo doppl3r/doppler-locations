@@ -14,11 +14,11 @@
             <label class="small col-3-m">Page Title</label>
             <label class="small col-6-m">Options</label>
         </div>
-        <div class="locations">
+        <div class="posts">
             <?php
                 // Query for results
                 global $doppler_locator_plugin;
-                $results = get_posts([ 'post_type' => 'location', 'post_status' => 'publish', 'numberposts' => -1 ]);
+                $results = get_posts([ 'post_type' => 'location', 'post_status' => 'any', 'numberposts' => -1 ]);
 
                 // Render each row using a basic template
                 foreach ($results as $row) {

@@ -1,3 +1,22 @@
+<?php
+    $post_id = $_GET['id'];
+    $post = get_post($post_id);
+    $template = get_post_meta($post_id, 'template');
+    $status = get_post_meta($post_id, 'status');
+    $name = get_post_meta($post_id, 'name');
+    $hours = json_decode(get_post_meta($post_id, 'hours')[0]);
+    $city = get_post_meta($post_id, 'city');
+    $state = get_post_meta($post_id, 'state');
+    $zip = get_post_meta($post_id, 'zip');
+    $phone = get_post_meta($post_id, 'phone');
+    $street = get_post_meta($post_id, 'street');
+    $latitude = get_post_meta($post_id, 'latitude');
+    $longitude = get_post_meta($post_id, 'longitude');
+    $guide = get_post_meta($post_id, 'guide');
+    $posts = json_decode(get_post_meta($post_id, 'posts')[0]);
+    $links = json_decode(get_post_meta($post_id, 'links')[0]);
+    $users = json_decode(get_post_meta($post_id, 'users')[0]);
+?>
 <div class="doppler-body">
     <div class="nav row">
         <div class="col-6-m">
@@ -11,7 +30,7 @@
         <div class="row">
             <div class="col-6 page-title">
                 <label for="page-title">Title</label>
-                <input id="page-title" name="page-title" type="text">
+                <input id="page-title" name="page-title" type="text" value="<?php echo $post->post_title; ?>">
             </div>
             <div class="col-3 page-template">
                 <label for="page-template">Template</label>
@@ -20,9 +39,14 @@
                     <option value="Default">Default</option>
                 </select>
             </div>
-            <div class="col-3 page-title">
-                <label for="page-title">Title</label>
-                <input id="page-title" name="page-title" type="text">
+            <div class="col-3 page-status">
+                <label for="page-status">Status</label>
+                <select id="page-status" name="page-status">
+                    <option value="Open">Open</option>
+                    <option value="Open">Coming Soon</option>
+                    <option value="Open">Closed</option>
+                    <option value="Open">Other</option>
+                </select>
             </div>
         </div>
         <div class="row">

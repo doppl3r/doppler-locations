@@ -1,13 +1,13 @@
 /* Doppler Locator Admin CSS */
 h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; }
-.doppler-body { padding: 64px; user-select: none; }
+.doppler-body { padding: 64px 64px 64px 44px; user-select: none; }
 .doppler-body * { box-sizing: border-box; }
 .doppler-body a { text-decoration: none; color: inherit; }
 .doppler-body a:focus { outline: none; box-shadow: none; }
 .doppler-body input[name],
-.doppler-body select[name] { border: 2px solid #f1f1f1; border-radius: 8px; display: block; margin: 0 0 24px; max-width: 100%; width: 100%; }
+.doppler-body select[name] { border: 2px solid #f1f1f1; border-radius: 8px; display: block; margin: 0 0 24px; max-width: 100%; width: 100%; padding: 4px 12px; }
 .doppler-body input[name]:focus,
-.doppler-body select[name]:focus { box-shadow: none; border-color: #0088FF; }
+.doppler-body select[name]:focus { box-shadow: none; border-color: #0088FF; color: inherit; }
 
 /* Grid overrides */
 .doppler-body .row [class*="col"]:first-of-type { padding-left: 0; }
@@ -23,7 +23,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; }
 
 /* Container */
 .doppler-body .container { background-color: #fff; padding: 16px; border-radius: 8px; position: relative; overflow: hidden; }
-.doppler-body .container label { color: #333; font-size: 16px; font-weight: bold; margin-bottom: 12px; display: block; cursor: default }
+.doppler-body .container label { color: #333; font-size: 16px; font-weight: bold; margin-bottom: 12px; display: inline-block; cursor: default }
 .doppler-body .container label.small { color: #999; font-size: 12px; margin-bottom: 8px; }
 .doppler-body .container .btn { background-color: #f1f1f1; border-radius: 8px; color: #333; display: block; font-size: 16px; font-weight: normal; padding: 8px 0; text-decoration: none; text-align: center; }
 .doppler-body .container .btn:hover { background-color: #0088FF; color: #fff; }
@@ -57,7 +57,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; }
 
 /* Media Query */
 @media (max-width: 768px) {
-    .doppler-body { padding: 12px; }
+    .doppler-body { padding: 12px 12px 12px 2px; }
     .doppler-body .row [class*="col"] { padding: 0; }
 }
 

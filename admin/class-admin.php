@@ -57,7 +57,7 @@ class Doppler_Locator_Admin {
 		require_once(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/templates.php');
 	}
 
-	public function add_post($post_type) {
+	public function add_post($post_type, $allow_data = true) {
 		// Define post_type by AJAX post value
 		if (isset($_POST['post_type'])) $post_type = $_POST['post_type'];
 
@@ -74,10 +74,6 @@ class Doppler_Locator_Admin {
 				'post_content'          => $default['content']
 			);
 			$post_id = wp_insert_post($post_arr);
-			// Return row HTML/PHP template
-			$row = get_post($post_id);
-			echo $this->render_template_row($row);
-			wp_die();
 		}
 		else if ($post_type == "location") {
 			// Add new page with default template
@@ -106,20 +102,17 @@ class Doppler_Locator_Admin {
 			add_post_meta($post_id, 'posts', json_encode($default['posts']));
 			add_post_meta($post_id, 'links', json_encode($default['links']));
 			add_post_meta($post_id, 'users', json_encode($default['users']));
-
-			// Return row HTML/PHP template
+		}
+		// Return row HTML/PHP template
+		if ($allow_data == true) {
 			$row = get_post($post_id);
-			echo $this->render_location_row($row);
+			echo $this->render_row($post_type, $row);
 			wp_die();
 		}
 	}
 
-	public function render_location_row($row) {
-		include(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/location-row.php');
-	}
-
-	public function render_template_row($row) {
-		include(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/template-row.php');
+	public function render_row($post_type, $row) {
+		include(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/' . $post_type . '-row.php');
 	}
 
 	public function delete_post($post_id) {

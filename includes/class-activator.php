@@ -9,7 +9,7 @@ class Doppler_Locator_Activator {
 
         // Add default template if no template exists on activation
         if ($count <= 0) {
-            $doppler_locator_plugin->get_plugin_admin()->add_post($post_type);
+            $doppler_locator_plugin->get_plugin_admin()->add_post($post_type, false);
         }
     }
 }

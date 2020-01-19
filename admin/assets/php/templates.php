@@ -18,11 +18,12 @@
             <?php
                 // Query for results
                 global $doppler_locator_plugin;
-                $results = get_posts([ 'post_type' => 'template', 'post_status' => 'any', 'numberposts' => -1 ]);
+                $post_type = 'template';
+                $results = get_posts([ 'post_type' => $post_type, 'post_status' => 'any', 'numberposts' => -1 ]);
 
                 // Render each row using a basic template
                 foreach ($results as $row) {
-                    $doppler_locator_plugin->get_plugin_admin()->render_template_row($row);
+                    $doppler_locator_plugin->get_plugin_admin()->render_row($post_type, $row);
                 }
             ?>
         </div>

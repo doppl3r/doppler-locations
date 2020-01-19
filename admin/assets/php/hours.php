@@ -7,10 +7,10 @@
     foreach($periods as $period) {
         for ($hour = 0; $hour < 12; $hour++) {
             for ($d = 0; $d < $divisions; $d++) {
-                $h = (($hour + 12) % 12);
-                $h = ($h == 0) ? 12 : $h;
+                $h = (($hour + 12) % 12); // Sanitize hour to start at '0'
+                $h = ($h == 0) ? 12 : $h; // Fix '12' appearing as '0'
                 $m = ($d % $divisions == 0) ? '00' : ($d * (60 / $divisions)) . '';
-                $t = $h . ':' . $m . ' ' . $period;
+                $t = $h . ':' . $m . ' ' . $period; // Final time string
 ?>
 <option value="<?php echo $t; ?>"><?php echo $t; ?></option>
 <?php

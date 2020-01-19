@@ -1,51 +1,20 @@
 <?php
     // TODO: add attribute "selected" from database
+    $periods = array('AM', 'PM');
+    $divisions = 2; // 2 = 30 minutes
+
+    // Loop through each time options
+    foreach($periods as $period) {
+        for ($hour = 0; $hour < 12; $hour++) {
+            for ($d = 0; $d < $divisions; $d++) {
+                $h = (($hour + 12) % 12);
+                $h = ($h == 0) ? 12 : $h;
+                $m = ($d % $divisions == 0) ? '00' : ($d * (60 / $divisions)) . '';
+                $t = $h . ':' . $m . ' ' . $period;
 ?>
-<option value="12:00 AM">12:00 AM</option>
-<option value="12:30 AM">12:30 AM</option>
-<option value="12:30 AM">1:00 AM</option>
-<option value="12:30 AM">1:30 AM</option>
-<option value="12:30 AM">2:00 AM</option>
-<option value="12:30 AM">2:30 AM</option>
-<option value="12:30 AM">3:00 AM</option>
-<option value="12:30 AM">3:30 AM</option>
-<option value="12:30 AM">4:00 AM</option>
-<option value="12:30 AM">4:30 AM</option>
-<option value="12:30 AM">5:00 AM</option>
-<option value="12:30 AM">5:30 AM</option>
-<option value="12:30 AM">6:00 AM</option>
-<option value="12:30 AM">6:30 AM</option>
-<option value="12:30 AM">7:00 AM</option>
-<option value="12:30 AM">7:30 AM</option>
-<option value="12:30 AM">8:00 AM</option>
-<option value="12:30 AM">8:30 AM</option>
-<option value="12:30 AM">9:00 AM</option>
-<option value="12:30 AM">9:30 AM</option>
-<option value="12:30 AM">10:00 AM</option>
-<option value="12:30 AM">10:30 AM</option>
-<option value="12:30 AM">11:00 AM</option>
-<option value="12:30 AM">11:30 AM</option>
-<option value="12:00 AM">12:00 PM</option>
-<option value="12:30 AM">12:30 PM</option>
-<option value="12:30 AM">1:00 PM</option>
-<option value="12:30 AM">1:30 PM</option>
-<option value="12:30 AM">2:00 PM</option>
-<option value="12:30 AM">2:30 PM</option>
-<option value="12:30 AM">3:00 PM</option>
-<option value="12:30 AM">3:30 PM</option>
-<option value="12:30 AM">4:00 PM</option>
-<option value="12:30 AM">4:30 PM</option>
-<option value="12:30 AM">5:00 PM</option>
-<option value="12:30 AM">5:30 PM</option>
-<option value="12:30 AM">6:00 PM</option>
-<option value="12:30 AM">6:30 PM</option>
-<option value="12:30 AM">7:00 PM</option>
-<option value="12:30 AM">7:30 PM</option>
-<option value="12:30 AM">8:00 PM</option>
-<option value="12:30 AM">8:30 PM</option>
-<option value="12:30 AM">9:00 PM</option>
-<option value="12:30 AM">9:30 PM</option>
-<option value="12:30 AM">10:00 PM</option>
-<option value="12:30 AM">10:30 PM</option>
-<option value="12:30 AM">11:00 PM</option>
-<option value="12:30 AM">11:30 PM</option>
+<option value="<?php echo $t; ?>"><?php echo $t; ?></option>
+<?php
+            }
+        }
+    }
+?>

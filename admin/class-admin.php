@@ -18,8 +18,8 @@ class Doppler_Locator_Admin {
 		$menu_slug = $this->doppler_locator;
 		$function = array($this, 'render_locations');
 		$icon_url = 'dashicons-location-alt';
-		$position = 5;
 		//$icon_url = plugin_dir_url(__FILE__) . 'images/icon_wporg.png';
+		$position = 5;
 		add_menu_page($page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position);
 		
 		// Sub level menu
@@ -51,11 +51,15 @@ class Doppler_Locator_Admin {
 	}
 
 	public function render_locations() {
-		require_once(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/locations.php');
+		// Render single location if id exists, else render location list
+		if (isset($_GET['id'])) { require_once(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/location-single.php'); }
+		else { require_once(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/locations.php'); }
 	}
 
 	public function render_template() {
-		require_once(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/templates.php');
+		// Render single template if id exists, else render template list
+		if (isset($_GET['id'])) { require_once(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/template-single.php'); }
+		else { require_once(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/templates.php'); }
 	}
 
 	public function add_post($post_type, $allow_data = true) {

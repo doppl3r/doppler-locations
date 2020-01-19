@@ -69,7 +69,9 @@
                     </div>
                     <div class="col-6 state">
                         <label for="state">State</label>
-                        <?php require(plugin_dir_path(dirname(__FILE__)) . 'php/states.php'); ?>
+                        <select name="state" id="state">
+                            <?php require(plugin_dir_path(dirname(__FILE__)) . 'php/states.php'); ?>
+                        </select>
                     </div>
                 </div>
                 <div class="row">

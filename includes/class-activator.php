@@ -11,5 +11,8 @@ class Doppler_Locator_Activator {
         if ($count <= 0) {
             $doppler_locator_plugin->get_plugin_admin()->add_post($post_type, false);
         }
+
+        // Flush rewrite rules to prevent 404
+        flush_rewrite_rules();
     }
 }

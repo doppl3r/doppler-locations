@@ -18,8 +18,9 @@ class Doppler_Locator_Admin {
 		$menu_slug = $this->doppler_locator;
 		$function = array($this, 'render_locations');
 		$icon_url = 'dashicons-location-alt';
+		$position = 5;
 		//$icon_url = plugin_dir_url(__FILE__) . 'images/icon_wporg.png';
-		add_menu_page($page_title, $menu_title, $capability, $menu_slug, $function, $icon_url);
+		add_menu_page($page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position);
 		
 		// Sub level menu
 		$parent_slug = $menu_slug;
@@ -190,7 +191,7 @@ class Doppler_Locator_Admin {
 				'taxonomies'            => array($post_type),
 				'hierarchical'          => false,
 				'public'                => true,
-				'show_ui'               => true,
+				'show_ui'               => false,
 				'show_in_menu'          => true,
 				'menu_position'         => 5,
 				'show_in_admin_bar'     => true,

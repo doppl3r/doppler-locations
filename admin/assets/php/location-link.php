@@ -8,15 +8,15 @@
 <div class="row post-meta">
     <div class="col-3">
         <label class="small">Text</label>
-        <input type="text" name="link-text[]" value="<?php echo $text; ?>">
+        <input type="text" name="link_text[]" value="<?php echo $text; ?>">
     </div>
     <div class="col-3">
         <label class="small">URL</label>
-        <input type="text" name="link-url[]" value="<?php echo $url; ?>">
+        <input type="text" name="link_url[]" value="<?php echo $url; ?>">
     </div>
     <div class="col-3">
         <label class="small">Target</label>
-        <select name="link-target[]">
+        <select name="link_target[]">
             <?php
                 $t_arr = array('_self', '_blank');
                 foreach($t_arr as $t) {
@@ -32,6 +32,6 @@
             <div class="col"><label class="small">Class</label></div>
             <div class="col"><label class="small"><a href="#delete-post-meta-link">Delete</a></label></div>
         </div>
-        <input type="text" name="link-class[]" value="<?php echo $class; ?>">
+        <input type="text" name="link_class[]" value="<?php echo $class; ?>">
     </div>
 </div>

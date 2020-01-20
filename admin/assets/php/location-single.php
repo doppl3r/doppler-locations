@@ -45,5 +45,9 @@
         <div class="container">
             <?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-links.php'); ?>
         </div>
+        <h1>Users</h1>
+        <div class="container">
+            <?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-users.php'); ?>
+        </div>
     </form>
 </div>

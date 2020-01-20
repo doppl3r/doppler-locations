@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-6">
                 <label class="small">Type</label>
-                <select name="custom-post-type[]">
+                <select name="custom_post_type[]">
                     <?php
                         $p_arr = array('news', 'event');
                         foreach($p_arr as $p) {
@@ -24,17 +24,17 @@
             </div>
             <div class="col-6">
                 <label class="small">Title</label>
-                <input type="text" name="custom-post-title[]" value="<?php echo $title; ?>">
+                <input type="text" name="custom_post_title[]" value="<?php echo $title; ?>">
             </div>
         </div>
         <div class="row">
             <div class="col-6">
                 <label class="small">Date</label>
-                <input type="text" name="custom-post-date[]" value="<?php echo $date; ?>">
+                <input type="text" name="custom_post_date[]" value="<?php echo $date; ?>">
             </div>
             <div class="col-6">
                 <label class="small">Link</label>
-                <input type="text" name="custom-post-link[]" value="<?php echo $link; ?>">
+                <input type="text" name="custom_post_link[]" value="<?php echo $link; ?>">
             </div>
         </div>
     </div>
@@ -43,6 +43,6 @@
             <div class="col"><label class="small">Content</label></div>
             <div class="col"><label class="small"><a href="#delete-post-meta-custom-post">Delete</a></label></div>
         </div>
-        <textarea name="custom-post-content[]"><?php echo $content; ?></textarea>
+        <textarea name="custom_post_content[]"><?php echo $content; ?></textarea>
     </div>
 </div>

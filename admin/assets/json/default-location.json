@@ -29,6 +29,17 @@
             "content": "Location coming soon!"
         }
     ],
-    "links": [],
-    "users": []
+    "links": [
+        {
+            "text": "",
+            "url": "",
+            "target": "",
+            "class": ""
+        }
+    ],
+    "users": [
+        {
+            "user_login": ""
+        }
+    ]
 }

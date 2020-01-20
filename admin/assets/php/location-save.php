@@ -50,7 +50,7 @@
                 'text' => $_POST['link_text'][$key],
                 'url' => $_POST['link_url'][$key],
                 'target' => $_POST['link_target'][$key],
-                'class' => $_POST['link_class'][$key]
+                'id' => $_POST['link_id'][$key]
             );
         }
     }
@@ -66,5 +66,5 @@
         }
     }
     update_post_meta($post_id, 'users', json_encode($users));
-    
+
 ?>

@@ -20,26 +20,7 @@
     "latitude": "37.7441807",
     "longitude": "-122.4236523",
     "guide": "Entrance facing the street",
-    "custom_posts": [
-        {
-            "type": "news",
-            "title": "Coming soon!",
-            "date": "TBD",
-            "link": "https://www.dopplercreative.com",
-            "content": "Location coming soon!"
-        }
-    ],
-    "links": [
-        {
-            "text": "",
-            "url": "",
-            "target": "",
-            "class": ""
-        }
-    ],
-    "users": [
-        {
-            "user_login": ""
-        }
-    ]
+    "custom_posts": [],
+    "links": [],
+    "users": []
 }

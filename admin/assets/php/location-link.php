@@ -3,7 +3,7 @@
     $text = $postmeta->text;
     $url = $postmeta->url;
     $target = $postmeta->target;
-    $class = $postmeta->class;
+    $id = $postmeta->id;
 ?>
 <div class="row post-meta">
     <div class="col-3">
@@ -29,9 +29,9 @@
     </div>
     <div class="col-3">
         <div class="row justify">
-            <div class="col"><label class="small">Class</label></div>
+            <div class="col"><label class="small">ID</label></div>
             <div class="col"><label class="small"><a href="#delete-post-meta-link">Delete</a></label></div>
         </div>
-        <input type="text" name="link_class[]" value="<?php echo $class; ?>">
+        <input type="text" name="link_id[]" value="<?php echo $id; ?>">
     </div>
 </div>

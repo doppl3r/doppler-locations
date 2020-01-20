@@ -8,6 +8,7 @@ class Doppler_Locator_Admin {
 		add_action('admin_menu', array($this, 'add_menu_page')); /* Add admin menu and page */
 		add_action('wp_ajax_add_post', array($this, 'add_post'));
 		add_action('wp_ajax_delete_post', array($this, 'delete_post'));
+		add_action('wp_ajax_add_custom_post', array($this, 'add_custom_post'));
 	}
 
 	public function add_menu_page() {
@@ -104,7 +105,7 @@ class Doppler_Locator_Admin {
 			add_post_meta($post_id, 'latitude', $default['latitude']);
 			add_post_meta($post_id, 'longitude', $default['longitude']);
 			add_post_meta($post_id, 'guide', $default['guide']);
-			add_post_meta($post_id, 'posts', json_encode($default['posts']));
+			add_post_meta($post_id, 'custom_posts', json_encode($default['custom_posts']));
 			add_post_meta($post_id, 'links', json_encode($default['links']));
 			add_post_meta($post_id, 'users', json_encode($default['users']));
 		}
@@ -118,6 +119,14 @@ class Doppler_Locator_Admin {
 
 	public function render_row($post_type, $row) {
 		include(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/' . $post_type . '-row.php');
+	}
+
+	public function add_custom_post($custom_post) {
+		echo $this->render_custom_post($custom_post); wp_die();
+	}
+
+	public function render_custom_post($custom_post) {
+		include(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/location-custom-post.php');
 	}
 
 	public function delete_post($post_id) {

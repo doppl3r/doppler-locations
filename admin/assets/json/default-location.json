@@ -20,7 +20,15 @@
     "latitude": "37.7441807",
     "longitude": "-122.4236523",
     "guide": "Entrance facing the street",
-    "posts": [],
+    "custom_posts": [
+        {
+            "type": "news",
+            "title": "Coming soon!",
+            "date": "dbt",
+            "link": "https://www.dopplercreative.com",
+            "content": "Location coming soon!"
+        }
+    ],
     "links": [],
     "users": []
 }

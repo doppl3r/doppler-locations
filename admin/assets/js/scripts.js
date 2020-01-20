@@ -1,10 +1,10 @@
 (function($) {
 	'use strict';
-	
+
 	$(document).ready(function(){
 		$('.doppler-body').removeClass('loading');
 		// Add post button(s)
-		$(document).on('click', '.doppler-body [href*="add"]', function(e){
+		$(document).on('click', '.doppler-body [href*="add-location"], .doppler-body [href*="add-template"]', function(e){
 			e.preventDefault();
 			var postType = $(this).attr('href').split("-")[1];
 			$('.doppler-body').addClass('loading');
@@ -17,14 +17,14 @@
 		});
 
 		// Add click listener for delete buttons
-		$(document).on('click', '.doppler-body [href*="delete"]', function(e){
+		$(document).on('click', '.doppler-body [href*="delete-post"]', function(e){
 			e.preventDefault();
 			$(this).closest('label').addClass('disabled');
 			$(this).closest('.options').append('<label class="small"><a href="cancel">Cancel</a></label>');
 			$(this).closest('.options').append('<label class="small"><a href="confirm">Confirm</a></label>');
 		});
 
-		// Cancel deletion
+		// Cancel post deletion
 		$(document).on('click', '.doppler-body [href*="cancel"]', function(e){
 			e.preventDefault();
 			$(this).closest('.options').find('[href*="delete"]').closest('label').removeClass('disabled');
@@ -49,6 +49,24 @@
 			e.preventDefault();
 			$('.doppler-body').addClass('loading');
 			$('.doppler-body form').submit();
+		});
+
+		// Add custom post (for location-single.php page)
+		$(document).on('click', '.doppler-body [href*="add-custom-post"]', function(e){
+			e.preventDefault();
+			$('.doppler-body').addClass('loading');
+			$.post(ajaxurl, { 'action': 'add_custom_post' }, function(response) { 
+				// Append new row
+				var row = response;
+				$('.custom-posts').append(row);
+				$('.doppler-body').removeClass('loading');
+			});
+		});
+
+		// Delete custom-posts (for location-single.php page)
+		$(document).on('click', '.doppler-body [href*="delete-custom-post"]', function(e){
+			e.preventDefault();
+			$(this).closest('.custom-post').remove();
 		});
 	});
 })(jQuery);

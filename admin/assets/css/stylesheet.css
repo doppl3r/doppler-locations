@@ -1,15 +1,19 @@
 /* Doppler Locator Admin CSS */
-h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; }
+h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; line-height: initial; margin: 0; }
 .doppler-body { padding: 64px 64px 64px 44px; user-select: none; }
 .doppler-body * { box-sizing: border-box; }
 .doppler-body a { text-decoration: none; color: inherit; }
 .doppler-body a:focus { outline: none; box-shadow: none; }
-.doppler-body input[name],
-.doppler-body select[name] { border: 2px solid #f1f1f1; border-radius: 8px; display: block; margin: 0 0 24px; max-width: 100%; width: 100%; padding: 4px 12px; }
-.doppler-body input[name]:focus,
-.doppler-body select[name]:focus { box-shadow: none; border-color: #0088FF; color: inherit; }
+.doppler-body input,
+.doppler-body select,
+.doppler-body textarea { border: 2px solid #f1f1f1; border-radius: 8px; display: block; margin: 0 0 24px; max-width: 100%; width: 100%; padding: 4px 12px; }
+.doppler-body input:focus,
+.doppler-body select:focus,
+.doppler-body textarea:focus { box-shadow: none; border-color: #0088FF; color: inherit; }
 
 /* Grid overrides */
+.doppler-body .row.justify { justify-content: space-between; }
+.doppler-body .row.justify [class*="col"] { flex-grow: 0; }
 .doppler-body .row [class*="col"]:first-of-type { padding-left: 0; }
 .doppler-body .row [class*="col"]:last-of-type { padding-right: 0; }
 
@@ -18,11 +22,11 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; }
 .doppler-body .nav .col-6-m { display: flex; align-items: center; }
 .doppler-body .nav .col-6-m:last-of-type { justify-content: flex-end; }
 .doppler-body .nav h1 { color: #333; font-size: 24px; }
-.doppler-body .nav .btn { background-color: #0088FF; border-radius: 999px; box-shadow: 0 3px 6px rgba(0, 136, 255, 0.25); color: #fff; font-size: 16px; font-weight: bold; padding: 8px 24px; position: sticky; text-decoration: none; top: 0; }
+.doppler-body .nav .btn { background-color: #0088FF; border-radius: 999px; box-shadow: 0 3px 6px rgba(0, 136, 255, 0.25); color: #fff; font-size: 16px; font-weight: bold; padding: 12px 24px; position: sticky; text-decoration: none; top: 0; }
 .doppler-body .nav .btn:hover { background-color: #fff; color: #0088FF; box-shadow: none; }
 
 /* Container */
-.doppler-body .container { background-color: #fff; padding: 16px; border-radius: 8px; position: relative; overflow: hidden; }
+.doppler-body .container { background-color: #fff; padding: 16px; margin: 16px 0 24px; border-radius: 8px; position: relative; overflow: hidden; }
 .doppler-body .container label { color: #333; font-size: 16px; font-weight: bold; margin-bottom: 12px; display: inline-block; cursor: default }
 .doppler-body .container label.small { color: #999; font-size: 12px; margin-bottom: 8px; }
 .doppler-body .container .btn { background-color: #f1f1f1; border-radius: 8px; color: #333; display: block; font-size: 16px; font-weight: normal; padding: 8px 0; text-decoration: none; text-align: center; }
@@ -38,6 +42,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; }
 .doppler-body .container .posts .row .status.open label:before { background-color: #00D17D; }
 .doppler-body .container .posts .row .status.closed label:before { background-color: #ff0000; }
 .doppler-body .container .posts .row .status.coming-soon label:before { background-color: #ffc107; }
+.doppler-body .container.custom-posts textarea { height: 100%; min-height: 130px; max-height: 130px; }
 
 /* Hours */
 .doppler-body .container .hours .row { align-items: center; }

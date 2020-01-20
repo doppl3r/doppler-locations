@@ -8,6 +8,6 @@
     <div class="col-6-m description"><?php echo $row->post_excerpt; ?></div>
     <div class="col-3-m options">
         <label class="small"><a href="<?php echo $url_edit; ?>&id=<?php echo $row->ID; ?>">Edit</a></label>
-        <label class="small"><a href="#delete">Delete</a></label>
+        <label class="small"><a href="#delete-post">Delete</a></label>
     </div>
 </div>

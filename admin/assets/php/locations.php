@@ -18,8 +18,16 @@
             <?php
                 // Query for results
                 global $doppler_locator_plugin;
+                $order_by = !empty($_GET['orderby']) ? $_GET['orderby'] : 'title';
+                $order = !empty($_GET['order']) ? $_GET['order'] : 'ASC';
                 $post_type = 'location';
-                $results = get_posts([ 'post_type' => $post_type, 'post_status' => 'any', 'numberposts' => -1 ]);
+                $results = get_posts([ 
+                    'post_type' => $post_type, 
+                    'post_status' => 'any', 
+                    'numberposts' => -1,
+                    'orderby' => $order_by,
+                    'order' => $order
+                ]);
 
                 // Render each row using a basic template
                 foreach ($results as $row) {

@@ -21,14 +21,16 @@
 
     // Convert custom posts
     $custom_post = array();
-    foreach($_POST['custom-post-type'] as $key=>$value) {
-        $custom_post[$key] = array(
-            'type' => $_POST['custom-post-type'][$key],
-            'title' => $_POST['custom-post-title'][$key],
-            'date' => $_POST['custom-post-date'][$key],
-            'link' => $_POST['custom-post-link'][$key],
-            'content' => $_POST['custom-post-content'][$key]
-        );
+    if (!empty($_POST['custom-post-type'])) {
+        foreach($_POST['custom-post-type'] as $key=>$value) {
+            $custom_post[$key] = array(
+                'type' => $_POST['custom-post-type'][$key],
+                'title' => $_POST['custom-post-title'][$key],
+                'date' => $_POST['custom-post-date'][$key],
+                'link' => $_POST['custom-post-link'][$key],
+                'content' => $_POST['custom-post-content'][$key]
+            );
+        }
     }
     update_post_meta($post_id, 'custom_posts', json_encode($custom_post));
 

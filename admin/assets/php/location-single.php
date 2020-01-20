@@ -37,7 +37,7 @@
         <div class="container details">
             <?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-details.php'); ?>
         </div>
-        <h1>Posts</h1>
+        <h1>Custom Posts</h1>
         <div class="container">
             <?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-custom-posts.php'); ?>
         </div>

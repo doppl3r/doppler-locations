@@ -20,10 +20,10 @@
     update_post_meta($post_id, 'hours', json_encode($hours));
 
     // Convert custom posts
-    $custom_post = array();
+    $custom_posts = array();
     if (!empty($_POST['custom-post-type'])) {
         foreach($_POST['custom-post-type'] as $key=>$value) {
-            $custom_post[$key] = array(
+            $custom_posts[$key] = array(
                 'type' => $_POST['custom-post-type'][$key],
                 'title' => $_POST['custom-post-title'][$key],
                 'date' => $_POST['custom-post-date'][$key],
@@ -32,7 +32,21 @@
             );
         }
     }
-    update_post_meta($post_id, 'custom_posts', json_encode($custom_post));
+    update_post_meta($post_id, 'custom_posts', json_encode($custom_posts));
+
+    // Convert links
+    $links = array();
+    if (!empty($_POST['link-text'])) {
+        foreach($_POST['link-text'] as $key=>$value) {
+            $links[$key] = array(
+                'text' => $_POST['link-text'][$key],
+                'url' => $_POST['link-url'][$key],
+                'target' => $_POST['link-target'][$key],
+                'class' => $_POST['link-class'][$key]
+            );
+        }
+    }
+    update_post_meta($post_id, 'links', json_encode($links));
 
     // More post meta
     update_post_meta($post_id, 'city', $_POST['city']);
@@ -43,6 +57,5 @@
     update_post_meta($post_id, 'latitude', $_POST['latitude']);
     update_post_meta($post_id, 'longitude', $_POST['longitude']);
     update_post_meta($post_id, 'guide', $_POST['guide']);
-    update_post_meta($post_id, 'links', json_encode($_POST['links']));
     update_post_meta($post_id, 'users', json_encode($_POST['users']));
 ?>

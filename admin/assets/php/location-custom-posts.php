@@ -3,15 +3,15 @@
         <label>Posts</label>
     </div>
 </div>
-<div class="custom-posts">
+<div class="post-meta-group">
     <?php
         // Declare global variables
         global $doppler_locator_plugin;
 
         // Loop through each custom post
         foreach($custom_posts as $custom_post) {
-            $doppler_locator_plugin->get_plugin_admin()->render_custom_post($custom_post);
+            $doppler_locator_plugin->get_plugin_admin()->render_meta_row('custom-post', $custom_post);
         }
     ?>
 </div>
-<a class="btn" href="#add-custom-post">Add New Post</a>
+<a class="btn" href="#add-post-meta-custom-post">Add New Post</a>

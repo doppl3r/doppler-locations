@@ -42,7 +42,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; line-height: initial; margin: 0;
 .doppler-body .container .posts .row .status.open label:before { background-color: #00D17D; }
 .doppler-body .container .posts .row .status.closed label:before { background-color: #ff0000; }
 .doppler-body .container .posts .row .status.coming-soon label:before { background-color: #ffc107; }
-.doppler-body .container.custom-posts textarea { height: 100%; min-height: 130px; max-height: 130px; }
+.doppler-body .container .post-meta textarea { height: 100%; min-height: 130px; max-height: 130px; }
 
 /* Hours */
 .doppler-body .container .hours .row { align-items: center; }

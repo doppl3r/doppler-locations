@@ -2,7 +2,9 @@
 	'use strict';
 
 	$(document).ready(function(){
+		// Show document when ready
 		$('.doppler-body').removeClass('loading');
+
 		// Add post button(s)
 		$(document).on('click', '.doppler-body [href*="add-location"], .doppler-body [href*="add-template"]', function(e){
 			e.preventDefault();
@@ -16,7 +18,7 @@
 			});
 		});
 
-		// Add click listener for delete buttons
+		// Add delete confirmation
 		$(document).on('click', '.doppler-body [href*="delete-post"]', function(e){
 			e.preventDefault();
 			$(this).closest('label').addClass('disabled');
@@ -32,7 +34,7 @@
 			$(this).closest('.options').find('[href*="cancel"]').closest('label').remove();
 		});
 
-		// Delete posts with confirmation
+		// Delete posts when confirmation is clicked
 		$(document).on('click', '.doppler-body [href*="confirm"]', function(e){
 			e.preventDefault();
 			var postId = $(this).closest('.row').attr('data-post');
@@ -51,22 +53,26 @@
 			$('.doppler-body form').submit();
 		});
 
-		// Add custom post (for location-single.php page)
-		$(document).on('click', '.doppler-body [href*="add-custom-post"]', function(e){
+		// Add post meta rows (ex: custom posts, links etc.)
+		$(document).on('click', '.doppler-body [href*="add-post-meta"]', function(e){
 			e.preventDefault();
+			var elem = $(this);
+			var href = $(this).attr('href');
+			var pm_type = href.substring(href.indexOf('meta') + 5);
 			$('.doppler-body').addClass('loading');
-			$.post(ajaxurl, { 'action': 'add_custom_post' }, function(response) { 
+			$.post(ajaxurl, { 'action': 'add_meta_row', 'pm_type': pm_type }, function(response) { 
 				// Append new row
 				var row = response;
-				$('.custom-posts').append(row);
+				console.log(elem.closest('.post-meta-group'));
+				elem.closest('.container').find('.post-meta-group').append(row);
 				$('.doppler-body').removeClass('loading');
 			});
 		});
 
-		// Delete custom-posts (for location-single.php page)
-		$(document).on('click', '.doppler-body [href*="delete-custom-post"]', function(e){
+		// Delete post meta rows (ex: custom posts, links etc.)
+		$(document).on('click', '.doppler-body [href*="delete-post-meta"]', function(e){
 			e.preventDefault();
-			$(this).closest('.custom-post').remove();
+			$(this).closest('.post-meta').remove();
 		});
 	});
 })(jQuery);

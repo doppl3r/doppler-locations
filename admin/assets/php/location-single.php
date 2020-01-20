@@ -41,5 +41,9 @@
         <div class="container">
             <?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-custom-posts.php'); ?>
         </div>
+        <h1>Links</h1>
+        <div class="container">
+            <?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-links.php'); ?>
+        </div>
     </form>
 </div>

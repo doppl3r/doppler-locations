@@ -1,12 +1,12 @@
 <?php 
     // Requires location-custom-posts.php to generate variables
-    $type = $custom_post->type;
-    $title = $custom_post->title;
-    $date = $custom_post->date;
-    $link = $custom_post->link;
-    $content = $custom_post->content;
+    $type = $postmeta->type;
+    $title = $postmeta->title;
+    $date = $postmeta->date;
+    $link = $postmeta->link;
+    $content = $postmeta->content;
 ?>
-<div class="row custom-post">
+<div class="row post-meta">
     <div class="col-6">
         <div class="row">
             <div class="col-6">
@@ -41,7 +41,7 @@
     <div class="col-6">
         <div class="row justify">
             <div class="col"><label class="small">Content</label></div>
-            <div class="col"><label class="small"><a href="#delete-custom-post">Delete</a></label></div>
+            <div class="col"><label class="small"><a href="#delete-post-meta-custom-post">Delete</a></label></div>
         </div>
         <textarea name="custom-post-content[]"><?php echo $content; ?></textarea>
     </div>

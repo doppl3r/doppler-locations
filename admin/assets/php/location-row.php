@@ -6,7 +6,7 @@
     $url_view = get_post_permalink($row->ID);
 ?>
 <div class="row" data-post="<?php echo $row->ID; ?>">
-    <div class="col-3-m status <?php echo strtolower($status); ?>"><label class="small"><?php echo ucfirst($status); ?></label></div>
+    <div class="col-3-m status <?php echo str_replace(" ", "-", strtolower($status)); ?>"><label class="small"><?php echo ucfirst($status); ?></label></div>
     <div class="col-3-m title"><?php echo $row->post_title; ?></div>
     <div class="col-6-m options">
         <label class="small"><a href="<?php echo $url_edit; ?>&id=<?php echo $row->ID; ?>">Edit</a></label>

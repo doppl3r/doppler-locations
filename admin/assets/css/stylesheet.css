@@ -37,6 +37,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; }
 .doppler-body .container .posts .row .status label:before { background-color: #f1f1f1; content: ''; display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 12px; }
 .doppler-body .container .posts .row .status.open label:before { background-color: #00D17D; }
 .doppler-body .container .posts .row .status.closed label:before { background-color: #ff0000; }
+.doppler-body .container .posts .row .status.coming-soon label:before { background-color: #ffc107; }
 
 /* Hours */
 .doppler-body .container .hours .row { align-items: center; }

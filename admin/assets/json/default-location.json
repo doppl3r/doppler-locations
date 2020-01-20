@@ -1,16 +1,16 @@
 {
     "title": "New Location",
-    "template": "default",
+    "template": "",
     "status": "open",
     "name": "New Location",
     "hours": {
-        "mon": "7:00am-7:00pm",
-        "tue": "7:00am-7:00pm",
-        "wed": "7:00am-7:00pm",
-        "thu": "7:00am-7:00pm",
-        "fri": "7:00am-7:00pm",
-        "sat": "7:00am-7:00pm",
-        "sun": "7:00am-7:00pm"
+        "mon": "7:00 AM-7:00 PM",
+        "tue": "7:00 AM-7:00 PM",
+        "wed": "7:00 AM-7:00 PM",
+        "thu": "7:00 AM-7:00 PM",
+        "fri": "7:00 AM-7:00 PM",
+        "sat": "7:00 AM-7:00 PM",
+        "sun": "7:00 AM-7:00 PM"
     },
     "city": "",
     "state": "",

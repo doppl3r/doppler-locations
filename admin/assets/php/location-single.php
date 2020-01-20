@@ -1,18 +1,18 @@
 <?php
     $post_id = $_GET['id'];
     $post = get_post($post_id);
-    $template = get_post_meta($post_id, 'template');
-    $status = get_post_meta($post_id, 'status');
-    $name = get_post_meta($post_id, 'name');
+    $template = get_post_meta($post_id, 'template')[0];
+    $status = get_post_meta($post_id, 'status')[0];
+    $name = get_post_meta($post_id, 'name')[0];
     $hours = json_decode(get_post_meta($post_id, 'hours')[0]);
-    $city = get_post_meta($post_id, 'city');
-    $state = get_post_meta($post_id, 'state');
-    $zip = get_post_meta($post_id, 'zip');
-    $phone = get_post_meta($post_id, 'phone');
-    $street = get_post_meta($post_id, 'street');
-    $latitude = get_post_meta($post_id, 'latitude');
-    $longitude = get_post_meta($post_id, 'longitude');
-    $guide = get_post_meta($post_id, 'guide');
+    $city = get_post_meta($post_id, 'city')[0];
+    $state = get_post_meta($post_id, 'state')[0];
+    $zip = get_post_meta($post_id, 'zip')[0];
+    $phone = get_post_meta($post_id, 'phone')[0];
+    $street = get_post_meta($post_id, 'street')[0];
+    $latitude = get_post_meta($post_id, 'latitude')[0];
+    $longitude = get_post_meta($post_id, 'longitude')[0];
+    $guide = get_post_meta($post_id, 'guide')[0];
     $posts = json_decode(get_post_meta($post_id, 'posts')[0]);
     $links = json_decode(get_post_meta($post_id, 'links')[0]);
     $users = json_decode(get_post_meta($post_id, 'users')[0]);
@@ -34,18 +34,28 @@
             </div>
             <div class="col-3 page-template">
                 <label for="page-template">Template</label>
-                <!-- TODO: populate from template types -->
                 <select id="page-template" name="page-template">
-                    <option value="Default">Default</option>
+                    <?php
+                        $templates = get_posts([ 'post_type' => 'template', 'post_status' => 'any', 'numberposts' => -1 ]);
+                        foreach ($templates as $t) {
+                            $selected = '';
+                            if ($template == $t->ID) $selected = ' selected';
+                            echo '<option value="' . $t->ID . '"' . $selected . '>' . $t->post_title . '</option>';
+                        }
+                    ?>
                 </select>
             </div>
             <div class="col-3 page-status">
                 <label for="page-status">Status</label>
                 <select id="page-status" name="page-status">
-                    <option value="Open">Open</option>
-                    <option value="Open">Coming Soon</option>
-                    <option value="Open">Closed</option>
-                    <option value="Open">Other</option>
+                    <?php
+                        $status_arr = array('open', 'closed', 'coming soon', 'other');
+                        foreach($status_arr as $s) {
+                            $selected = '';
+                            if ($status == $s) $selected = ' selected';
+                            echo '<option value="' . $s . '"' . $selected . '>' . ucfirst($s) . '</option>';
+                        }
+                    ?>
                 </select>
             </div>
         </div>
@@ -54,7 +64,7 @@
                 <div class="row">
                     <div class="col-12 page-name">
                         <label for="page-name">Name</label>
-                        <input id="page-name" name="page-name" type="text">
+                        <input id="page-name" name="page-name" type="text" value="<?php echo $name; ?>">
                     </div>
                 </div>
                 <div class="row">
@@ -71,8 +81,8 @@
                         ?>
                         <div class="row">
                             <div class="col-2-m"><label><?php echo ucfirst($day); ?></label></div>
-                            <div class="col-5-m"><select name="<?php echo $day; ?>-open" id="<?php echo $day; ?>-open"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/hours.php'); ?></select></div>
-                            <div class="col-5-m"><select name="<?php echo $day; ?>-close" id="<?php echo $day; ?>-close"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/hours.php'); ?></select></div>
+                            <div class="col-5-m"><select name="<?php echo $day; ?>-open" id="<?php echo $day; ?>-open"><?php $interval = 0; require(plugin_dir_path(dirname(__FILE__)) . 'php/hours.php'); ?></select></div>
+                            <div class="col-5-m"><select name="<?php echo $day; ?>-close" id="<?php echo $day; ?>-close"><?php $interval = 1; require(plugin_dir_path(dirname(__FILE__)) . 'php/hours.php'); ?></select></div>
                         </div>
                         <?php } ?>
                     </div>

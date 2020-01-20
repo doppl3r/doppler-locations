@@ -2,6 +2,7 @@
 	'use strict';
 	
 	$(document).ready(function(){
+		$('.doppler-body').removeClass('loading');
 		// Add post button(s)
 		$(document).on('click', '.doppler-body [href*="add"]', function(e){
 			e.preventDefault();
@@ -46,6 +47,7 @@
 		// Save posts
 		$(document).on('click', '.doppler-body [href*="save"]', function(e){
 			e.preventDefault();
+			$('.doppler-body').addClass('loading');
 			$('.doppler-body form').submit();
 		});
 	});

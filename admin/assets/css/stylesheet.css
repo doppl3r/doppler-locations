@@ -27,7 +27,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; }
 .doppler-body .container label.small { color: #999; font-size: 12px; margin-bottom: 8px; }
 .doppler-body .container .btn { background-color: #f1f1f1; border-radius: 8px; color: #333; display: block; font-size: 16px; font-weight: normal; padding: 8px 0; text-decoration: none; text-align: center; }
 .doppler-body .container .btn:hover { background-color: #0088FF; color: #fff; }
-.doppler-body .container .posts .row { animation: fade-in 1s ease-in-out; padding: 0px 12px; border: 2px solid #f1f1f1; border-radius: 8px; margin: 0 0 8px; font-size: 16px; align-items: center; }
+.doppler-body .container .posts .row { animation: fade-in 0.5s ease-in-out; padding: 0px 12px; border: 2px solid #f1f1f1; border-radius: 8px; margin: 0 0 8px; font-size: 16px; align-items: center; }
 .doppler-body .container .posts .row label { display: inline-block; margin: 4px 0px; }
 .doppler-body .container .posts .row label.disabled { display: none; }
 .doppler-body .container .posts .row label a { padding: 4px 16px; display: block; border-radius: 999px; background-color: #fff; }

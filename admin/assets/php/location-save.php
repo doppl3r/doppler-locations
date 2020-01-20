@@ -9,7 +9,7 @@
     wp_update_post($post_arr);
 
     // Add postmeta to newly inserted page
-    update_post_meta($post_id, 'template', $_POST['post_template']);
+    update_post_meta($post_id, 'template', $_POST['template']);
     update_post_meta($post_id, 'status', $_POST['status']);
     update_post_meta($post_id, 'display_name', $_POST['display_name']);
 

@@ -23,7 +23,7 @@
     $links = json_decode(get_post_meta($post_id, 'links')[0]);
     $users = json_decode(get_post_meta($post_id, 'users')[0]);
 ?>
-<div class="doppler-body">
+<div class="doppler-body loading">
     <div class="nav row">
         <div class="col-6-m">
             <h1>Location Details</h1>
@@ -40,9 +40,9 @@
                     <label for="post-title">Title</label>
                     <input id="post-title" name="post_title" type="text" value="<?php echo $post->post_title; ?>">
                 </div>
-                <div class="col-3 post-template">
-                    <label for="post-template">Template</label>
-                    <select id="post-template" name="post_template">
+                <div class="col-3 template">
+                    <label for="template">Template</label>
+                    <select id="template" name="template">
                         <?php
                             $templates = get_posts([ 'post_type' => 'template', 'post_status' => 'any', 'numberposts' => -1 ]);
                             foreach ($templates as $t) {

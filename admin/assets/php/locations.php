@@ -1,4 +1,4 @@
-<div class="doppler-body">
+<div class="doppler-body loading">
     <div class="nav row">
         <div class="col-6-m">
             <h1>Locations</h1>

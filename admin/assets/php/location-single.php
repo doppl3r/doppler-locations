@@ -92,7 +92,7 @@
                 <div class="row">
                     <div class="col-6 city">
                         <label for="city">City</label>
-                        <input name="city" id="city" type="text">
+                        <input name="city" id="city" type="text" value="<?php echo $city; ?>">
                     </div>
                     <div class="col-6 state">
                         <label for="state">State</label>
@@ -104,33 +104,33 @@
                 <div class="row">
                     <div class="col-6 zip">
                         <label for="zip">Zip</label>
-                        <input name="zip" id="zip" type="text">
+                        <input name="zip" id="zip" type="text" value="<?php echo $zip; ?>">
                     </div>
                     <div class="col-6 phone">
                         <label for="phone">Phone</label>
-                        <input name="phone" id="phone" type="tel">
+                        <input name="phone" id="phone" type="tel" value="<?php echo $phone; ?>">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <label for="street">Street</label>
-                        <input name="street" id="street" type="text">
+                        <input name="street" id="street" type="text" value="<?php echo $street; ?>">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-6">
                         <label for="latitude">Latitude</label>
-                        <input name="latitude" id="latitude" type="text">
+                        <input name="latitude" id="latitude" type="text" value="<?php echo $latitude; ?>">
                     </div>
                     <div class="col-6">
                         <label for="longitude">Longitude</label>
-                        <input name="longitude" id="longitude" type="text">
+                        <input name="longitude" id="longitude" type="text" value="<?php echo $longitude; ?>">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <label for="guide">Guide</label>
-                        <input name="guide" id="guide" type="text">
+                        <input name="guide" id="guide" type="text" value="<?php echo $guide; ?>">
                     </div>
                 </div>
             </div>

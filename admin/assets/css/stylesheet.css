@@ -18,7 +18,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; }
 .doppler-body .nav .col-6-m { display: flex; align-items: center; }
 .doppler-body .nav .col-6-m:last-of-type { justify-content: flex-end; }
 .doppler-body .nav h1 { color: #333; font-size: 24px; }
-.doppler-body .nav .btn { background-color: #0088FF; border-radius: 999px; box-shadow: 0 3px 6px rgba(0, 136, 255, 0.25); color: #fff; font-size: 16px; font-weight: bold; padding: 8px 24px; text-decoration: none; }
+.doppler-body .nav .btn { background-color: #0088FF; border-radius: 999px; box-shadow: 0 3px 6px rgba(0, 136, 255, 0.25); color: #fff; font-size: 16px; font-weight: bold; padding: 8px 24px; position: sticky; text-decoration: none; top: 0; }
 .doppler-body .nav .btn:hover { background-color: #fff; color: #0088FF; box-shadow: none; }
 
 /* Container */
@@ -36,6 +36,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; }
 .doppler-body .container .posts .row .status label { line-height: 12px; display: flex; }
 .doppler-body .container .posts .row .status label:before { background-color: #f1f1f1; content: ''; display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 12px; }
 .doppler-body .container .posts .row .status.open label:before { background-color: #00D17D; }
+.doppler-body .container .posts .row .status.closed label:before { background-color: #ff0000; }
 
 /* Hours */
 .doppler-body .container .hours .row { align-items: center; }

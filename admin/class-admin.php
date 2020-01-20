@@ -74,9 +74,9 @@ class Doppler_Locator_Admin {
 			$post_arr = array(
 				'post_status'			=> 'publish',
 				'post_type'             => $post_type,
-				'post_title'            => $default['title'],
-				'post_excerpt'          => $default['description'],
-				'post_content'          => $default['content']
+				'post_title'            => $default['post_title'],
+				'post_excerpt'          => $default['post_excerpt'],
+				'post_content'          => $default['post_content']
 			);
 			$post_id = wp_insert_post($post_arr);
 		}
@@ -87,15 +87,15 @@ class Doppler_Locator_Admin {
 			$post_arr = array(
 				'post_status'			=> 'publish',
 				'post_type'             => $post_type,
-				'post_title' 			=> $default['title']
+				'post_title' 			=> $default['post_title']
 			);
 			$post_id = wp_insert_post($post_arr);
 
 			// Add postmeta to newly inserted page
 			add_post_meta($post_id, 'template', $default['template']);
 			add_post_meta($post_id, 'status', $default['status']);
-			add_post_meta($post_id, 'name', $default['name']);
-			add_post_meta($post_id, 'hours', json_encode($default['hours'])); // TODO - might need to use json_encode()
+			add_post_meta($post_id, 'display_name', $default['display_name']);
+			add_post_meta($post_id, 'hours', json_encode($default['hours']));
 			add_post_meta($post_id, 'city', $default['city']);
 			add_post_meta($post_id, 'state', $default['state']);
 			add_post_meta($post_id, 'zip', $default['zip']);

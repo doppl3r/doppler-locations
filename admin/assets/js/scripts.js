@@ -42,5 +42,11 @@
 				$('.posts [data-post=' + postId + ']').remove();
 			});
 		});
+
+		// Save posts
+		$(document).on('click', '.doppler-body [href*="save"]', function(e){
+			e.preventDefault();
+			$('.doppler-body form').submit();
+		});
 	});
 })(jQuery);

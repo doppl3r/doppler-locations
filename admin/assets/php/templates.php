@@ -11,8 +11,8 @@
         <label>Templates</label>
         <div class="row">
             <label class="small col-3-m">Title</label>
-            <label class="small col-6-m">Descriptions</label>
-            <label class="small col-3-m">Options</label>
+            <label class="small col-3-m">Descriptions</label>
+            <label class="small col-6-m">Options</label>
         </div>
         <div class="posts">
             <?php

@@ -35,10 +35,10 @@
     <form action="" method="post">
         <input type="hidden" name="action" value="save">
         <div class="tabs">
-            <div class="tab active"><span class="dashicons-before dashicons-location"></span> General</div>
-            <div class="tab"><span class="dashicons-before dashicons-welcome-write-blog"></span> Posts</div>
-            <div class="tab"><span class="dashicons-before dashicons-admin-links"></span> Links</div>
-            <div class="tab"><span class="dashicons-before dashicons-admin-users"></span> Users</div>
+            <div class="tab active"><span class="dashicons-before dashicons-location"></span> <span class="text">General</span></div>
+            <div class="tab"><span class="dashicons-before dashicons-welcome-write-blog"></span> <span class="text">Posts</span></div>
+            <div class="tab"><span class="dashicons-before dashicons-admin-links"></span> <span class="text">Links</span></div>
+            <div class="tab"><span class="dashicons-before dashicons-admin-users"></span> <span class="text">Users</span></div>
         </div>
         <div class="containers">
             <div class="container active"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-details.php'); ?></div>

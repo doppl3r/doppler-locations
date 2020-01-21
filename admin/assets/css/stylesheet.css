@@ -1,7 +1,7 @@
 /* Doppler Locator Admin CSS */
 h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; line-height: initial; margin: 0; }
 .doppler-body { padding: 64px 64px 64px 44px; user-select: none; }
-.doppler-body * { box-sizing: border-box; }
+.doppler-body * { box-sizing: border-box; line-height: 24px; }
 .doppler-body a { text-decoration: none; color: inherit; }
 .doppler-body a:focus { outline: none; box-shadow: none; }
 .doppler-body input,
@@ -35,6 +35,8 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; line-height: initial; margin: 0;
 .doppler-body .container .btn { background-color: #f1f1f1; border-radius: 8px; color: #333; display: block; font-size: 16px; font-weight: bold; padding: 8px 0; text-decoration: none; text-align: center; }
 .doppler-body .container .btn:hover { background-color: #0088FF; color: #fff; }
 .doppler-body .container .posts .row { animation: fade-in 0.5s ease-in-out; padding: 0px 12px; border: 2px solid #f1f1f1; border-radius: 8px; margin: 0 0 8px; font-size: 16px; align-items: center; }
+.doppler-body .container .posts .row .title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.doppler-body .container .posts .row .description { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .doppler-body .container .posts .row label { display: inline-block; margin: 4px 0px; }
 .doppler-body .container .posts .row label.disabled { display: none; }
 .doppler-body .container .posts .row label a { padding: 4px 16px; display: block; border-radius: 999px; background-color: #fff; }
@@ -48,7 +50,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; line-height: initial; margin: 0;
 .doppler-body .container .post-meta { padding: 24px 0 0; border-bottom: 2px dashed #f1f1f1; }
 .doppler-body .container .post-meta:first-of-type { padding-top: 0; }
 .doppler-body .container .post-meta:last-of-type { border: none; }
-.doppler-body .container .post-meta textarea { height: 100%; min-height: 130px; max-height: 130px; }
+.doppler-body .container .post-meta textarea { height: 100%; min-height: 136px; max-height: 136px; }
 .doppler-body .container .post-content textarea { min-height: 400px; }
 .doppler-body .container .short-codes { user-select: text; min-height: 400px; padding: 12px; background-color: #f1f1f1; border-radius: 8px; }
 .doppler-body .container .short-codes label { font-size: 12px; margin: 0 0 4px; }
@@ -61,7 +63,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; line-height: initial; margin: 0;
 .doppler-body .tabs .tab:first-of-type { margin-left: 0; }
 .doppler-body .tabs .tab:last-of-type { margin-right: 0; }
 .doppler-body .tabs .tab.active { background-color: #fff; color: #0088FF; cursor: default; font-weight: bold; }
-.doppler-body .tabs .tab span:before { transition: none; }
+.doppler-body .tabs .tab .dashicons-before:before { transition: none; }
 .doppler-body .containers .container { display: none; border-top-left-radius: 0; border-top-right-radius: 0; }
 .doppler-body .containers .container.active { display: block; }
 
@@ -88,6 +90,8 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; line-height: initial; margin: 0;
     .doppler-body { padding: 12px 12px 12px 2px; }
     .doppler-body .row [class*="col"] { padding: 0; }
     .doppler-body .nav .btn { top: initial; bottom: 16px; }
+    .doppler-body .tabs .tab { text-align: center; }
+    .doppler-body .tabs .tab .text { display: none; }
 }
 
 /* Font Family */

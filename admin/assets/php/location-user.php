@@ -37,7 +37,7 @@
     <div class="col-3">
         <div class="row justify">
             <div class="col"><label class="small">Role(s)</label></div>
-            <div class="col"><label class="small"><a href="#delete-post-meta-user">Delete</a></label></div>
+            <div class="col"><label class="small"><a href="#delete-post-meta-user" class="dashicons-before dashicons-trash"></a></label></div>
         </div>
         <input type="text" value="<?php echo implode(', ', $user_roles); ?>" disabled>
     </div>

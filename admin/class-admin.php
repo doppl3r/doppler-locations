@@ -15,7 +15,7 @@ class Doppler_Locator_Admin {
 		// Top level menu
 		$page_title = 'Locations';
 		$menu_title = 'Locations';
-		$capability = 'manage_options';
+		$capability = 'edit_others_posts';
 		$menu_slug = $this->doppler_locator;
 		$function = array($this, 'render_locations');
 		$icon_url = 'dashicons-location-alt';
@@ -24,13 +24,15 @@ class Doppler_Locator_Admin {
 		add_menu_page($page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position);
 		
 		// Sub level menu
-		$parent_slug = $menu_slug;
-		$page_title = 'Templates';
-		$menu_title = 'Templates';
-		$capability = 'manage_options';
-		$menu_slug = $menu_slug . "-template";
-		$function = array($this, 'render_template');
-		add_submenu_page($parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function);
+		if (current_user_can('administrator')) {
+			$parent_slug = $menu_slug;
+			$page_title = 'Templates';
+			$menu_title = 'Templates';
+			$capability = 'manage_options';
+			$menu_slug = $menu_slug . "-template";
+			$function = array($this, 'render_template');
+			add_submenu_page($parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function);
+		}
 	}
 
 	public function enqueue_styles() {

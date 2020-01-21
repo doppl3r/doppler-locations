@@ -5,6 +5,7 @@
     }
 
     // Get location data
+    global $current_user;
     $post_id = $_GET['id'];
     $post = get_post($post_id);
     $template = get_post_meta($post_id, 'template')[0];
@@ -22,6 +23,20 @@
     $custom_posts = json_decode(get_post_meta($post_id, 'custom_posts')[0]);
     $links = json_decode(get_post_meta($post_id, 'links')[0]);
     $users = json_decode(get_post_meta($post_id, 'users')[0]);
+    $permission = current_user_can('administrator') ? true : false;
+
+    // Check users to see if they have permission to edit the page ID
+    if (!empty($users)) {
+        foreach($users as $user) {
+            if ($user->user_login == $current_user->data->user_login) {
+                $permission = true; break;
+            }
+        }
+    }
+
+    if ($permission == false) {
+        require(plugin_dir_path(dirname(__FILE__)) . 'php/location-error.php'); wp_die();
+    }
 ?>
 <div class="doppler-body loading">
     <div class="nav row">
@@ -29,7 +44,8 @@
             <h1>Location Details</h1>
         </div>
         <div class="col-6-m">
-            <a class="btn" href="#save-location">Save</a>
+            <a class="btn" href="admin.php?page=doppler-locator">Back <span class="dashicons-before dashicons-undo"></a>
+            <a class="btn blue" href="#save-location">Save</a>
         </div>
     </div>
     <form action="" method="post">

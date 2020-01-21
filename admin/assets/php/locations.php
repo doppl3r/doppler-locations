@@ -1,10 +1,17 @@
+<?php
+    // Render page if user has permission
+    $permission = current_user_can('administrator') ? true : false;
+    if ($permission == false) {
+        require(plugin_dir_path(dirname(__FILE__)) . 'php/location-error.php'); wp_die();
+    }
+?>
 <div class="doppler-body loading">
     <div class="nav row">
         <div class="col-6-m">
             <h1>Locations</h1>
         </div>
         <div class="col-6-m">
-            <a class="btn" href="#add-location">Add</a>
+            <a class="btn blue" href="#add-location">Add</a>
         </div>
     </div>
     <div class="container">

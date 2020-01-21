@@ -1,8 +1,10 @@
 /* Doppler Locator Admin CSS */
-h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; line-height: initial; margin: 0; }
+h1, h2, h3, h4, h5, h6, p { font-family: 'Roboto'; line-height: initial; margin: 0; }
 .doppler-body { padding: 64px 64px 64px 44px; user-select: none; }
 .doppler-body * { box-sizing: border-box; line-height: 24px; }
 .doppler-body a { text-decoration: none; color: inherit; }
+.doppler-body a[href*="mailto"] { text-decoration: underline; color: #0088FF; }
+.doppler-body p { font-size: 16px; }
 .doppler-body a:focus { outline: none; box-shadow: none; }
 .doppler-body input,
 .doppler-body select,
@@ -25,8 +27,12 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; line-height: initial; margin: 0;
 .doppler-body .nav .col-6-m { display: flex; align-items: center; }
 .doppler-body .nav .col-6-m:last-of-type { justify-content: flex-end; }
 .doppler-body .nav h1 { color: #333; font-size: 24px; }
-.doppler-body .nav .btn { background-color: #0088FF; border-radius: 999px; box-shadow: 0 3px 6px rgba(0, 136, 255, 0.25); color: #fff; font-size: 16px; font-weight: bold; padding: 12px 24px; position: fixed; text-decoration: none; top: 90px; z-index: 1; }
-.doppler-body .nav .btn:hover { background-color: #fff; color: #0088FF; box-shadow: none; }
+.doppler-body .nav .btn { background-color: #f1f1f1; border-radius: 999px; color: #333; display: inline-block; font-size: 16px; font-weight: bold; padding: 12px 24px; /* position: fixed; */ margin: 0 8px; text-decoration: none; top: 90px; z-index: 1; }
+.doppler-body .nav .btn:first-of-type { margin-left: 0; }
+.doppler-body .nav .btn:last-of-type { margin-right: 0; }
+.doppler-body .nav .btn.blue { background-color: #0088FF; box-shadow: 0 3px 6px rgba(0, 136, 255, 0.25); color: #fff; }
+.doppler-body .nav .btn:hover { background-color: #e6e6e6; box-shadow: none; }
+.doppler-body .nav .btn.blue:hover { background-color: #fff; color: #0088FF; }
 
 /* Container */
 .doppler-body .container { background-color: #fff; padding: 16px; margin: 0 0 24px; border-radius: 8px; position: relative; overflow: hidden; }

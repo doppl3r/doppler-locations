@@ -4,7 +4,7 @@
             <h1>Templates</h1>
         </div>
         <div class="col-6-m">
-            <a class="btn" href="#add-template">Add</a>
+            <a class="btn blue" href="#add-template">Add</a>
         </div>
     </div>
     <div class="container">

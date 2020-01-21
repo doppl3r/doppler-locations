@@ -11,4 +11,4 @@
         
     ?>
 </div>
-<a class="btn" href="#add-post-meta-media">Add New Media</a>
+<a class="btn" href="">Add New Media</a>

@@ -6,6 +6,7 @@
 
     // Get location data
     global $current_user;
+    $tab = isset($_POST['tab']) ? $_POST['tab'] : 0;
     $post_id = $_GET['id'];
     $post = get_post($post_id);
     $url_view = get_post_permalink($post_id);
@@ -52,15 +53,16 @@
     </div>
     <form action="" method="post">
         <input type="hidden" name="action" value="save">
+        <input type="hidden" name="tab" value="<?php echo $tab; ?>">
         <div class="tabs">
-            <div class="tab active"><span class="dashicons-before dashicons-location"></span> <span class="text">General</span></div>
+            <div class="tab"><span class="dashicons-before dashicons-location"></span> <span class="text">General</span></div>
             <div class="tab"><span class="dashicons-before dashicons-paperclip"></span> <span class="text">Media</span></div>
             <div class="tab"><span class="dashicons-before dashicons-editor-quote"></span> <span class="text">Posts</span></div>
             <div class="tab"><span class="dashicons-before dashicons-admin-links"></span> <span class="text">Links</span></div>
             <div class="tab"><span class="dashicons-before dashicons-admin-users"></span> <span class="text">Users</span></div>
         </div>
         <div class="containers">
-            <div class="container active"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-details.php'); ?></div>
+            <div class="container"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-details.php'); ?></div>
             <div class="container"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-media.php'); ?></div>
             <div class="container"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-custom-posts.php'); ?></div>
             <div class="container"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-links.php'); ?></div>

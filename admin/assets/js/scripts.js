@@ -63,7 +63,7 @@
 			$.post(ajaxurl, { 'action': 'add_meta_row', 'pm_type': pm_type }, function(response) { 
 				// Append new row
 				var row = response;
-				console.log(elem.closest('.post-meta-group'));
+				console.log(response);
 				elem.closest('.container').find('.post-meta-group').append(row);
 				$('.doppler-body').removeClass('loading');
 			});
@@ -78,10 +78,29 @@
 		// Add tab click functionality
 		$(document).on('click', '.doppler-body .tabs .tab', function(e){
 			e.preventDefault();
-			$('.doppler-body .tabs .tab').removeClass('active');
-			var containers = $('.doppler-body .containers .container').removeClass('active');
-			containers.eq($(this).index()).addClass('active');
-			$(this).addClass('active');
+			selectTab($(this).index(), $(this));
 		});
+
+		function selectTab(index, elem) {
+			var containers = $('.doppler-body .containers .container');
+			var tabs = $('.doppler-body .tabs .tab');
+			var tab = $('[name="tab"]');
+
+			// Use form default value if not clicked
+			if (index == null) index = tab.val();
+			if (elem == null) elem = tabs.eq(index);
+			
+			// Deactivate all tabs/containers
+			containers.removeClass('active');
+			tabs.removeClass('active')
+
+			// Activate tabs and update form value
+			containers.eq(index).addClass('active');
+			elem.addClass('active');
+			tab.val(index);
+		}
+
+		// Activate default tab/container
+		selectTab();
 	});
 })(jQuery);

@@ -74,5 +74,14 @@
 			e.preventDefault();
 			$(this).closest('.post-meta').remove();
 		});
+
+		// Add tab click functionality
+		$(document).on('click', '.doppler-body .tabs .tab', function(e){
+			e.preventDefault();
+			$('.doppler-body .tabs .tab').removeClass('active');
+			var containers = $('.doppler-body .containers .container').removeClass('active');
+			containers.eq($(this).index()).addClass('active');
+			$(this).addClass('active');
+		});
 	});
 })(jQuery);

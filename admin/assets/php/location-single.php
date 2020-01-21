@@ -34,17 +34,17 @@
     </div>
     <form action="" method="post">
         <input type="hidden" name="action" value="save">
-        <div class="container">
-            <?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-details.php'); ?>
+        <div class="tabs">
+            <div class="tab active"><span class="dashicons-before dashicons-location"></span> General</div>
+            <div class="tab"><span class="dashicons-before dashicons-welcome-write-blog"></span> Posts</div>
+            <div class="tab"><span class="dashicons-before dashicons-admin-links"></span> Links</div>
+            <div class="tab"><span class="dashicons-before dashicons-admin-users"></span> Users</div>
         </div>
-        <div class="container">
-            <?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-custom-posts.php'); ?>
-        </div>
-        <div class="container">
-            <?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-links.php'); ?>
-        </div>
-        <div class="container">
-            <?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-users.php'); ?>
+        <div class="containers">
+            <div class="container active"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-details.php'); ?></div>
+            <div class="container"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-custom-posts.php'); ?></div>
+            <div class="container"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-links.php'); ?></div>
+            <div class="container"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-users.php'); ?></div>
         </div>
     </form>
 </div>

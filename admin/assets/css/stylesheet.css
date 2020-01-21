@@ -29,7 +29,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; line-height: initial; margin: 0;
 .doppler-body .nav .btn:hover { background-color: #fff; color: #0088FF; box-shadow: none; }
 
 /* Container */
-.doppler-body .container { background-color: #fff; padding: 16px; margin: 16px 0 24px; border-radius: 8px; position: relative; overflow: hidden; }
+.doppler-body .container { background-color: #fff; padding: 16px; margin: 0 0 24px; border-radius: 8px; position: relative; overflow: hidden; }
 .doppler-body .container label { color: #333; font-size: 16px; font-weight: bold; margin-bottom: 12px; display: inline-block; cursor: default }
 .doppler-body .container label.small { color: #999; font-size: 12px; margin-bottom: 8px; }
 .doppler-body .container .btn { background-color: #f1f1f1; border-radius: 8px; color: #333; display: block; font-size: 16px; font-weight: bold; padding: 8px 0; text-decoration: none; text-align: center; }
@@ -53,6 +53,17 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Roboto'; line-height: initial; margin: 0;
 .doppler-body .container .short-codes { user-select: text; min-height: 400px; padding: 12px; background-color: #f1f1f1; border-radius: 8px; }
 .doppler-body .container .short-codes label { font-size: 12px; margin: 0 0 4px; }
 .doppler-body .container .short-codes p { font-size: 16px; color: #999; margin: 0 0 16px; }
+
+/* Tabs */
+.doppler-body .tabs { display: flex; }
+.doppler-body .tabs .tab { flex-grow: 1; background-color: #e6e6e6; padding: 12px; font-size: 16px; margin: 0 4px; cursor: pointer; border-top-left-radius: 8px; border-top-right-radius: 8px; }
+.doppler-body .tabs .tab:hover { background-color: #d9d9d9; }
+.doppler-body .tabs .tab:first-of-type { margin-left: 0; }
+.doppler-body .tabs .tab:last-of-type { margin-right: 0; }
+.doppler-body .tabs .tab.active { background-color: #fff; color: #0088FF; cursor: default; font-weight: bold; }
+.doppler-body .tabs .tab span:before { transition: none; }
+.doppler-body .containers .container { display: none; border-top-left-radius: 0; border-top-right-radius: 0; }
+.doppler-body .containers .container.active { display: block; }
 
 /* Hours */
 .doppler-body .container .hours .row { align-items: center; }

@@ -82,6 +82,7 @@
 
 		// Add rearrange function for post-meta types
 		$(document).on('click', '.doppler-body [href*="order-post-meta"]', function (e) {
+			e.preventDefault();
 			var href = $(this).attr('href');
 			var direction = href.substring(href.indexOf('meta') + 5);
 			var row = $(this).closest('.post-meta');

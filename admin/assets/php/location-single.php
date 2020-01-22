@@ -43,10 +43,10 @@
 ?>
 <div class="doppler-body loading">
     <div class="nav row">
-        <div class="col-6-m">
+        <div class="col-6">
             <h1>Location Details</h1>
         </div>
-        <div class="col-6-m">
+        <div class="col-6">
             <a class="btn" href="admin.php?page=doppler-locator">Cancel</a>
             <a class="btn" href="<?php echo $url_view; ?>" target="_blank">View</a>
             <a class="btn blue" href="#save-location">Save</a>

@@ -7,10 +7,10 @@
 ?>
 <div class="doppler-body loading">
     <div class="nav row">
-        <div class="col-6-m">
+        <div class="col-6">
             <h1>Locations</h1>
         </div>
-        <div class="col-6-m">
+        <div class="col-6">
             <a class="btn blue" href="#add-location">Add</a>
         </div>
     </div>

@@ -106,10 +106,13 @@ h1, h2, h3, h4, h5, h6, p { line-height: initial; margin: 0; }
 /* Media Query */
 @media (max-width: 768px) {
     .doppler-body { padding: 12px 12px 12px 2px; }
+    .doppler-body .nav.row { top: initial; bottom: 16px; text-align: center; padding: 0; }
+    .doppler-body .nav.row [class*="col"] { padding: 0 0 24px; }
+    .doppler-body .nav.row [class*="col"] .btn { top: initial; bottom: 16px; }
     .doppler-body .row [class*="col"] { padding: 0; }
-    .doppler-body .nav .btn { top: initial; bottom: 16px; }
     .doppler-body .tabs .tab { text-align: center; padding: 12px 0; }
     .doppler-body .tabs .tab .text { display: none; }
+    .doppler-body .container .post-meta a[class*="dashicons"] { display: inline-block; padding: 12px; }
 }
 
 /* Font Family */

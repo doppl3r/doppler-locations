@@ -41,6 +41,8 @@
     <div class="col-6">
         <div class="row justify">
             <div class="col"><label class="small">Content</label></div>
+            <div class="col"><label class="small"><a href="#order-post-meta-up" class="dashicons-before dashicons-arrow-up-alt"></a></label></div>
+            <div class="col"><label class="small"><a href="#order-post-meta-down" class="dashicons-before dashicons-arrow-down-alt"></a></label></div>
             <div class="col"><label class="small"><a href="#delete-post-meta-custom-post" class="dashicons-before dashicons-trash"></a></label></div>
         </div>
         <textarea name="custom_post_content[]"><?php echo $content; ?></textarea>

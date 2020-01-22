@@ -15,4 +15,4 @@
         }
     ?>
 </div>
-<a class="btn upload_image_button" href="add-post-meta-medium">Add New Media</a>
+<a class="btn" href="add-post-meta-medium">Add New Media</a>

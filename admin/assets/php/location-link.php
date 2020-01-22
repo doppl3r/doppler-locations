@@ -30,6 +30,8 @@
     <div class="col-3">
         <div class="row justify">
             <div class="col"><label class="small">ID</label></div>
+            <div class="col"><label class="small"><a href="#order-post-meta-up" class="dashicons-before dashicons-arrow-up-alt"></a></label></div>
+            <div class="col"><label class="small"><a href="#order-post-meta-down" class="dashicons-before dashicons-arrow-down-alt"></a></label></div>
             <div class="col"><label class="small"><a href="#delete-post-meta-link" class="dashicons-before dashicons-trash"></a></label></div>
         </div>
         <input type="text" name="link_id[]" value="<?php echo $id; ?>">

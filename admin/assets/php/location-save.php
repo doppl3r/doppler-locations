@@ -31,10 +31,20 @@
     $media = array();
     if (!empty($_POST['medium_id'])) {
         foreach($_POST['medium_id'] as $key=>$value) {
+            $medium_post_id = $_POST['medium_post_id'][$key];
+            $medium_post_title = $_POST['medium_title'][$key];
             $media[$key] = array(
-                'post_id' => $_POST['medium_post_id'][$key],
+                'post_id' => $medium_post_id,
                 'id' => $_POST['medium_id'][$key]
             );
+            if (isset($medium_post_title)) {
+                $medium_post_arr = array(
+                    'ID' => $medium_post_id,
+                    'post_title' => $medium_post_title,
+                    'post_name' => ''
+                );
+                wp_update_post($medium_post_arr);
+            }
         }
     }
     update_post_meta($post_id, 'media', json_encode($media));

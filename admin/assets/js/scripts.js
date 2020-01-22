@@ -63,7 +63,6 @@
 			$.post(ajaxurl, { 'action': 'add_meta_row', 'pm_type': pm_type }, function(response) { 
 				// Append new row
 				var row = response;
-				console.log(response);
 				elem.closest('.container').find('.post-meta-group').append(row);
 				$('.doppler-body').removeClass('loading');
 			});
@@ -84,24 +83,28 @@
 		// Add media button
 		$(document).on("click", ".upload_image_button", function (e) {
 			e.preventDefault();
+			var row = $(this).closest('.post-meta');
 	  
 			// Create the media frame.
 			var file_frame = wp.media.frames.file_frame = wp.media({
 			   title: 'Select or upload media',
 			   button: { text: 'Select' },
-			   multiple: true
+			   multiple: false
 			});
 	  
 			// When an image is selected, run a callback.
 			file_frame.on('select', function () {
-			   var attachment = file_frame.state().get('selection').toJSON();
-			   console.log(attachment);
+				var attachment = file_frame.state().get('selection').first().toJSON();
+				row.find('.thumbnail div').attr("style", "background-image: url('" + attachment.url + "');");
+				row.find('[name*="medium_post_id"]').val(attachment.id);
+				row.find('[name*="medium_url"]').val(attachment.url);
+				row.find('[name*="medium_title"]').val(attachment.title);
 			});
 			
 			// Predefine selected
 			file_frame.on('open', function() {
 				var selection = file_frame.state().get('selection');
-				var selected = '6'; // TODO: CHANGE to the id of the image
+				var selected = row.find('[name*="medium_post_id"]').val();
 				if (selected) {
 					selection.add(wp.media.attachment(selected));
 				}

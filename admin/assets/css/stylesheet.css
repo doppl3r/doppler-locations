@@ -1,7 +1,7 @@
 /* Doppler Locator Admin CSS */
-h1, h2, h3, h4, h5, h6, p { font-family: 'Roboto'; line-height: initial; margin: 0; }
-.doppler-body { padding: 64px 64px 64px 44px; user-select: none; }
-.doppler-body * { box-sizing: border-box; line-height: 24px; }
+h1, h2, h3, h4, h5, h6, p { line-height: initial; margin: 0; }
+.doppler-body { padding: 64px 64px 64px 44px; user-select: none; color: #333; }
+.doppler-body * { box-sizing: border-box; line-height: 24px; font-family: 'Roboto'; }
 .doppler-body a { text-decoration: none; color: inherit; }
 .doppler-body a[href*="mailto"] { text-decoration: underline; color: #0088FF; }
 .doppler-body p { font-size: 16px; }
@@ -17,8 +17,8 @@ h1, h2, h3, h4, h5, h6, p { font-family: 'Roboto'; line-height: initial; margin:
 .doppler-body textarea:disabled { background-color: #f1f1f1; box-shadow: none; color: inherit; }
 
 /* Grid overrides */
-.doppler-body .row.justify { justify-content: space-between; }
 .doppler-body .row.justify [class*="col"] { flex-grow: 0; }
+.doppler-body .row.justify [class*="col"]:first-of-type { margin-right: auto; }
 .doppler-body .row [class*="col"]:first-of-type { padding-left: 0; }
 .doppler-body .row [class*="col"]:last-of-type { padding-right: 0; }
 
@@ -62,7 +62,7 @@ h1, h2, h3, h4, h5, h6, p { font-family: 'Roboto'; line-height: initial; margin:
 .doppler-body .container .post-meta:last-of-type { border: none; }
 .doppler-body .container .post-meta textarea { height: 100%; min-height: 136px; max-height: 136px; }
 .doppler-body .container .post-meta .row .thumbnail { flex: 0 0 0; flex-grow: 0; }
-.doppler-body .container .post-meta .row .thumbnail div { width: 40px; height: 40px; background-color: #f1f1f1; border-radius: 8px; background-size: cover; }
+.doppler-body .container .post-meta .row .thumbnail div { width: 40px; height: 40px; background-color: #f1f1f1; border-radius: 8px; background-size: cover; display: flex; justify-content: center; align-items: center; font-size: 12px; font-weight: bold; text-transform: uppercase; }
 .doppler-body .container .post-content textarea { min-height: 400px; }
 .doppler-body .container .short-codes { user-select: text; min-height: 400px; padding: 12px; background-color: #f1f1f1; border-radius: 8px; }
 .doppler-body .container .short-codes label { font-size: 12px; margin: 0 0 4px; }

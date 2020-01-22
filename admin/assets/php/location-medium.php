@@ -5,6 +5,7 @@
     $url = wp_get_attachment_url($post_id);
     $type = end(explode('.', $url));
     $id = $postmeta->id;
+    if (empty($id)) $id = 'media-' . $post_id;
 ?>
 <div class="row post-meta">
     <input type="hidden" name="medium_post_id[]" value="<?php echo $post_id; ?>">

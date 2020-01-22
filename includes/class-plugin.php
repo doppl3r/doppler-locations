@@ -29,8 +29,8 @@ class Doppler_Locator {
 		$this->loader->add_action('init', $this->plugin_admin, 'register_custom_posts'); // Register custom post type
 		
 		// TODO: Make this an option to write URL
-		$this->loader->add_action('post_type_link', $this->plugin_admin, 'remove_custom_slug', 10, 3); // Change URL
-		$this->loader->add_action('pre_get_posts', $this->plugin_admin, 'parse_custom_request'); // Resolve 404 error
+		//$this->loader->add_action('post_type_link', $this->plugin_admin, 'remove_custom_slug', 10, 3); // Change URL
+		//$this->loader->add_action('pre_get_posts', $this->plugin_admin, 'parse_custom_request'); // Resolve 404 error
 	}
 	
 	private function define_public_hooks() {

@@ -13,7 +13,7 @@ class Doppler_Locator_Activator {
         }
 
         // Flush rewrite rules to prevent 404
-        update_option('permalink_structure', '/%postname%/');
+        // update_option('permalink_structure', '/%postname%/');
         flush_rewrite_rules();
     }
 }

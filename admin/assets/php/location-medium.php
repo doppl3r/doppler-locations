@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col thumbnail">
                 <label class="small">Type</label>
-                <div class="upload_media_button" style="background-image: url('<?php echo $url; ?>');"><?php if ($type == 'pdf') echo $type; ?></div>
+                <div class="upload_media_button" data-type="<?php echo $type; ?>" style="background-image: url('<?php echo $url; ?>');"><?php echo $type; ?></div>
             </div>
             <div class="col">
                 <label class="small">URL</label>

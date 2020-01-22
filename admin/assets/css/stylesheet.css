@@ -62,7 +62,8 @@ h1, h2, h3, h4, h5, h6, p { line-height: initial; margin: 0; }
 .doppler-body .container .post-meta:last-of-type { border: none; }
 .doppler-body .container .post-meta textarea { height: 100%; min-height: 136px; max-height: 136px; }
 .doppler-body .container .post-meta .row .thumbnail { flex: 0 0 0; flex-grow: 0; }
-.doppler-body .container .post-meta .row .thumbnail div { width: 40px; height: 40px; background-color: #f1f1f1; border-radius: 8px; background-size: cover; display: flex; justify-content: center; align-items: center; font-size: 12px; font-weight: bold; text-transform: uppercase; }
+.doppler-body .container .post-meta .row .thumbnail div { color: transparent; width: 40px; height: 40px; background-color: #f1f1f1; border-radius: 8px; background-size: cover; display: flex; justify-content: center; align-items: center; font-size: 12px; font-weight: bold; text-transform: uppercase; }
+.doppler-body .container .post-meta .row .thumbnail div[data-type="pdf"] { color: inherit; }
 .doppler-body .container .post-meta:first-of-type [href*="order-post-meta-up"],
 .doppler-body .container .post-meta:last-of-type [href*="order-post-meta-down"] { pointer-events: none; opacity: 0.25; }
 .doppler-body .container .post-meta .dashicons-before { transition: none; }

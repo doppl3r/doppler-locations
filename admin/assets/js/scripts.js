@@ -106,7 +106,10 @@
 			// When an image is selected, run a callback.
 			file_frame.on('select', function () {
 				var attachment = file_frame.state().get('selection').first().toJSON();
+				var type = attachment.url.substring(attachment.url.lastIndexOf('.') + 1);
 				row.find('.thumbnail div').attr("style", "background-image: url('" + attachment.url + "');");
+				row.find('.thumbnail div').attr("data-type", type);
+				row.find('.thumbnail div').html(type);
 				row.find('[name*="medium_post_id"]').val(attachment.id);
 				row.find('[name*="medium_url"]').val(attachment.url);
 				row.find('[name*="medium_title"]').val(attachment.title);

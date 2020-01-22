@@ -80,8 +80,19 @@
 			selectTab($(this).index(), $(this));
 		});
 
+		// Add rearrange function for post-meta types
+		$(document).on('click', '.doppler-body [href*="order-post-meta"]', function (e) {
+			var href = $(this).attr('href');
+			var direction = href.substring(href.indexOf('meta') + 5);
+			var row = $(this).closest('.post-meta');
+
+			// update by direction
+			if (direction == 'up') row.insertBefore(row.prev());
+			else if (direction == 'down') row.insertAfter(row.next());
+		});
+
 		// Add media button
-		$(document).on("click", ".upload_image_button", function (e) {
+		$(document).on('click', '.doppler-body .upload_media_button', function (e) {
 			e.preventDefault();
 			var row = $(this).closest('.post-meta');
 	  

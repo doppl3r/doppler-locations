@@ -12,11 +12,11 @@
         <div class="row">
             <div class="col thumbnail">
                 <label class="small">Type</label>
-                <div class="upload_image_button" style="background-image: url('<?php echo $url; ?>');"><?php if ($type == 'pdf') echo $type; ?></div>
+                <div class="upload_media_button" style="background-image: url('<?php echo $url; ?>');"><?php if ($type == 'pdf') echo $type; ?></div>
             </div>
             <div class="col">
                 <label class="small">URL</label>
-                <input class="upload_image_button" type="text" name="medium_url[]" value="<?php echo $url; ?>" placeholder="Click to add media">
+                <input class="upload_media_button" type="text" name="medium_url[]" value="<?php echo $url; ?>" placeholder="Click to add media">
             </div>
         </div>
     </div>

@@ -27,6 +27,18 @@
     foreach($days as $day) { $hours[$day] = $_POST[$day . '_open'] . '-' . $_POST[$day . '_close']; }
     update_post_meta($post_id, 'hours', json_encode($hours));
 
+    // Parse media
+    $media = array();
+    if (!empty($_POST['medium_id'])) {
+        foreach($_POST['medium_id'] as $key=>$value) {
+            $media[$key] = array(
+                'post_id' => $_POST['medium_post_id'][$key],
+                'id' => $_POST['medium_id'][$key]
+            );
+        }
+    }
+    update_post_meta($post_id, 'media', json_encode($media));
+
     // Parse custom posts
     $custom_posts = array();
     if (!empty($_POST['custom_post_type'])) {

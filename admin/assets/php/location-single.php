@@ -22,6 +22,7 @@
     $latitude = get_post_meta($post_id, 'latitude')[0];
     $longitude = get_post_meta($post_id, 'longitude')[0];
     $guide = get_post_meta($post_id, 'guide')[0];
+    $media = json_decode(get_post_meta($post_id, 'media')[0]);
     $custom_posts = json_decode(get_post_meta($post_id, 'custom_posts')[0]);
     $links = json_decode(get_post_meta($post_id, 'links')[0]);
     $users = json_decode(get_post_meta($post_id, 'users')[0]);

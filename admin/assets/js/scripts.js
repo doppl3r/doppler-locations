@@ -81,6 +81,36 @@
 			selectTab($(this).index(), $(this));
 		});
 
+		// Add media button
+		$(document).on("click", ".upload_image_button", function (e) {
+			e.preventDefault();
+	  
+			// Create the media frame.
+			var file_frame = wp.media.frames.file_frame = wp.media({
+			   title: 'Select or upload media',
+			   button: { text: 'Select' },
+			   multiple: true
+			});
+	  
+			// When an image is selected, run a callback.
+			file_frame.on('select', function () {
+			   var attachment = file_frame.state().get('selection').toJSON();
+			   console.log(attachment);
+			});
+			
+			// Predefine selected
+			file_frame.on('open', function() {
+				var selection = file_frame.state().get('selection');
+				var selected = '6'; // TODO: CHANGE to the id of the image
+				if (selected) {
+					selection.add(wp.media.attachment(selected));
+				}
+			});
+
+			// Finally, open the modal
+			file_frame.open();
+		});
+
 		function selectTab(index, elem) {
 			var containers = $('.doppler-body .containers .container');
 			var tabs = $('.doppler-body .tabs .tab');

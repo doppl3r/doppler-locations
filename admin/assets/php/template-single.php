@@ -17,7 +17,7 @@
             <h1>Template Details</h1>
         </div>
         <div class="col-6-m">
-            <a class="btn" href="admin.php?page=doppler-locator-template">Back <span class="dashicons-before dashicons-undo"></a>
+            <a class="btn" href="admin.php?page=doppler-locator-template">Back</a>
             <a class="btn blue" href="#save-location">Save</a>
         </div>
     </div>

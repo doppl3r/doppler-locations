@@ -7,8 +7,12 @@
     <?php
         // Declare global variables
         global $doppler_locator_plugin;
+        wp_enqueue_media();
 
-        
+        // Loop through each link
+        foreach($media as $medium) {
+            $doppler_locator_plugin->get_plugin_admin()->render_meta_row('medium', $medium);
+        }
     ?>
 </div>
-<a class="btn" href="">Add New Media</a>
+<a class="btn upload_image_button" href="add-post-meta-medium">Add New Media</a>

@@ -61,6 +61,8 @@ h1, h2, h3, h4, h5, h6, p { font-family: 'Roboto'; line-height: initial; margin:
 .doppler-body .container .post-meta:first-of-type { padding-top: 0; }
 .doppler-body .container .post-meta:last-of-type { border: none; }
 .doppler-body .container .post-meta textarea { height: 100%; min-height: 136px; max-height: 136px; }
+.doppler-body .container .post-meta .row .thumbnail { flex: 0 0 0; flex-grow: 0; }
+.doppler-body .container .post-meta .row .thumbnail div { width: 40px; height: 40px; background-color: #f1f1f1; border-radius: 8px; background-size: cover; }
 .doppler-body .container .post-content textarea { min-height: 400px; }
 .doppler-body .container .short-codes { user-select: text; min-height: 400px; padding: 12px; background-color: #f1f1f1; border-radius: 8px; }
 .doppler-body .container .short-codes label { font-size: 12px; margin: 0 0 4px; }

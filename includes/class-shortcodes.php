@@ -55,12 +55,12 @@
                     
                     if (!isset($type) || $type == $post_type) {
                         $output .= '
-                            <div class="row '. $post_type .'">
-                                <div class="col">' . $post_title . '</div>
-                                <div class="col">' . $post_date . '</div>
-                                <div class="col">' . $post_link . '</div>
-                                <div class="col">' . $post_content . '</div>
-                            </div>
+                            <ul class="row '. $post_type .'">
+                                <li class="col">' . $post_title . '</li>
+                                <li class="col">' . $post_date . '</li>
+                                <li class="col">' . $post_link . '</li>
+                                <li class="col">' . $post_content . '</li>
+                            </ul>
                         ';
                     }
                 }

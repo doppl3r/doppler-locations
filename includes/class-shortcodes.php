@@ -2,6 +2,7 @@
     //echo get_the_ID(); die;
     function doppler_shortcode($atts, $content = null) {
         $post_id = get_the_ID();
+        $post_type = get_post_type($post_id);
         $post_meta = get_post_meta($post_id);
         $data = $atts['data'];
         $type = $atts['type'];
@@ -78,13 +79,61 @@
             return $output;
         }
         else if ($data == 'map') {
-            global $include_leaflet;
-            $include_leaflet = true;
-
             // Enqueue data if map exists
             wp_enqueue_style('leaflet');
             wp_enqueue_script('leaflet');
+            wp_enqueue_script('leaflet-doppler-locator');
+            wp_enqueue_style('leaflet-doppler-locator');
 
+            // Update URL for front-end icon path
+            $url = explode('/', plugin_dir_url( __FILE__ ));
+            array_pop($url);
+            array_pop($url);
+            $dir = implode('/', $url) . '/public/assets/';
+
+            // Use single location if 'location' is set, default = all
+            if ($post_type == 'location') $post__in = array($post_id);
+
+            // Get posts by location and matching ID
+            $locations = get_posts([
+                'post_type' => 'location',
+                'post_status' => 'any',
+                'numberposts' => -1,
+                'post__in' => $post__in
+            ]);
+
+            // Generate JSON for Javascript object
+            foreach($locations as $index => $loc) {
+                $loc_title = get_the_title($loc->ID);
+                $loc_url = get_post_permalink($loc->ID);;
+                $loc_display_name = get_post_meta($loc->ID, 'display_name')[0];
+                $loc_phone = get_post_meta($loc->ID, 'phone')[0];
+                $loc_street = get_post_meta($loc->ID, 'street')[0];
+                $loc_city = get_post_meta($loc->ID, 'city')[0];
+                $loc_state = get_post_meta($loc->ID, 'state')[0];
+                $loc_zip = get_post_meta($loc->ID, 'zip')[0];
+                $loc_addr = $loc_street . ', ' . $loc_city . ', ' . $loc_state . ' ' . $loc_zip;
+                $loc_lat = get_post_meta($loc->ID, 'latitude')[0];
+                $loc_long = get_post_meta($loc->ID, 'longitude')[0];
+                $loc_geo = array($loc_lat, $loc_long);
+
+                // Fix any missing names
+                if (empty($loc_display_name)) $loc_display_name = $loc_title;
+
+                $json_locations[$index]['display_name'] = $loc_display_name;
+                $json_locations[$index]['phone'] = $loc_phone;
+                $json_locations[$index]['address'] = $loc_addr;
+                $json_locations[$index]['geo'] = $loc_geo;
+            }
+
+            // Render map HTML/JS
+            $output = '
+                <div id="leaflet-map"></div>
+                <script>
+                    var locations = ' . json_encode($json_locations) . ';
+                    var path = "' . $dir . '";
+                </script>';
+            
             return $output;
         }
         else { 

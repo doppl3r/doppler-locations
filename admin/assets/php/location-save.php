@@ -25,7 +25,7 @@
     update_post_meta($post_id, 'guide', $_POST['guide']);
 
     // Convert hours into array
-    $hours = array('hours');
+    $hours = array();
     $days = array('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun');
     foreach($days as $day) { $hours[$day] = $_POST[$day . '_open'] . '-' . $_POST[$day . '_close']; }
     update_post_meta($post_id, 'hours', json_encode($hours));

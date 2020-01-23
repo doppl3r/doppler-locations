@@ -11,6 +11,15 @@
 
         switch ($data) {
             case 'title': return get_the_title($post_id); break;
+            case 'hours':
+                $output = '';
+                $hours = json_decode($post_meta['hours'][0]);
+                foreach($hours as $key=>$day) {
+                    $output .= '<li><span>'. $key. '</span> <span>' . $hours->$key . '</span></li>';
+                }
+                $output = '<ul>' . $output . '</ul>';
+                return $output;
+            break;
             case 'media':
                 $output = '';
                 $media = json_decode($post_meta['media'][0]);

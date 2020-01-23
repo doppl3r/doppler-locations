@@ -1,5 +1,5 @@
 {
     "post_title": "Default",
     "post_excerpt": "Default page template",
-    "post_content": "<div class=\"doppler-locator\">\n    <h1>[dl data=\"title\"]<\/h1>\n    <ul>\n        <li>[dl data=\"status\"]<\/li>\n        <li>[dl data=\"street\"]<\/li>\n        <li>[dl data=\"city\"]<\/li>\n        <li>[dl data=\"state\"]<\/li>\n        <li>[dl data=\"zip\"]<\/li>\n        <li>[dl data=\"guide\"]<\/li>\n    <\/ul>\n\n    <h2>Gallery<\/h2>\n    [dl data=\"media\" id=\"gallery\"]\n\n    <h2>News<\/h2>\n    [dl data=\"posts\" type=\"news\"]\n\n    <h2>Contact Us<\/h2>\n    [dl data=\"links\" id=\"email\"]\n    [dl data=\"map\"]\n<\/div>"
+    "post_content": "<div class=\"doppler-locator\">\n    <h1>[dl data=\"title\"]<\/h1>\n    <ul>\n        <li>[dl data=\"status\"]<\/li>\n        <li>[dl data=\"street\"]<\/li>\n        <li>[dl data=\"city\"]<\/li>\n        <li>[dl data=\"state\"]<\/li>\n        <li>[dl data=\"zip\"]<\/li>\n        <li>[dl data=\"guide\"]<\/li>\n    <\/ul>\n\n    <h2>Hours<\/h2>\n    [dl data=\"hours\"]\n\n    <h2>Gallery<\/h2>\n    [dl data=\"media\" id=\"gallery\"]\n\n    <h2>News<\/h2>\n    [dl data=\"posts\" type=\"news\"]\n\n    <h2>Contact Us<\/h2>\n    [dl data=\"links\" id=\"email\"]\n    [dl data=\"map\"]\n<\/div>"
 }

@@ -18,7 +18,7 @@ h1, h2, h3, h4, h5, h6, p { line-height: initial; margin: 0; }
 
 /* Grid overrides */
 .doppler-body .row.justify { flex-wrap: nowrap; }
-.doppler-body .row.justify [class*="col"] { flex-grow: 0; }
+.doppler-body .row.justify [class*="col"] { flex-grow: 0; padding: 0 8px; }
 .doppler-body .row.justify [class*="col"]:first-of-type { margin-right: auto; }
 .doppler-body .row [class*="col"]:first-of-type { padding-left: 0; }
 .doppler-body .row [class*="col"]:last-of-type { padding-right: 0; }

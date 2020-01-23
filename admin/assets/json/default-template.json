@@ -1,5 +1,5 @@
 {
     "post_title": "Default",
     "post_excerpt": "Default page template",
-    "post_content": "<h1>[name]<\/h1>\n<p>[status]<\/p>\n<p>[street],<br>[city] [state], [zip]<br>[guide]<\/p>\n\n<h2>Gallery<\/h2>\n[media id=\"gallery\"]\n\n<h2>News<\/h2>\n[posts type=\"news\"]\n\n<h2>Contact Us<\/h2>\n[link text=\"email\"]\n[map]"
+    "post_content": "<div class=\"doppler-locator\">\n    <h1>[dl data=\"title\"]<\/h1>\n    <ul>\n        <li>[dl data=\"status\"]<\/li>\n        <li>[dl data=\"street\"]<\/li>\n        <li>[dl data=\"city\"]<\/li>\n        <li>[dl data=\"state\"]<\/li>\n        <li>[dl data=\"zip\"]<\/li>\n        <li>[dl data=\"guide\"]<\/li>\n    <\/ul>\n\n    <h2>Gallery<\/h2>\n    [dl data=\"media\" id=\"gallery\"]\n\n    <h2>News<\/h2>\n    [dl data=\"posts\" type=\"news\"]\n\n    <h2>Contact Us<\/h2>\n    [dl data=\"links\" id=\"email\"]\n    [dl data=\"map\"]\n<\/div>"
 }

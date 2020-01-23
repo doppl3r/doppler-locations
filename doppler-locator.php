@@ -39,6 +39,10 @@ register_uninstall_hook(__FILE__, 'uninstall_doppler_locator');
 // Evaluate the main file and include classes
 require plugin_dir_path( __FILE__ ) . 'includes/class-plugin.php';
 
+// Add shortcodes
+require plugin_dir_path( __FILE__ ) . 'includes/class-shortcodes.php';
+
+
 // Run the plugin
 function run_doppler_locator() {
 	global $doppler_locator_plugin; // Make available for other classes

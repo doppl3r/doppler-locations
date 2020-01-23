@@ -63,7 +63,7 @@
             }
             return $output;
         }
-        else if ($data == 'links') {
+        else if ($data == 'links' || $data == 'link') {
             $links = json_decode($post_meta['links'][0]);
             foreach($links as $link) {
                 $link_text = $link->text;

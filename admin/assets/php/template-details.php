@@ -17,15 +17,34 @@
         <label for="post-options">Shortcode Options</label>
         <div class="short-codes">
             <label>Location Details</label>
-            <p>[title] [template] [status] [name] [hours] [city] [state] [zip] [phone] [street] [latitude] [longitude] [guide]</p>
+            <p>
+                [dl data="title"]<br>
+                [dl data="status"]<br>
+                [dl data="display_name"]<br>
+                [dl data="hours"]<br>
+                [dl data="city"]<br>
+                [dl data="state"]<br>
+                [dl data="zip"]<br>
+                [dl data="phone"]<br>
+                [dl data="street"]<br>
+                [dl data="latitude"]<br>
+                [dl data="longitude"]<br>
+                [dl data="guide"]
+            </p>
             <label>Media</label>
-            <p>[media id="your-id"]</p>
+            <p>
+                [dl data="media" id="your-id"]<br>
+                [dl data="media" id="group-id"]
+            </p>
             <label>Posts</label>
-            <p>[posts type="event"] [posts type="news"]</p>
+            <p>
+                [dl data="posts" type="news"]<br>
+                [dl data="posts" type="event"]
+            </p>
             <label>Links</label>
-            <p>[link text="your-text"]</p>
+            <p>[dl data="links" id="email"]</p>
             <label>Map</label>
-            <p>[map]</p>
+            <p>[dl data="map"]</p>
         </div>
     </div>
 </div>

@@ -7,6 +7,16 @@ class Doppler_Locator_Public {
 		$this->doppler_locator = $doppler_locator;
 	}
 
+	public function apply_template() {
+		$post_id = get_the_ID();
+		$post_type = get_post_type($post_id);
+		$template_id = get_post_meta($post_id, 'template')[0];
+
+		// If post_type = 'location', use the associated template, else use default post content
+		$content_id = ($post_type == 'location') ? $template_id : $post_id;
+		return get_post_field('post_content', $content_id);
+	}
+
 	public function enqueue_styles() {
 		// Register stylesheets
 		wp_register_style('stylesheet', plugin_dir_url(__FILE__) . 'assets/css/stylesheet.css');

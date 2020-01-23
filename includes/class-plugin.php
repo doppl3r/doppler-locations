@@ -37,6 +37,9 @@ class Doppler_Locator {
 		$this->plugin_public = new Doppler_Locator_Public($this->get_doppler_locator());
 		$this->loader->add_action('wp_enqueue_scripts', $this->plugin_public, 'enqueue_styles');
 		$this->loader->add_action('wp_enqueue_scripts', $this->plugin_public, 'enqueue_scripts');
+		
+		// Replace location content with associated template content
+		$this->loader->add_filter('the_content', $this->plugin_public, 'apply_template');
 	}
 
 	public function run() {

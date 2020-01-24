@@ -22,6 +22,7 @@ class Doppler_Locator_Public {
 		wp_register_style('stylesheet', plugin_dir_url(__FILE__) . 'assets/css/stylesheet.css');
 
 		// Enqueue is in the shortcode
+		wp_register_style('grix', plugin_dir_url(__FILE__) . 'assets/css/grix.css');
 		wp_register_style('leaflet', plugin_dir_url(__FILE__) . 'assets/css/leaflet.css');
 		wp_register_style('leaflet-doppler-locator', plugin_dir_url(__FILE__) . 'assets/css/leaflet-doppler-locator.css');
 

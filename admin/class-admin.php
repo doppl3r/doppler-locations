@@ -38,19 +38,41 @@ class Doppler_Locator_Admin {
 	public function enqueue_styles() {
 		// Register stylesheets
 		wp_register_style('grix', plugin_dir_url(__FILE__) . 'assets/css/grix.css');
+		wp_register_style('codemirror', plugin_dir_url(__FILE__) . 'assets/css/codemirror.css');
 		wp_register_style('stylesheet', plugin_dir_url(__FILE__) . 'assets/css/stylesheet.css');
 
 		// Enqueue stylesheets
 		wp_enqueue_style('grix');
 		wp_enqueue_style('stylesheet');
+
+		// Enqueue stylesheets (for template editor)
+		if ($this->has_codemirror()) {
+			wp_enqueue_style('codemirror');
+		}
 	}
 
 	public function enqueue_scripts() {
 		// Register scripts
+		wp_register_script('codemirror', plugin_dir_url(__FILE__) . 'assets/js/codemirror.js');
+		wp_register_script('codemirror-xml', plugin_dir_url(__FILE__) . 'assets/js/codemirror-xml.js');
+		wp_register_script('codemirror-css', plugin_dir_url(__FILE__) . 'assets/js/codemirror-css.js');
+		wp_register_script('codemirror-javascript', plugin_dir_url(__FILE__) . 'assets/js/codemirror-javascript.js');
+		wp_register_script('codemirror-htmlmixed', plugin_dir_url(__FILE__) . 'assets/js/codemirror-htmlmixed.js');
+		wp_register_script('codemirror-init', plugin_dir_url(__FILE__) . 'assets/js/codemirror-init.js');
 		wp_register_script('scripts', plugin_dir_url(__FILE__) . 'assets/js/scripts.js', array( 'jquery' ));
 		
-		// Enqueue scripts
+		// Enqueue global (admin) scripts
 		wp_enqueue_script('scripts');
+
+		// Enqueue scripts (for template editor)
+		if ($this->has_codemirror()) {
+			wp_enqueue_script('codemirror');
+			wp_enqueue_script('codemirror-xml');
+			wp_enqueue_script('codemirror-css');
+			wp_enqueue_script('codemirror-javascript');
+			wp_enqueue_script('codemirror-htmlmixed');
+			wp_enqueue_script('codemirror-init');
+		}
 	}
 
 	public function render_locations() {
@@ -61,7 +83,7 @@ class Doppler_Locator_Admin {
 
 	public function render_template() {
 		// Render single template if id exists, else render template list
-		if (isset($_GET['id'])) { require_once(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/template-single.php'); }
+		if (isset($_GET['id'])) {require_once(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/template-single.php'); }
 		else { require_once(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/templates.php'); }
 	}
 
@@ -224,14 +246,18 @@ class Doppler_Locator_Admin {
 		}
 	}
 
-	function remove_custom_slug( $post_link, $post) {
+	public function has_codemirror() {
+		return (strpos($_GET['page'], 'template') !== false && !empty($_GET['id']));
+	}
+
+	public function remove_custom_slug( $post_link, $post) {
 		// Replace and return link of custom post type
 		if ('location' != $post->post_type || 'publish' != $post->post_status) { return $post_link; }
 		$post_link = str_replace( '/' . $post->post_type . '/', '/', $post_link );
 		return $post_link;
 	}
 
-	function parse_custom_request($query) {
+	public function parse_custom_request($query) {
 		// Allow WordPress to accept custom post type "location"
 		if (!$query->is_main_query() || 2 != count($query->query) || ! isset($query->query['page'])) { return; }
 		if (!empty($query->query['name'])) {

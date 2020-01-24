@@ -8,13 +8,17 @@
         $id = $atts['id'];
         $output = '';
 
-        //var_dump($post_meta); die;
+        // Apply grix grid system if shortcode is used
+        wp_enqueue_style('grix');
 
         if ($data == 'title') { return get_the_title($post_id); }
         else if ($data == 'hours') {
             $hours = json_decode($post_meta['hours'][0]);
             foreach($hours as $key=>$day) {
-                $output .= '<li><span>'. $key. '</span> <span>' . $hours->$key . '</span></li>';
+                $time = explode('-', $hours->$key);
+                $open = $time[0];
+                $close = $time[1];
+                $output .= '<li><span>'. $key. '</span> <span>' . $open . ' - ' . $close . '</span></li>';
             }
             $output = '<ul>' . $output . '</ul>';
             return $output;
@@ -44,19 +48,19 @@
         else if ($data == 'posts') {
             $posts = json_decode($post_meta['custom_posts'][0]);
             foreach($posts as $post) {
-                $post_type = $post->type;
-                $post_title = $post->title;
-                $post_date = $post->date;
-                $post_link = $post->link;
-                $post_content = $post->content;
+                $custom_post_type = $post->type;
+                $custom_post_title = $post->title;
+                $custom_post_date = $post->date;
+                $custom_post_link = $post->link;
+                $custom_post_content = $post->content;
                 
-                if (!isset($type) || $type == $post_type) {
+                if (!isset($type) || $type == $custom_post_type) {
                     $output .= '
-                        <ul class="row '. $post_type .'">
-                            <li class="col">' . $post_title . '</li>
-                            <li class="col">' . $post_date . '</li>
-                            <li class="col">' . $post_link . '</li>
-                            <li class="col">' . $post_content . '</li>
+                        <ul class="'. $custom_post_type .'">
+                            <li class="title">' . $custom_post_title . '</li>
+                            <li class="date">' . $custom_post_date . '</li>
+                            <li class="link">' . $custom_post_link . '</li>
+                            <li class="content">' . $custom_post_content . '</li>
                         </ul>
                     ';
                 }

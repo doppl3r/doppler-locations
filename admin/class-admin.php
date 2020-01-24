@@ -185,7 +185,7 @@ class Doppler_Locator_Admin {
 
 	public function register_custom_posts() {
 		// Loop through types of custom posts
-		$post_types = array('template', 'location');
+		$post_types = array('location');
 		foreach ($post_types as $post_type) {
 			// Define strings by post type
 			$plural = $post_type . 's';
@@ -237,6 +237,7 @@ class Doppler_Locator_Admin {
 				'show_in_nav_menus'     => true,
 				'can_export'            => true,
 				'has_archive'           => true,
+				'rewrite'            	=> array( 'slug' => '/' ),
 				'exclude_from_search'   => false,
 				'publicly_queryable'    => true,
 				'capability_type'       => 'page',
@@ -250,7 +251,7 @@ class Doppler_Locator_Admin {
 		return (strpos($_GET['page'], 'template') !== false && !empty($_GET['id']));
 	}
 
-	public function remove_custom_slug( $post_link, $post) {
+	public function remove_custom_slug($post_link, $post) {
 		// Replace and return link of custom post type
 		if ('location' != $post->post_type || 'publish' != $post->post_status) { return $post_link; }
 		$post_link = str_replace( '/' . $post->post_type . '/', '/', $post_link );
@@ -261,7 +262,7 @@ class Doppler_Locator_Admin {
 		// Allow WordPress to accept custom post type "location"
 		if (!$query->is_main_query() || 2 != count($query->query) || ! isset($query->query['page'])) { return; }
 		if (!empty($query->query['name'])) {
-			$query->set('post_type', array( 'post', 'location', 'page'));
+			$query->set('post_type', array('post', 'location', 'page'));
 		}
 	}
 }

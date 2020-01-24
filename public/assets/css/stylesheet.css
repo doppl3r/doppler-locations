@@ -5,6 +5,5 @@ body .doppler-locator .address li { margin: 0; display: inline-block; }
 body .doppler-locator .hours ul li { margin: 0; display: flex; justify-content: space-between; }
 body .doppler-locator .hours ul li span:first-of-type { text-transform: capitalize; font-weight: bold; }
 body .doppler-locator .hours ul li span:first-of-type:after { content: '.'; }
-
 body .doppler-locator ul { list-style: none; padding: 12px 0; margin: 0; }
 body .doppler-locator ul li { margin: 0; }

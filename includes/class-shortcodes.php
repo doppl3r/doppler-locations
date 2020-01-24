@@ -124,6 +124,7 @@
                 if (empty($loc_display_name)) $loc_display_name = $loc_title;
 
                 $json_locations[$index]['display_name'] = $loc_display_name;
+                $json_locations[$index]['link'] = $loc_url;
                 $json_locations[$index]['phone'] = $loc_phone;
                 $json_locations[$index]['address'] = $loc_addr;
                 $json_locations[$index]['geo'] = $loc_geo;

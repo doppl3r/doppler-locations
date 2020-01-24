@@ -10,8 +10,9 @@ var icon = L.icon({ iconUrl: path + 'img/marker-icon.png', shadowUrl: path + 'im
 var group = new L.featureGroup([]);
 locations.forEach(function(value){
     var name = value['display_name'];
+    var address = value['address'];
     var phone = value['phone'];
-    var url = value['url'];
+    var link = value['link'];
     var geo = value['geo'];
 
     // Add icon if geo coordinates exist
@@ -19,8 +20,10 @@ locations.forEach(function(value){
         var marker = L.marker(geo, { icon: icon }).addTo(group);
         marker.bindPopup(
             '<ul>' +
-                '<li>'+ name + '</li>' +
-                '<li>'+ phone + '</li>' +
+                '<li class="title">'+ name + '</li>' +
+                '<li class="address">'+ address + '</li>' +
+                '<li class="phone">'+ phone + '</li>' +
+                '<li class="link"><a href="'+ link + '">View Location</a></li>' +
             '</ul>'
         );
     }
@@ -29,5 +32,5 @@ locations.forEach(function(value){
 
 // zoom settings
 group.addTo(map);
-map.fitBounds(group.getBounds());
+map.fitBounds(group.getBounds(), { padding: [16, 16], maxZoom: 16 });
 L.control.zoom({ position:'bottomright' }).addTo(map);

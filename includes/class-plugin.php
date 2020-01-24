@@ -24,13 +24,6 @@ class Doppler_Locator {
 		$this->plugin_admin = new Doppler_Locator_Admin($this->get_doppler_locator());
 		$this->loader->add_action('admin_enqueue_scripts', $this->plugin_admin, 'enqueue_styles');
 		$this->loader->add_action('admin_enqueue_scripts', $this->plugin_admin, 'enqueue_scripts');
-
-		// Add custom post features (also for public)
-		$this->loader->add_action('init', $this->plugin_admin, 'register_custom_posts'); // Register custom post type
-		
-		// TODO: Make this an option to write URL
-		$this->loader->add_action('post_type_link', $this->plugin_admin, 'remove_custom_slug', 10, 3); // Change URL
-		$this->loader->add_action('pre_get_posts', $this->plugin_admin, 'parse_custom_request'); // Resolve 404 error
 	}
 	
 	private function define_public_hooks() {
@@ -38,8 +31,11 @@ class Doppler_Locator {
 		$this->loader->add_action('wp_enqueue_scripts', $this->plugin_public, 'enqueue_styles');
 		$this->loader->add_action('wp_enqueue_scripts', $this->plugin_public, 'enqueue_scripts');
 		
-		// Replace location content with associated template content
+		// Register custom posts and replace location content with associated template content
+		$this->loader->add_action('init', $this->plugin_public, 'register_custom_posts'); // Register custom post type
 		$this->loader->add_filter('the_content', $this->plugin_public, 'apply_template');
+		$this->loader->add_action('post_type_link', $this->plugin_public, 'remove_custom_slug', 10, 3); // Change URL
+		$this->loader->add_action('pre_get_posts', $this->plugin_public, 'parse_custom_request'); // Resolve 404 error
 	}
 
 	public function run() {

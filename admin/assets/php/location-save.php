@@ -92,5 +92,5 @@
         }
     }
     update_post_meta($post_id, 'users', json_encode($users));
-
+    flush_rewrite_rules();
 ?>

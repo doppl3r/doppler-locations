@@ -41,4 +41,80 @@ class Doppler_Locator_Public {
 		// Enqueue scripts
 		wp_enqueue_script('scripts');
 	}
+
+	public function register_custom_posts() {
+		// Loop through types of custom posts
+		$post_types = array('location');
+		foreach ($post_types as $post_type) {
+			// Define strings by post type
+			$plural = $post_type . 's';
+			$uppercaseSingular = ucfirst($post_type);
+			$uppercasePlural = ucfirst($plural);
+
+			// Create labels
+			$labels = array(
+				'name'                  => $uppercasePlural,
+				'singular_name'         => $uppercaseSingular,
+				'menu_name'             => $uppercaseSingular,
+				'name_admin_bar'        => $uppercaseSingular,
+				'archives'              => $uppercaseSingular . ' Archives',
+				'attributes'            => $uppercaseSingular . ' Attributes',
+				'parent_item_colon'     => 'Parent ' . $uppercaseSingular . ':',
+				'all_items'             => 'All ' . $uppercasePlural,
+				'add_new_item'          => 'Add New ' . $uppercaseSingular,
+				'add_new'               => 'Add New',
+				'new_item'              => 'New ' . $uppercaseSingular,
+				'edit_item'             => 'Edit ' . $uppercaseSingular,
+				'update_item'           => 'Update ' . $uppercaseSingular,
+				'view_item'             => 'View ' . $uppercaseSingular,
+				'view_items'            => 'View ' . $uppercaseSingular,
+				'search_items'          => 'Search ' . $uppercaseSingular,
+				'not_found'             => 'Not found',
+				'not_found_in_trash'    => 'Not found in Trash',
+				'featured_image'        => 'Featured Image',
+				'set_featured_image'    => 'Set featured image',
+				'remove_featured_image' => 'Remove featured image',
+				'use_featured_image'    => 'Use as featured image',
+				'insert_into_item'      => 'Insert into ' . $post_type,
+				'uploaded_to_this_item' => 'Uploaded to this ' . $post_type,
+				'items_list'            => $uppercasePlural . ' list',
+				'items_list_navigation' => $uppercasePlural . ' list navigation',
+				'filter_items_list'     => 'Filter ' . $uppercaseSingular . ' list',
+			);
+			$args = array(
+				'label'                 => $uppercaseSingular,
+				'description'           => $uppercaseSingular,
+				'labels'                => $labels,
+				'supports'              => array('title', 'editor'),
+				'taxonomies'            => array($post_type),
+				'hierarchical'          => false,
+				'public'                => true,
+				'show_ui'               => false,
+				'show_in_menu'          => true,
+				'menu_position'         => 5,
+				'show_in_admin_bar'     => true,
+				'show_in_nav_menus'     => true,
+				'can_export'            => true,
+				'has_archive'           => true,
+				'rewrite'            	=> array( 'slug' => '/' ),
+				'exclude_from_search'   => false,
+				'publicly_queryable'    => true,
+				'capability_type'       => 'page',
+				'show_in_rest'          => true,
+			);
+			register_post_type($post_type, $args);
+		}
+	}
+
+	public function remove_custom_slug($post_link, $post) {
+		if ('location' === $post->post_type && 'publish' === $post->post_status) { $post_link = str_replace( '/' . $post->post_type . '/', '/', $post_link ); }
+		return $post_link;
+	}
+
+	public function parse_custom_request($query) {
+		if (!$query->is_main_query()) { return; }
+		if (!isset( $query->query['page']) || 2 !== count($query->query)) { return; }
+		if (empty($query->query['name'])) { return; }
+		$query->set('post_type', array( 'post', 'page', 'location'));
+	}
 }

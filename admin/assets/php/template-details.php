@@ -43,6 +43,8 @@
             </p>
             <label>Links</label>
             <p>[dl data="links" id="email"]</p>
+            <label>Scripts</label>
+            <p>[dl data="scripts"]</p>
             <label>Map</label>
             <p>[dl data="map"]</p>
         </div>

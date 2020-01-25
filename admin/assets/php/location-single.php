@@ -48,7 +48,7 @@
         </div>
         <div class="col-6">
             <a class="btn" href="admin.php?page=doppler-locator">Cancel</a>
-            <a class="btn" href="<?php echo $url_view; ?>" target="_blank">View</a>
+            <a class="btn" href="<?php echo $url_view; ?>">View</a>
             <a class="btn blue" href="#save-location">Save</a>
         </div>
     </div>

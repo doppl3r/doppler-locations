@@ -57,12 +57,15 @@
     $custom_posts = array();
     if (!empty($_POST['custom_post_type'])) {
         foreach($_POST['custom_post_type'] as $key=>$value) {
+            $custom_post_content = $_POST['custom_post_content'][$key];
+            $custom_post_content = str_replace("\r\n", "\\n", $custom_post_content);
+
             $custom_posts[$key] = array(
                 'type' => $_POST['custom_post_type'][$key],
                 'title' => $_POST['custom_post_title'][$key],
                 'date' => $_POST['custom_post_date'][$key],
                 'link' => $_POST['custom_post_link'][$key],
-                'content' => $_POST['custom_post_content'][$key]
+                'content' => $custom_post_content
             );
         }
     }
@@ -87,9 +90,9 @@
     if (!empty($_POST['script_content'])) {
         foreach($_POST['script_content'] as $key=>$value) {
             // Prevent json_encode from converting Javascript
-            $script = $_POST['script_content'][$key] . '';
-            $script = str_replace("\\","\\\\", $script);
-            $script = str_replace("\r\n","\\n", $script);
+            $script = $_POST['script_content'][$key];
+            $script = str_replace("\\", "\\\\", $script);
+            $script = str_replace("\r\n", "\\n", $script);
             $script = esc_textarea($script);
 
             // Add script to list

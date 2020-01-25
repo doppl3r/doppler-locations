@@ -82,6 +82,22 @@
     }
     update_post_meta($post_id, 'links', json_encode($links));
 
+    // Parse scripts
+    $scripts = array();
+    if (!empty($_POST['script_content'])) {
+        foreach($_POST['script_content'] as $key=>$value) {
+            // Prevent json_encode from converting Javascript
+            $script = $_POST['script_content'][$key] . '';
+            $script = str_replace("\\","\\\\", $script);
+            $script = str_replace("\r\n","\\n", $script);
+            $script = esc_textarea($script);
+
+            // Add script to list
+            $scripts[$key] = array('script_content' => $script);
+        }
+    }
+    update_post_meta($post_id, 'scripts', json_encode($scripts));
+
     // Parse users
     $users = array();
     if (!empty($_POST['user_login'])) {

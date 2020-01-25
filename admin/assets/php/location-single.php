@@ -25,6 +25,7 @@
     $media = json_decode(get_post_meta($post_id, 'media')[0]);
     $custom_posts = json_decode(get_post_meta($post_id, 'custom_posts')[0]);
     $links = json_decode(get_post_meta($post_id, 'links')[0]);
+    $scripts = json_decode(get_post_meta($post_id, 'scripts')[0]);
     $users = json_decode(get_post_meta($post_id, 'users')[0]);
     $permission = current_user_can('administrator') ? true : false;
 
@@ -60,6 +61,7 @@
             <div class="tab"><span class="dashicons-before dashicons-paperclip"></span> <span class="text">Media</span></div>
             <div class="tab"><span class="dashicons-before dashicons-editor-quote"></span> <span class="text">Posts</span></div>
             <div class="tab"><span class="dashicons-before dashicons-admin-links"></span> <span class="text">Links</span></div>
+            <div class="tab"><span class="dashicons-before dashicons-editor-code"></span> <span class="text">Scripts</span></div>
             <div class="tab"><span class="dashicons-before dashicons-admin-users"></span> <span class="text">Users</span></div>
         </div>
         <div class="containers">
@@ -67,6 +69,7 @@
             <div class="container"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-media.php'); ?></div>
             <div class="container"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-custom-posts.php'); ?></div>
             <div class="container"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-links.php'); ?></div>
+            <div class="container"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-scripts.php'); ?></div>
             <div class="container"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-users.php'); ?></div>
         </div>
     </form>

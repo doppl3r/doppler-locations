@@ -81,6 +81,16 @@
             }
             return $output;
         }
+        else if ($data == 'scripts' || $data == 'script') {
+            $scripts = json_decode($post_meta['scripts'][0]);
+            foreach($scripts as $script) {
+                $script_content = $script->script_content;
+                $script_content = str_replace('\\', '', $script_content);
+                $script_content = htmlspecialchars_decode($script_content, ENT_QUOTES);
+                $output .= $script_content;
+            }
+            return $output;
+        }
         else if ($data == 'map') {
             // Enqueue data if map exists
             wp_enqueue_style('leaflet');

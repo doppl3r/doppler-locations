@@ -134,6 +134,7 @@ class Doppler_Locator_Admin {
 			add_post_meta($post_id, 'media', json_encode($default['media']));
 			add_post_meta($post_id, 'custom_posts', json_encode($default['custom_posts']));
 			add_post_meta($post_id, 'links', json_encode($default['links']));
+			add_post_meta($post_id, 'scripts', json_encode($default['scripts']));
 			add_post_meta($post_id, 'users', json_encode($default['users']));
 			flush_rewrite_rules();
 		}

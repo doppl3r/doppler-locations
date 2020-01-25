@@ -33,6 +33,8 @@ class Doppler_Locator_Admin {
 			$function = array($this, 'render_template');
 			add_submenu_page($parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function);
 		}
+
+		//$this->redirect_location();
 	}
 
 	public function enqueue_styles() {
@@ -186,5 +188,15 @@ class Doppler_Locator_Admin {
 
 	public function has_codemirror() {
 		return (strpos($_GET['page'], 'template') !== false && !empty($_GET['id']));
+	}
+
+	public function redirect_location() {
+		$post_id = $_GET['post'];
+		$post_type = get_post_type($post_id);
+
+		// Change where the admin bar 'edit location' goes to
+		if (!empty($post_id) && $post_type == 'location') {
+			wp_redirect(get_site_url() . '/wp-admin/admin.php?page=' . $this->doppler_locator . '&id=' . $_GET['post']);
+		}
 	}
 }

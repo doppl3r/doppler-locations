@@ -24,6 +24,7 @@ class Doppler_Locator {
 		$this->plugin_admin = new Doppler_Locator_Admin($this->get_doppler_locator());
 		$this->loader->add_action('admin_enqueue_scripts', $this->plugin_admin, 'enqueue_styles');
 		$this->loader->add_action('admin_enqueue_scripts', $this->plugin_admin, 'enqueue_scripts');
+		$this->loader->add_action('the_post', $this->plugin_admin, 'redirect_location');
 	}
 	
 	private function define_public_hooks() {

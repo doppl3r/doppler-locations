@@ -58,11 +58,11 @@
         <input type="hidden" name="tab" value="<?php echo $tab; ?>">
         <div class="tabs">
             <div class="tab"><span class="dashicons-before dashicons-location"></span> <span class="text">General</span></div>
-            <div class="tab"><span class="dashicons-before dashicons-paperclip"></span> <span class="text">Media</span></div>
+            <div class="tab"><span class="dashicons-before dashicons-admin-media"></span> <span class="text">Media</span></div>
             <div class="tab"><span class="dashicons-before dashicons-editor-quote"></span> <span class="text">Posts</span></div>
             <div class="tab"><span class="dashicons-before dashicons-admin-links"></span> <span class="text">Links</span></div>
             <div class="tab"><span class="dashicons-before dashicons-editor-code"></span> <span class="text">Scripts</span></div>
-            <div class="tab"><span class="dashicons-before dashicons-admin-users"></span> <span class="text">Users</span></div>
+            <div class="tab"><span class="dashicons-before dashicons-admin-network"></span> <span class="text">Users</span></div>
         </div>
         <div class="containers">
             <div class="container"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-details.php'); ?></div>

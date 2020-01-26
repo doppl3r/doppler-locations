@@ -6,6 +6,9 @@
         $data = $atts['data'];
         $type = $atts['type'];
         $id = $atts['id'];
+        $width = $atts['width'];
+        $height = $atts['height'];
+        $style = '';
         $output = '';
 
         // Apply grix grid system if shortcode is used
@@ -92,6 +95,13 @@
             return $output;
         }
         else if ($data == 'map') {
+            // Build style attribute
+            if (!empty($width) || !empty($height)) {
+                if (!empty($width)) $width = 'width: ' . $width . '; ';
+                if (!empty($height)) $height = 'height: ' . $height . '; ';
+                $style = 'style="' . $width . $height . '"';
+            }
+
             // Enqueue data if map exists
             wp_enqueue_style('leaflet');
             wp_enqueue_script('leaflet');
@@ -142,7 +152,7 @@
 
             // Render map HTML/JS
             $output = '
-                <div id="leaflet-map"></div>
+                <div id="leaflet-map" ' . $style . '></div>
                 <script>
                     var locations = ' . json_encode($json_locations) . ';
                     var path = "' . $dir . '";

@@ -1,3 +1,4 @@
+<option value="Closed">Closed</option>
 <?php
     $periods = array('AM', 'PM');
     $divisions = 2; // 2 = 30 minutes

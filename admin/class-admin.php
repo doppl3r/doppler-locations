@@ -90,11 +90,15 @@ class Doppler_Locations_Admin {
 	}
 
 	public function add_post($post_type, $allow_data = true) {
+		global $doppler_locations_plugin;
+        $post_type_template = $doppler_locations_plugin->get_post_type_template();
+        $post_type_location = $doppler_locations_plugin->get_post_type_location();
+
 		// Define post_type by AJAX post value
 		if (isset($_POST['post_type'])) $post_type = $_POST['post_type'];
 
 		// Determine specific post_type
-		if ($post_type == "template") {
+		if ($post_type == $post_type_template) {
 			// Add new page with default template
 			$json = file_get_contents(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/json/default-template.json');
 			$default = json_decode($json, true);
@@ -107,7 +111,7 @@ class Doppler_Locations_Admin {
 			);
 			$post_id = wp_insert_post($post_arr);
 		}
-		else if ($post_type == "location") {
+		else if ($post_type == $post_type_location) {
 			// Add new page with default template
 			$json = file_get_contents(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/json/default-location.json');
 			$default = json_decode($json, true);
@@ -119,7 +123,7 @@ class Doppler_Locations_Admin {
 			$post_id = wp_insert_post($post_arr);
 
 			// Add postmeta to newly inserted page
-			add_post_meta($post_id, 'template', $default['template']);
+			add_post_meta($post_id, 'template_id', $default['template_id']);
 			add_post_meta($post_id, 'status', $default['status']);
 			add_post_meta($post_id, 'display_name', $default['display_name']);
 			add_post_meta($post_id, 'hours', json_encode($default['hours']));
@@ -147,7 +151,8 @@ class Doppler_Locations_Admin {
 	}
 
 	public function render_row($post_type, $row) {
-		include(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/' . $post_type . '-row.php');
+		$type = explode('_', $post_type); // Ex: Convert "doppler_location" to "location"
+		include(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/' . $type[1] . '-row.php');
 	}
 	
 	public function add_meta_row($postmeta) { 
@@ -192,11 +197,13 @@ class Doppler_Locations_Admin {
 	}
 
 	public function redirect_location() {
+		global $doppler_locations_plugin;
+        $post_type_location = $doppler_locations_plugin->get_post_type_location();
 		$post_id = $_GET['post'];
 		$post_type = get_post_type($post_id);
 
 		// Change where the admin bar 'edit location' goes to
-		if (!empty($post_id) && $post_type == 'location') {
+		if (!empty($post_id) && $post_type == $post_type_location) {
 			wp_redirect(get_site_url() . '/wp-admin/admin.php?page=' . $this->doppler_locations . '&id=' . $_GET['post']);
 		}
 	}

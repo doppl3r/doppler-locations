@@ -3,11 +3,11 @@
         <label for="post-title">Title</label>
         <input id="post-title" name="post_title" type="text" value="<?php echo $post->post_title; ?>">
     </div>
-    <div class="col-3 template">
-        <label for="template">Template</label>
-        <select id="template" name="template">
+    <div class="col-3 template-id">
+        <label for="template-id">Template</label>
+        <select id="template-id" name="template_id">
             <?php
-                $templates = get_posts([ 'post_type' => 'template', 'post_status' => 'any', 'numberposts' => -1 ]);
+                $templates = get_posts([ 'post_type' => $post_type_template, 'post_status' => 'any', 'numberposts' => -1 ]);
                 foreach ($templates as $t) {
                     $selected = '';
                     if ($template == $t->ID) $selected = ' selected';

@@ -8,12 +8,14 @@ class Doppler_Locations_Public {
 	}
 
 	public function apply_template() {
+		global $doppler_locations_plugin;
 		$post_id = get_the_ID();
 		$post_type = get_post_type($post_id);
-		$template_id = get_post_meta($post_id, 'template')[0];
+		$post_type_location = $doppler_locations_plugin->get_post_type_location();
+		$template_id = get_post_meta($post_id, 'template_id')[0];
 
 		// If post_type = 'location', use the associated template, else use default post content
-		$content_id = ($post_type == 'location') ? $template_id : $post_id;
+		$content_id = ($post_type == $post_type_location) ? $template_id : $post_id;
 		return get_post_field('post_content', $content_id);
 	}
 
@@ -43,13 +45,18 @@ class Doppler_Locations_Public {
 	}
 
 	public function register_custom_posts() {
+		
+		global $doppler_locations_plugin;
+		$post_type_location = $doppler_locations_plugin->get_post_type_location();
+		$post_types = array($post_type_location);
+
 		// Loop through types of custom posts
-		$post_types = array('location');
 		foreach ($post_types as $post_type) {
 			// Define strings by post type
-			$plural = $post_type . 's';
-			$uppercaseSingular = ucfirst($post_type);
-			$uppercasePlural = ucfirst($plural);
+			$singular = str_replace('_', ' ', $post_type);
+			$plural = $singular . 's';
+			$uppercaseSingular = ucwords($singular);
+			$uppercasePlural = ucwords($plural);
 
 			// Create labels
 			$labels = array(
@@ -75,8 +82,8 @@ class Doppler_Locations_Public {
 				'set_featured_image'    => 'Set featured image',
 				'remove_featured_image' => 'Remove featured image',
 				'use_featured_image'    => 'Use as featured image',
-				'insert_into_item'      => 'Insert into ' . $post_type,
-				'uploaded_to_this_item' => 'Uploaded to this ' . $post_type,
+				'insert_into_item'      => 'Insert into ' . $singular,
+				'uploaded_to_this_item' => 'Uploaded to this ' . $singular,
 				'items_list'            => $uppercasePlural . ' list',
 				'items_list_navigation' => $uppercasePlural . ' list navigation',
 				'filter_items_list'     => 'Filter ' . $uppercaseSingular . ' list',
@@ -102,19 +109,26 @@ class Doppler_Locations_Public {
 				'capability_type'       => 'page',
 				'show_in_rest'          => true,
 			);
+			// echo '<pre>';
+			// var_dump($args);
+			// echo '</pre>'; die;
 			register_post_type($post_type, $args);
 		}
 	}
 
 	public function remove_custom_slug($post_link, $post) {
-		if ('location' === $post->post_type && 'publish' === $post->post_status) { $post_link = str_replace( '/' . $post->post_type . '/', '/', $post_link ); }
+		global $doppler_locations_plugin;
+		$post_type_location = $doppler_locations_plugin->get_post_type_location();
+		if ($post_type_location === $post->post_type && 'publish' === $post->post_status) { $post_link = str_replace( '/' . $post->post_type . '/', '/', $post_link ); }
 		return $post_link;
 	}
 
 	public function parse_custom_request($query) {
+		global $doppler_locations_plugin;
+		$post_type_location = $doppler_locations_plugin->get_post_type_location();
 		if (!$query->is_main_query()) { return; }
 		if (!isset( $query->query['page']) || 2 !== count($query->query)) { return; }
 		if (empty($query->query['name'])) { return; }
-		$query->set('post_type', array( 'post', 'page', 'location'));
+		$query->set('post_type', array( 'post', 'page', $post_type_location));
 	}
 }

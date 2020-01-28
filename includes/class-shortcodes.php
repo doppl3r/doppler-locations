@@ -1,7 +1,9 @@
 <?php
     function doppler_shortcode($atts, $content = null) {
+        global $doppler_locations_plugin;
         $post_id = get_the_ID();
         $post_type = get_post_type($post_id);
+        $post_type_location = $doppler_locations_plugin->get_post_type_location();
         $post_meta = get_post_meta($post_id);
         $data = $atts['data'];
         $type = $atts['type'];
@@ -115,11 +117,11 @@
             $dir = implode('/', $url) . '/public/assets/';
 
             // Use single location if 'location' is set, default = all
-            if ($post_type == 'location') $post__in = array($post_id);
+            if ($post_type == $post_type_location) $post__in = array($post_id);
 
             // Get posts by location and matching ID
             $locations = get_posts([
-                'post_type' => 'location',
+                'post_type' => $post_type_location,
                 'post_status' => 'any',
                 'numberposts' => -1,
                 'post__in' => $post__in

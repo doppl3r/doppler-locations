@@ -27,7 +27,7 @@
                 global $doppler_locations_plugin;
                 $order_by = !empty($_GET['orderby']) ? $_GET['orderby'] : 'title';
                 $order = !empty($_GET['order']) ? $_GET['order'] : 'ASC';
-                $post_type = 'location';
+                $post_type = $doppler_locations_plugin->get_post_type_location();
                 $results = get_posts([ 
                     'post_type' => $post_type, 
                     'post_status' => 'any', 
@@ -42,6 +42,6 @@
                 }
             ?>
         </div>
-        <a class="btn" href="#add-location">Add New Location</a>
+        <a class="btn" href="#add-location" value="<?php echo $post_type; ?>">Add New Location</a>
     </div>
 </div>

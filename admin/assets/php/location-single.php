@@ -5,12 +5,14 @@
     }
 
     // Get location data
-    global $current_user;
+    global $current_user, $doppler_locations_plugin;
+    $post_type_location = $doppler_locations_plugin->get_post_type_location();
+    $post_type_template = $doppler_locations_plugin->get_post_type_template();
     $tab = isset($_POST['tab']) ? $_POST['tab'] : 0;
     $post_id = $_GET['id'];
     $post = get_post($post_id);
     $url_view = get_post_permalink($post_id);
-    $template = get_post_meta($post_id, 'template')[0];
+    $template = get_post_meta($post_id, 'template_id')[0];
     $status = get_post_meta($post_id, 'status')[0];
     $display_name = get_post_meta($post_id, 'display_name')[0];
     $hours = json_decode(get_post_meta($post_id, 'hours')[0]);

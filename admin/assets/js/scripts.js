@@ -15,7 +15,8 @@
 		// Add post button(s)
 		$(document).on('click', '.doppler-body [href*="add-location"], .doppler-body [href*="add-template"]', function(e){
 			e.preventDefault();
-			var postType = $(this).attr('href').split("-")[1];
+			// var postType = $(this).attr('href').split("-")[1];
+			var postType = $(this).attr('value');
 			$('.doppler-body').addClass('loading');
 			$.post(ajaxurl, { 'action': 'add_post', 'post_type': postType }, function(response) { 
 				// Append new row

@@ -3,11 +3,15 @@
 class Doppler_Locations {
 	protected $loader;
 	protected $doppler_locations;
+	protected $post_type_location;
+	protected $post_type_template;
 	protected $plugin_admin;
 	protected $plugin_public;
 
 	public function __construct() {
-		$this->doppler_locations = 'doppler-locations';
+		$this->doppler_locations = 'doppler-locations'; // Slug
+		$this->post_type_location = 'doppler_location'; // DB 'post_type' value
+		$this->post_type_template = 'doppler_template'; // DB 'post_type' value
 		$this->load_dependencies();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
@@ -45,6 +49,14 @@ class Doppler_Locations {
 
 	public function get_doppler_locations() {
 		return $this->doppler_locations;
+	}
+
+	public function get_post_type_location() {
+		return $this->post_type_location;
+	}
+
+	public function get_post_type_template() {
+		return $this->post_type_template;
 	}
 
 	public function get_loader() {

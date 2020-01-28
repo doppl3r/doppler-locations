@@ -45,7 +45,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-shortcodes.php';
 
 // Run the plugin
 function run_doppler_locations() {
-	global $doppler_locations_plugin; // Make available for other classes
+	// Make available for other classes
+	global $doppler_locations_plugin;
+
+	// Init plugin class
 	$doppler_locations_plugin = new Doppler_Locations();
 	$doppler_locations_plugin->run();
 }

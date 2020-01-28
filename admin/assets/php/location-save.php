@@ -1,7 +1,7 @@
 <?php
     // Update post data
     $post_id = $_GET['id'];
-    $template_id = $_POST['template'];
+    $template_id = $_POST['template_id'];
     $template_content = ''; // Set empty, the content will come from the template
     //$template_content = get_post_field('post_content', $template_id);
     $post_arr = array(
@@ -13,7 +13,7 @@
     wp_update_post($post_arr);
 
     // Add postmeta to newly inserted page
-    update_post_meta($post_id, 'template', $template_id);
+    update_post_meta($post_id, 'template_id', $template_id);
     update_post_meta($post_id, 'status', $_POST['status']);
     update_post_meta($post_id, 'display_name', $_POST['display_name']);
     update_post_meta($post_id, 'city', $_POST['city']);

@@ -24,7 +24,7 @@
         <div class="posts">
             <?php
                 // Query for results
-                global $doppler_locator_plugin;
+                global $doppler_locations_plugin;
                 $order_by = !empty($_GET['orderby']) ? $_GET['orderby'] : 'title';
                 $order = !empty($_GET['order']) ? $_GET['order'] : 'ASC';
                 $post_type = 'location';
@@ -38,7 +38,7 @@
 
                 // Render each row using a basic template
                 foreach ($results as $row) {
-                    $doppler_locator_plugin->get_plugin_admin()->render_row($post_type, $row);
+                    $doppler_locations_plugin->get_plugin_admin()->render_row($post_type, $row);
                 }
             ?>
         </div>

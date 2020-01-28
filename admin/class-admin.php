@@ -1,10 +1,10 @@
 <?php
 
-class Doppler_Locator_Admin {
-	private $doppler_locator;
+class Doppler_Locations_Admin {
+	private $doppler_locations;
 
-	public function __construct($doppler_locator) {
-		$this->doppler_locator = $doppler_locator;
+	public function __construct($doppler_locations) {
+		$this->doppler_locations = $doppler_locations;
 		add_action('admin_menu', array($this, 'add_menu_page')); /* Add admin menu and page */
 		add_action('wp_ajax_add_post', array($this, 'add_post'));
 		add_action('wp_ajax_delete_post', array($this, 'delete_post'));
@@ -16,7 +16,7 @@ class Doppler_Locator_Admin {
 		$page_title = 'Locations';
 		$menu_title = 'Locations';
 		$capability = 'edit_others_posts';
-		$menu_slug = $this->doppler_locator;
+		$menu_slug = $this->doppler_locations;
 		$function = array($this, 'render_locations');
 		$icon_url = 'dashicons-location-alt';
 		//$icon_url = plugin_dir_url(__FILE__) . 'images/icon_wporg.png';
@@ -197,7 +197,7 @@ class Doppler_Locator_Admin {
 
 		// Change where the admin bar 'edit location' goes to
 		if (!empty($post_id) && $post_type == 'location') {
-			wp_redirect(get_site_url() . '/wp-admin/admin.php?page=' . $this->doppler_locator . '&id=' . $_GET['post']);
+			wp_redirect(get_site_url() . '/wp-admin/admin.php?page=' . $this->doppler_locations . '&id=' . $_GET['post']);
 		}
 	}
 }

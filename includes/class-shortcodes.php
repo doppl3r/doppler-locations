@@ -105,8 +105,8 @@
             // Enqueue data if map exists
             wp_enqueue_style('leaflet');
             wp_enqueue_script('leaflet');
-            wp_enqueue_script('leaflet-doppler-locator');
-            wp_enqueue_style('leaflet-doppler-locator');
+            wp_enqueue_script('leaflet-doppler-locations');
+            wp_enqueue_style('leaflet-doppler-locations');
 
             // Update URL for front-end icon path
             $url = explode('/', plugin_dir_url( __FILE__ ));

@@ -6,12 +6,12 @@
 <div class="post-meta-group">
     <?php
         // Declare global variables
-        global $doppler_locator_plugin;
+        global $doppler_locations_plugin;
         wp_enqueue_media();
 
         // Loop through each link
         foreach($media as $medium) {
-            $doppler_locator_plugin->get_plugin_admin()->render_meta_row('medium', $medium);
+            $doppler_locations_plugin->get_plugin_admin()->render_meta_row('medium', $medium);
         }
     ?>
 </div>

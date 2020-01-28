@@ -1,6 +1,6 @@
 <?php
 
-class Doppler_Locator_Loader {
+class Doppler_Locations_Loader {
 	protected $actions;
 	protected $filters;
 

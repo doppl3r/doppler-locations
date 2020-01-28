@@ -1,4 +1,4 @@
-/* Doppler Locator Admin CSS */
+/* Doppler Locations Admin CSS */
 h1, h2, h3, h4, h5, h6, p { line-height: initial; margin: 0; }
 .doppler-body { padding: 64px 64px 64px 44px; user-select: none; color: #333; }
 .doppler-body * { box-sizing: border-box; line-height: 24px; font-family: 'Roboto'; }

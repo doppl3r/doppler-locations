@@ -1,13 +1,13 @@
 <?php
 
-class Doppler_Locator {
+class Doppler_Locations {
 	protected $loader;
-	protected $doppler_locator;
+	protected $doppler_locations;
 	protected $plugin_admin;
 	protected $plugin_public;
 
 	public function __construct() {
-		$this->doppler_locator = 'doppler-locator';
+		$this->doppler_locations = 'doppler-locations';
 		$this->load_dependencies();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
@@ -17,18 +17,18 @@ class Doppler_Locator {
 		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-loader.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-admin.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-public.php';
-		$this->loader = new Doppler_Locator_Loader();
+		$this->loader = new Doppler_Locations_Loader();
 	}
 
 	private function define_admin_hooks() {
-		$this->plugin_admin = new Doppler_Locator_Admin($this->get_doppler_locator());
+		$this->plugin_admin = new Doppler_Locations_Admin($this->get_doppler_locations());
 		$this->loader->add_action('admin_enqueue_scripts', $this->plugin_admin, 'enqueue_styles');
 		$this->loader->add_action('admin_enqueue_scripts', $this->plugin_admin, 'enqueue_scripts');
 		$this->loader->add_action('the_post', $this->plugin_admin, 'redirect_location');
 	}
 	
 	private function define_public_hooks() {
-		$this->plugin_public = new Doppler_Locator_Public($this->get_doppler_locator());
+		$this->plugin_public = new Doppler_Locations_Public($this->get_doppler_locations());
 		$this->loader->add_action('wp_enqueue_scripts', $this->plugin_public, 'enqueue_styles');
 		$this->loader->add_action('wp_enqueue_scripts', $this->plugin_public, 'enqueue_scripts');
 		
@@ -43,8 +43,8 @@ class Doppler_Locator {
 		$this->loader->run();
 	}
 
-	public function get_doppler_locator() {
-		return $this->doppler_locator;
+	public function get_doppler_locations() {
+		return $this->doppler_locations;
 	}
 
 	public function get_loader() {

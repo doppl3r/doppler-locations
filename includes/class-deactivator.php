@@ -1,6 +1,6 @@
 <?php
 
-class Doppler_Locator_Deactivator {
+class Doppler_Locations_Deactivator {
 	public static function deactivate() {
 		
 	}

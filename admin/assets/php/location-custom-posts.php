@@ -6,11 +6,11 @@
 <div class="post-meta-group">
     <?php
         // Declare global variables
-        global $doppler_locator_plugin;
+        global $doppler_locations_plugin;
 
         // Loop through each custom post
         foreach($custom_posts as $custom_post) {
-            $doppler_locator_plugin->get_plugin_admin()->render_meta_row('custom-post', $custom_post);
+            $doppler_locations_plugin->get_plugin_admin()->render_meta_row('custom-post', $custom_post);
         }
     ?>
 </div>

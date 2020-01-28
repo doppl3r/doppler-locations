@@ -2,7 +2,7 @@
     /* Required variables: $row (query results) */
     $status = get_post_meta($row->ID, "status")[0];
     $url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
-    $url_edit = site_url() . '/wp-admin/admin.php?page=doppler-locator';
+    $url_edit = site_url() . '/wp-admin/admin.php?page=doppler-locations';
     $url_view = get_post_permalink($row->ID);
 ?>
 <div class="row" data-post="<?php echo $row->ID; ?>">

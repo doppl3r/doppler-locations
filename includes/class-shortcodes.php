@@ -117,15 +117,15 @@
             foreach($group_array as $group_key => $group_item) {
                 if (empty($group)) $group_title = 'Locations';
                 else $group_title = $group_key;
-                $output .= '<li><a class="title">' . $group_title . '</a><ul class="container">';
+                $output .= '<li><a class="title" aria-selected="false" href="#">' . $group_title . '</a><ul class="container">';
                 // Loop through each group item
                 foreach($group_item as $loc_key => $loc) {
                     $output .=
                         '<li>' .
-                            '<ul>' .
+                            '<ul class="location">' .
                                 '<li class="location-title"><a href="' . $group_item[$loc_key]['link'] . '">' . $group_item[$loc_key]['display_name'] . '</a></li>' .
-                                '<li class="location-phone">' . $group_item[$loc_key]['phone'] . '</li>' .
-                                '<li class="location-address">' . $group_item[$loc_key]['address'] . '</li>' .
+                                '<li class="location-phone"><a href="tel:' . $group_item[$loc_key]['phone'] . '">' . $group_item[$loc_key]['phone'] . '</a></li>' .
+                                '<li class="location-address"><a href="https://www.google.com/maps/place/' . $group_item[$loc_key]['address'] . '" target="_blank">' . $group_item[$loc_key]['address'] . '</a></li>' .
                             '</ul>' .
                         '</li>';
                 }

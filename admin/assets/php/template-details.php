@@ -46,8 +46,9 @@
             <label>Scripts</label>
             <p>[dl data="scripts"]</p>
             <label>List</label>
-            <p>[dl data="list"]</p>
-            <p>[dl data="list" group="state"]</p>
+            <p>
+                [dl data="list"]<br>
+                [dl data="list" group="state"]</p>
             <label>Map</label>
             <p>[dl data="map"]</p>
         </div>

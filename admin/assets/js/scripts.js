@@ -5,13 +5,6 @@
 		// Show document when ready
 		$('.doppler-body').removeClass('loading');
 
-		
-		/* var htmlEditor = CodeMirror.fromTextArea(document.getElementById("post-content"), {
-			lineNumbers: true,
-			mode: 'htmlmixed'
-		}); */
-
-
 		// Add post button(s)
 		$(document).on('click', '.doppler-body [href*="add-location"], .doppler-body [href*="add-template"]', function(e){
 			e.preventDefault();

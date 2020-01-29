@@ -7,3 +7,10 @@ body .doppler-locations .hours ul li span:first-of-type { text-transform: capita
 body .doppler-locations .hours ul li span:first-of-type:after { content: '.'; }
 body .doppler-locations ul { list-style: none; padding: 12px 0; margin: 0; }
 body .doppler-locations ul li { margin: 0; }
+
+/* Shortcode styling - list */
+.doppler-list { list-style: none; padding: 0; margin: 0; }
+.doppler-list li { margin: 0; padding: 0; }
+.doppler-list li ul { list-style: none; margin: 0; padding: 0; }
+.doppler-list li ul li { margin: 0; padding: 0; }
+.doppler-list li > [aria-selected="false"] + ul { display: none; }

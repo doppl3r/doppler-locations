@@ -88,12 +88,15 @@
             return $output;
         }
         else if ($data == 'scripts' || $data == 'script') {
+            //wp_enqueue_script('scripts-shortcode');
             $scripts = json_decode($post_meta['scripts'][0]);
             foreach($scripts as $script) {
                 $script_content = $script->script_content;
                 $script_content = str_replace('\\', '', $script_content);
                 $script_content = htmlspecialchars_decode($script_content, ENT_QUOTES);
-                $output .= $script_content;
+                // wp_add_inline_script( 'scripts-shortcode', $script_content );
+                if (strpos($script_content, '<script>') !== false) { $output .= $script_content; }
+                else { $output .= '<script>' . $script_content . '</script>'; }
             }
             return $output;
         }
@@ -161,13 +164,12 @@
                 'post_type_location' => $post_type_location
             ]);
 
-            // Render map HTML/JS
-            $output .= '
-                <div id="leaflet-map" ' . $style . '></div>
-                <script>
-                    var locations = ' . json_encode($json_locations) . ';
-                    var path = "' . $dir . '";
-                </script>';
+            // Send array to the front end
+            wp_localize_script( 'leaflet-doppler-locations', 'locations', $json_locations );
+            wp_localize_script( 'leaflet-doppler-locations', 'path', $dir );
+
+            // Render leaflet map HTML
+            $output .= '<div id="leaflet-map" ' . $style . '></div>';
             
             return $output;
         }

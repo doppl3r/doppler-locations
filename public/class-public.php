@@ -35,6 +35,7 @@ class Doppler_Locations_Public {
 	public function enqueue_scripts() {
 		// Register scripts
 		wp_register_script('scripts', plugin_dir_url(__FILE__) . 'assets/js/scripts.js', array( 'jquery' ));
+		wp_register_script('scripts-shortcode', '');
 
 		// Enqueue is in the shortcode
 		wp_register_script('leaflet', plugin_dir_url(__FILE__) . 'assets/js/leaflet.js');

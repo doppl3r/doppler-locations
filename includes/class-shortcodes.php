@@ -2,14 +2,15 @@
     function doppler_shortcode($atts, $content = null) {
         global $doppler_locations_plugin;
         $post_id = get_the_ID();
+        $post_meta = get_post_meta($post_id);
         $post_type = get_post_type($post_id);
         $post_type_location = $doppler_locations_plugin->get_post_type_location();
-        $post_meta = get_post_meta($post_id);
         $data = $atts['data'];
         $type = $atts['type'];
         $id = $atts['id'];
         $width = $atts['width'];
         $height = $atts['height'];
+        $group = $atts['group'];
         $style = '';
         $output = '';
 
@@ -96,6 +97,43 @@
             }
             return $output;
         }
+        else if ($data == 'list') {
+            // Generate JSON array for later
+            $json_locations = get_locations([
+                'post_id' => $post_id, 
+                'post_type' => $post_type, 
+                'post_type_location' => $post_type_location
+            ]); 
+
+            // Populate group_array by list value
+            $group_array = array();
+            foreach($json_locations as $group_key => $element) {
+                if (empty($group)) $group_id = $group_key;
+                else $group_id = $group;
+                $group_array[$element[$group_id]][] = $element;
+            }
+
+            // Loop through each list group. Ex: states
+            foreach($group_array as $group_key => $group_item) {
+                if (empty($group)) $group_title = 'Locations';
+                else $group_title = $group_key;
+                $output .= '<li><a class="title">' . $group_title . '</a><ul class="container">';
+                // Loop through each group item
+                foreach($group_item as $loc_key => $loc) {
+                    $output .=
+                        '<li>' .
+                            '<ul>' .
+                                '<li class="location-title"><a href="' . $group_item[$loc_key]['link'] . '">' . $group_item[$loc_key]['display_name'] . '</a></li>' .
+                                '<li class="location-phone">' . $group_item[$loc_key]['phone'] . '</li>' .
+                                '<li class="location-address">' . $group_item[$loc_key]['address'] . '</li>' .
+                            '</ul>' .
+                        '</li>';
+                }
+                $output .= '</ul></li>';
+            }
+            $output = '<ul class="doppler-list">' .  $output . '</ul>';
+            return $output;
+        }
         else if ($data == 'map') {
             // Build style attribute
             if (!empty($width) || !empty($height)) {
@@ -116,44 +154,15 @@
             array_pop($url);
             $dir = implode('/', $url) . '/public/assets/';
 
-            // Use single location if 'location' is set, default = all
-            if ($post_type == $post_type_location) $post__in = array($post_id);
-
-            // Get posts by location and matching ID
-            $locations = get_posts([
-                'post_type' => $post_type_location,
-                'post_status' => 'any',
-                'numberposts' => -1,
-                'post__in' => $post__in
+            // Generate JSON array for later
+            $json_locations = get_locations([
+                'post_id' => $post_id, 
+                'post_type' => $post_type, 
+                'post_type_location' => $post_type_location
             ]);
 
-            // Generate JSON for Javascript object
-            foreach($locations as $index => $loc) {
-                $loc_title = get_the_title($loc->ID);
-                $loc_url = get_post_permalink($loc->ID);;
-                $loc_display_name = get_post_meta($loc->ID, 'display_name')[0];
-                $loc_phone = get_post_meta($loc->ID, 'phone')[0];
-                $loc_street = get_post_meta($loc->ID, 'street')[0];
-                $loc_city = get_post_meta($loc->ID, 'city')[0];
-                $loc_state = get_post_meta($loc->ID, 'state')[0];
-                $loc_zip = get_post_meta($loc->ID, 'zip')[0];
-                $loc_addr = $loc_street . ', ' . $loc_city . ', ' . $loc_state . ' ' . $loc_zip;
-                $loc_lat = get_post_meta($loc->ID, 'latitude')[0];
-                $loc_long = get_post_meta($loc->ID, 'longitude')[0];
-                $loc_geo = array($loc_lat, $loc_long);
-
-                // Fix any missing names
-                if (empty($loc_display_name)) $loc_display_name = $loc_title;
-
-                $json_locations[$index]['display_name'] = $loc_display_name;
-                $json_locations[$index]['link'] = $loc_url;
-                $json_locations[$index]['phone'] = $loc_phone;
-                $json_locations[$index]['address'] = $loc_addr;
-                $json_locations[$index]['geo'] = $loc_geo;
-            }
-
             // Render map HTML/JS
-            $output = '
+            $output .= '
                 <div id="leaflet-map" ' . $style . '></div>
                 <script>
                     var locations = ' . json_encode($json_locations) . ';
@@ -168,4 +177,48 @@
         }
     }
     add_shortcode('dl', 'doppler_shortcode');
+
+    function get_locations($arr){
+        // Use single location if 'location' is set, default = all
+        if ($arr['post_type'] == $arr['post_type_location']) $post__in = array($arr['post_id']);
+
+        // Get posts by location and matching ID
+        $locations = get_posts([
+            'post_type' => $arr['post_type_location'],
+            'post_status' => 'any',
+            'numberposts' => -1,
+            'post__in' => $post__in
+        ]);
+
+        // Generate JSON for Javascript object
+        foreach($locations as $index => $loc) {
+            $loc_title = get_the_title($loc->ID);
+            $loc_url = get_post_permalink($loc->ID);;
+            $loc_display_name = get_post_meta($loc->ID, 'display_name')[0];
+            $loc_phone = get_post_meta($loc->ID, 'phone')[0];
+            $loc_street = get_post_meta($loc->ID, 'street')[0];
+            $loc_city = get_post_meta($loc->ID, 'city')[0];
+            $loc_state = get_post_meta($loc->ID, 'state')[0];
+            $loc_zip = get_post_meta($loc->ID, 'zip')[0];
+            $loc_addr = $loc_street . ', ' . $loc_city . ', ' . $loc_state . ' ' . $loc_zip;
+            $loc_lat = get_post_meta($loc->ID, 'latitude')[0];
+            $loc_long = get_post_meta($loc->ID, 'longitude')[0];
+            $loc_geo = array($loc_lat, $loc_long);
+
+            // Fix any missing names
+            if (empty($loc_display_name)) $loc_display_name = $loc_title;
+
+            // Populate JSON array
+            $json_locations[$index]['display_name'] = $loc_display_name;
+            $json_locations[$index]['link'] = $loc_url;
+            $json_locations[$index]['phone'] = $loc_phone;
+            $json_locations[$index]['street'] = $loc_street;
+            $json_locations[$index]['city'] = $loc_city;
+            $json_locations[$index]['state'] = $loc_state;
+            $json_locations[$index]['zip'] = $loc_zip;
+            $json_locations[$index]['address'] = $loc_addr;
+            $json_locations[$index]['geo'] = $loc_geo;
+        }
+        return $json_locations;
+    }
 ?>

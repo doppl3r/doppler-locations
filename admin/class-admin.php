@@ -94,7 +94,8 @@ class Doppler_Locations_Admin {
 	public function add_post($post_type, $allow_data = true) {
 		global $doppler_locations_plugin;
         $post_type_template = $doppler_locations_plugin->get_post_type_template();
-        $post_type_location = $doppler_locations_plugin->get_post_type_location();
+		$post_type_location = $doppler_locations_plugin->get_post_type_location();
+		$post_status = 'publish';
 
 		// Define post_type by AJAX post value
 		if (isset($_POST['post_type'])) $post_type = $_POST['post_type'];
@@ -105,7 +106,7 @@ class Doppler_Locations_Admin {
 			$json = file_get_contents(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/json/default-template.json');
 			$default = json_decode($json, true);
 			$post_arr = array(
-				'post_status'			=> 'publish',
+				'post_status'			=> $post_status,
 				'post_type'             => $post_type,
 				'post_title'            => $default['post_title'],
 				'post_excerpt'          => $default['post_excerpt'],
@@ -117,7 +118,6 @@ class Doppler_Locations_Admin {
 			// Add new page with default template
 			$json = file_get_contents(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/json/default-location.json');
 			$default = json_decode($json, true);
-			$post_status = 'publish';
 			$post_arr = array(
 				'post_type'             => $post_type,
 				'post_status'			=> $post_status,
@@ -153,7 +153,7 @@ class Doppler_Locations_Admin {
 		}
 	}
 
-	public function render_row($post_type, $post_status, $row) {
+	public function render_row($post_type, $post_status_filter, $row) {
 		$type = explode('_', $post_type); // Ex: Convert "doppler_location" to "location"
 		include(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/' . $type[1] . '-row.php');
 	}
@@ -200,7 +200,7 @@ class Doppler_Locations_Admin {
 		);
 	}
 
-	public function get_post_count($post_type, $post_status = 'any') {
+	public function get_post_count($post_type, $post_status = 'publish') {
 		// Initialize post query
         global $wpdb;
         $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(post_type) FROM wp_posts WHERE post_type = %s AND post_status = %s", $post_type, $post_status));

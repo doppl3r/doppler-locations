@@ -2,12 +2,12 @@
     // Query for results
     global $doppler_locations_plugin;
     $post_type_template = $doppler_locations_plugin->get_post_type_template();
-    $post_status = $doppler_locations_plugin->get_post_status();
+    $post_status_filter = $doppler_locations_plugin->get_post_status();
     $trash_count = $doppler_locations_plugin->get_plugin_admin()->get_post_count($post_type_template, 'trash');
     $publish_count = $doppler_locations_plugin->get_plugin_admin()->get_post_count($post_type_template, 'publish');
     $results = get_posts([
         'post_type' => $post_type_template,
-        'post_status' => $post_status,
+        'post_status' => $post_status_filter,
         'numberposts' => -1
     ]);
 ?>
@@ -17,9 +17,12 @@
             <h1>Templates</h1>
         </div>
         <div class="col-6">
-        <?php if ($post_status == 'any') : ?><a class="btn" href="?page=doppler-locations-template&post_status=trash">Trash Bin <?php echo '(' . $trash_count . ')'; ?></a>
-            <?php else : ?><a class="btn" href="?page=doppler-locations-template">Published <?php echo '(' . $publish_count . ')'; ?></a><?php endif; ?>
-            <a class="btn blue" href="#add-template">Add</a>
+        <?php if ($post_status_filter == 'publish') : ?>
+            <a class="btn" href="?page=doppler-locations-template&post_status=trash">Trash Bin <?php echo '(' . $trash_count . ')'; ?></a>
+            <a class="btn blue" href="#add-template" value="doppler_template">Add</a>
+        <?php else : ?>
+            <a class="btn" href="?page=doppler-locations-template">Published <?php echo '(' . $publish_count . ')'; ?></a>
+        <?php endif; ?>
         </div>
     </div>
     <div class="container">
@@ -32,15 +35,15 @@
         <div class="posts">
             <?php
                 // Show volume status
-                if ($post_status == 'any' && $publish_count <= 0) echo '<div class="row empty">No locations</div>';
-                else if ($post_status == 'trash' && $trash_count <= 0) echo '<div class="row empty">Trash is empty</div>';
+                if ($post_status_filter == 'publish' && $publish_count <= 0) echo '<div class="row empty">No templates</div>';
+                else if ($post_status_filter == 'trash' && $trash_count <= 0) echo '<div class="row empty">Trash is empty</div>';
 
                 // Loop through each result
                 foreach ($results as $row) {
-                    $doppler_locations_plugin->get_plugin_admin()->render_row($post_type_template, $post_status, $row);
+                    $doppler_locations_plugin->get_plugin_admin()->render_row($post_type_template, $post_status_filter, $row);
                 }
             ?>
         </div>
-        <?php if ($post_status == 'any') : ?><a class="btn" href="#add-template" value="doppler_template">Add New Template</a><?php endif; ?>
+        <?php if ($post_status_filter == 'publish') : ?><a class="btn" href="#add-template" value="doppler_template">Add New Template</a><?php endif; ?>
     </div>
 </div>

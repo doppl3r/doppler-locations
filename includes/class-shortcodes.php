@@ -194,7 +194,7 @@
         // Get posts by location and matching ID
         $locations = get_posts([
             'post_type' => $arr['post_type_location'],
-            'post_status' => 'any',
+            'post_status' => 'publish',
             'numberposts' => -1,
             'post__in' => $post__in
         ]);

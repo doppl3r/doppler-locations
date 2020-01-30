@@ -72,6 +72,6 @@ class Doppler_Locations {
 	}
 
 	public function get_post_status() {
-		return !empty($_GET['post_status']) ? $_GET['post_status'] : 'any';
+		return !empty($_GET['post_status']) ? $_GET['post_status'] : 'publish';
 	}
 }

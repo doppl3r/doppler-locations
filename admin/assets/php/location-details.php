@@ -7,7 +7,7 @@
         <label for="template-id">Template</label>
         <select id="template-id" name="template_id">
             <?php
-                $templates = get_posts([ 'post_type' => $post_type_template, 'post_status' => 'any', 'numberposts' => -1 ]);
+                $templates = get_posts([ 'post_type' => $post_type_template, 'post_status' => 'publish', 'numberposts' => -1 ]);
                 foreach ($templates as $t) {
                     $selected = '';
                     if ($template == $t->ID) $selected = ' selected';

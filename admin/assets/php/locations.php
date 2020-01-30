@@ -11,6 +11,7 @@
             <h1>Locations</h1>
         </div>
         <div class="col-6">
+            <a class="btn" href="?page=doppler-locations&post_status=trash">Trash Bin</a>
             <a class="btn blue" href="#add-location">Add</a>
         </div>
     </div>

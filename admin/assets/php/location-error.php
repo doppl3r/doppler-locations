@@ -25,7 +25,7 @@
             <h1>Access Denied</h1>
         </div>
         <div class="col-6">
-            <a class="btn" href="admin.php?page=doppler-locations">Back <span class="dashicons-before dashicons-undo"></a>
+            <!-- <a class="btn" href="?page=doppler-locations">Back</a> -->
         </div>
     </div>
     <div class="container">

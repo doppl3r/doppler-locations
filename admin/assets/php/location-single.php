@@ -50,7 +50,7 @@
             <h1>Location Details</h1>
         </div>
         <div class="col-6">
-            <a class="btn" href="admin.php?page=doppler-locations">Back</a>
+            <a class="btn" href="?page=doppler-locations">Back</a>
             <a class="btn" href="<?php echo $url_view; ?>" target="_blank">View</a>
             <a class="btn blue" href="#save-location">Save</a>
         </div>

@@ -107,7 +107,7 @@ class Doppler_Locations_Public {
 				'rewrite'            	=> array( 'slug' => '/' ),
 				'exclude_from_search'   => false,
 				'publicly_queryable'    => true,
-				'capability_type'       => 'page',
+				'capability_type'       => $singular,
 				'show_in_rest'          => true,
 			);
 			// echo '<pre>';

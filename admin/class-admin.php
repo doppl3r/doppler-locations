@@ -182,7 +182,7 @@ class Doppler_Locations_Admin {
 	public function delete_post($post_id) {
 		// Define post_type by AJAX post value and delete post
 		if (isset($_POST['post_id'])) $post_id = $_POST['post_id'];
-		wp_delete_post($post_id);
+		wp_delete_post($post_id, true);
 	}
 
 	public function delete_posts_by_type($post_type) {

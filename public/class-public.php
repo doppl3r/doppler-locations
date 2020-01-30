@@ -53,6 +53,9 @@ class Doppler_Locations_Public {
 
 		// Loop through types of custom posts
 		foreach ($post_types as $post_type) {
+			// Initialize post type slug
+			$doppler_slug = get_option($post_type . '_slug');
+
 			// Define strings by post type
 			$singular = str_replace('_', ' ', $post_type);
 			$plural = $singular . 's';
@@ -104,7 +107,7 @@ class Doppler_Locations_Public {
 				'show_in_nav_menus'     => false,
 				'can_export'            => true,
 				'has_archive'           => true,
-				'rewrite'            	=> array( 'slug' => '/' ),
+				'rewrite'            	=> array( 'slug' => $doppler_slug ),
 				'exclude_from_search'   => false,
 				'publicly_queryable'    => true,
 				'capability_type'       => 'page',

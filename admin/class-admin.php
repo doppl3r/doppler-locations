@@ -27,16 +27,24 @@ class Doppler_Locations_Admin {
 		
 		// Sub level menu
 		if (current_user_can('administrator')) {
+			// Default child settings
 			$parent_slug = $menu_slug;
+			$capability = 'manage_options';
+
+			// Templates
 			$page_title = 'Templates';
 			$menu_title = 'Templates';
-			$capability = 'manage_options';
-			$menu_slug = $menu_slug . "-template";
+			$menu_slug = $parent_slug . "-template";
 			$function = array($this, 'render_template');
 			add_submenu_page($parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function);
-		}
 
-		//$this->redirect_location();
+			// Settings
+			$page_title = 'Settings';
+			$menu_title = 'Settings';
+			$menu_slug = $parent_slug . "-settings";
+			$function = array($this, 'render_settings');
+			add_submenu_page($parent_slug, $page_title, $menu_title, $capability, $menu_slug, $function);
+		}
 	}
 
 	public function enqueue_styles() {
@@ -89,6 +97,10 @@ class Doppler_Locations_Admin {
 		// Render single template if id exists, else render template list
 		if (isset($_GET['id'])) {require_once(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/template-single.php'); }
 		else { require_once(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/templates.php'); }
+	}
+
+	public function render_settings() {
+		require_once(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/settings.php');
 	}
 
 	public function add_post($post_type, $allow_data = true) {

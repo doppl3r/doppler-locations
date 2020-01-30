@@ -35,8 +35,7 @@
         <div class="posts">
             <?php
                 // Show volume status
-                if ($post_status_filter == 'publish' && $publish_count <= 0) echo '<div class="row empty">No templates</div>';
-                else if ($post_status_filter == 'trash' && $trash_count <= 0) echo '<div class="row empty">Trash is empty</div>';
+                if ($post_status_filter == 'trash' && $trash_count <= 0) echo '<div class="row empty">Trash is empty</div>';
 
                 // Loop through each result
                 foreach ($results as $row) {

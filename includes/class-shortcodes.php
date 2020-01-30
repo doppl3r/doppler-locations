@@ -88,13 +88,29 @@
             return $output;
         }
         else if ($data == 'scripts' || $data == 'script') {
-            //wp_enqueue_script('scripts-shortcode');
-            global $scripts;
             $scripts = json_decode($post_meta['scripts'][0]);
-            add_action('wp_footer', function() { global $scripts; add_inline_scripts($scripts); });
+            wp_enqueue_script('scripts-shortcode');
+
+            // Loop through each script
+            foreach($scripts as $script) {
+                global $script_content;
+                $script_load = $script->script_load;
+                $script_content = $script->script_content;
+                $script_content = str_replace('\\', '', $script_content);
+                $script_content = htmlspecialchars_decode($script_content, ENT_QUOTES);
+
+                // Resolve missing HTML script tag
+                if (strpos($script_content, '<script>') == false) { $script_content = '<script>' . $script_content . '</script>'; }
+
+                // Insert into footer hook or output directly to body
+                if ($script_load == 'footer') add_action('wp_footer', function() { global $script_content; echo $script_content; });
+                else if ($script_load == 'inline') wp_add_inline_script( 'scripts-shortcode', $script_content );
+                else $output .= $script_content;
+            }
+            return $output;
         }
         else if ($data == 'list') {
-            // Generate JSON array for later
+            // Generate array using local function 'get_location'
             $json_locations = get_locations([
                 'post_id' => $post_id, 
                 'post_type' => $post_type, 
@@ -150,7 +166,7 @@
             array_pop($url);
             $dir = implode('/', $url) . '/public/assets/';
 
-            // Generate JSON array for later
+            // Generate array using local function 'get_location'
             $json_locations = get_locations([
                 'post_id' => $post_id, 
                 'post_type' => $post_type, 
@@ -163,7 +179,6 @@
 
             // Render leaflet map HTML
             $output .= '<div id="leaflet-map" ' . $style . '></div>';
-            
             return $output;
         }
         else { 
@@ -171,7 +186,6 @@
             return $post_meta[$data][0]; 
         }
     }
-    add_shortcode('dl', 'doppler_shortcode');
 
     function get_locations($arr){
         // Use single location if 'location' is set, default = all
@@ -217,17 +231,6 @@
         return $json_locations;
     }
 
-    function add_inline_scripts($scripts) {
-        foreach($scripts as $script) {
-            $script_content = $script->script_content;
-            $script_content = str_replace('\\', '', $script_content);
-            $script_content = htmlspecialchars_decode($script_content, ENT_QUOTES);
-            // wp_add_inline_script( 'scripts-shortcode', $script_content );
-
-            // Resolve missing script tags
-            if (strpos($script_content, '<script>') !== false) { $output .= $script_content; }
-            else { $output .= '<script>' . $script_content . '</script>'; }
-            echo $output;
-        }
-    }
+    // Run shortcode function
+    add_shortcode('dl', 'doppler_shortcode');
 ?>

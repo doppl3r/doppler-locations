@@ -96,7 +96,10 @@
             $script = esc_textarea($script);
 
             // Add script to list
-            $scripts[$key] = array('script_content' => $script);
+            $scripts[$key] = array(
+                'script_load' => $_POST['script_load'][$key],
+                'script_content' => $script
+            );
         }
     }
     update_post_meta($post_id, 'scripts', json_encode($scripts));

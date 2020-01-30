@@ -7,6 +7,8 @@ class Doppler_Locations_Admin {
 		$this->doppler_locations = $doppler_locations;
 		add_action('admin_menu', array($this, 'add_menu_page')); /* Add admin menu and page */
 		add_action('wp_ajax_add_post', array($this, 'add_post'));
+		add_action('wp_ajax_trash_post', array($this, 'trash_post'));
+		add_action('wp_ajax_restore_post', array($this, 'restore_post'));
 		add_action('wp_ajax_delete_post', array($this, 'delete_post'));
 		add_action('wp_ajax_add_meta_row', array($this, 'add_meta_row'));
 	}
@@ -115,9 +117,10 @@ class Doppler_Locations_Admin {
 			// Add new page with default template
 			$json = file_get_contents(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/json/default-location.json');
 			$default = json_decode($json, true);
+			$post_status = 'publish';
 			$post_arr = array(
-				'post_status'			=> 'publish',
 				'post_type'             => $post_type,
+				'post_status'			=> $post_status,
 				'post_title' 			=> $default['post_title']
 			);
 			$post_id = wp_insert_post($post_arr);
@@ -145,12 +148,12 @@ class Doppler_Locations_Admin {
 		// Return row HTML/PHP template
 		if ($allow_data == true) {
 			$row = get_post($post_id);
-			echo $this->render_row($post_type, $row);
+			echo $this->render_row($post_type, $post_status, $row);
 			wp_die();
 		}
 	}
 
-	public function render_row($post_type, $row) {
+	public function render_row($post_type, $post_status, $row) {
 		$type = explode('_', $post_type); // Ex: Convert "doppler_location" to "location"
 		include(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/' . $type[1] . '-row.php');
 	}
@@ -162,6 +165,18 @@ class Doppler_Locations_Admin {
 	
 	public function render_meta_row($pm_type, $postmeta) {
 		include(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/location-' . $pm_type . '.php');
+	}
+
+	public function trash_post($post_id) {
+		// Define post_type by AJAX post value and trash post
+		if (isset($_POST['post_id'])) $post_id = $_POST['post_id'];
+		wp_trash_post($post_id);
+	}
+
+	public function restore_post($post_id) {
+		// Define post_type by AJAX post value and restore (untrash) post
+		if (isset($_POST['post_id'])) $post_id = $_POST['post_id'];
+		wp_untrash_post($post_id);
 	}
 
 	public function delete_post($post_id) {
@@ -185,10 +200,10 @@ class Doppler_Locations_Admin {
 		);
 	}
 
-	public function get_post_count($post_type) {
+	public function get_post_count($post_type, $post_status = 'any') {
 		// Initialize post query
         global $wpdb;
-        $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(post_type) FROM wp_posts WHERE post_type = %s", $post_type));
+        $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(post_type) FROM wp_posts WHERE post_type = %s AND post_status = %s", $post_type, $post_status));
 		return $count;
 	}
 

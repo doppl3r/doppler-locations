@@ -19,6 +19,30 @@
 			});
 		});
 
+		// Add trash action
+		$(document).on('click', '.doppler-body [href*="trash-post"]', function(e){
+			e.preventDefault();
+			var postId = $(this).closest('.row').attr('data-post');
+			$('.doppler-body').addClass('loading');
+			$.post(ajaxurl, { 'action': 'trash_post', 'post_id': postId }, function(response) { 
+				// Remove row
+				$('.doppler-body').removeClass('loading');
+				$('.posts [data-post=' + postId + ']').remove();
+			});
+		});
+
+		// Add restore action
+		$(document).on('click', '.doppler-body [href*="restore-post"]', function(e){
+			e.preventDefault();
+			var postId = $(this).closest('.row').attr('data-post');
+			$('.doppler-body').addClass('loading');
+			$.post(ajaxurl, { 'action': 'restore_post', 'post_id': postId }, function(response) { 
+				// Remove row
+				$('.doppler-body').removeClass('loading');
+				$('.posts [data-post=' + postId + ']').remove();
+			});
+		});
+
 		// Add delete confirmation
 		$(document).on('click', '.doppler-body [href*="delete-post"]', function(e){
 			e.preventDefault();

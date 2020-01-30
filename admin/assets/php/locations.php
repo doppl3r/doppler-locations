@@ -4,6 +4,22 @@
     if ($permission == false) {
         require(plugin_dir_path(dirname(__FILE__)) . 'php/location-error.php'); wp_die();
     }
+
+    // Query for results
+    global $doppler_locations_plugin;
+    $order_by = !empty($_GET['orderby']) ? $_GET['orderby'] : 'title';
+    $order = !empty($_GET['order']) ? $_GET['order'] : 'ASC';
+    $post_type = $doppler_locations_plugin->get_post_type_location();
+    $post_status = $doppler_locations_plugin->get_post_status();
+    $trash_count = $doppler_locations_plugin->get_plugin_admin()->get_post_count($post_type, 'trash');
+    $publish_count = $doppler_locations_plugin->get_plugin_admin()->get_post_count($post_type, 'publish');
+    $results = get_posts([
+        'post_type' => $post_type,
+        'post_status' => $post_status,
+        'numberposts' => -1,
+        'orderby' => $order_by,
+        'order' => $order
+    ]);
 ?>
 <div class="doppler-body loading">
     <div class="nav row">
@@ -11,7 +27,8 @@
             <h1>Locations</h1>
         </div>
         <div class="col-6">
-            <a class="btn" href="?page=doppler-locations&post_status=trash">Trash Bin</a>
+            <?php if ($post_status == 'any') : ?><a class="btn" href="?page=doppler-locations&post_status=trash">Trash Bin <?php echo '(' . $trash_count . ')'; ?></a>
+            <?php else : ?><a class="btn" href="?page=doppler-locations">Published <?php echo '(' . $publish_count . ')'; ?></a><?php endif; ?>
             <a class="btn blue" href="#add-location">Add</a>
         </div>
     </div>
@@ -24,25 +41,16 @@
         </div>
         <div class="posts">
             <?php
-                // Query for results
-                global $doppler_locations_plugin;
-                $order_by = !empty($_GET['orderby']) ? $_GET['orderby'] : 'title';
-                $order = !empty($_GET['order']) ? $_GET['order'] : 'ASC';
-                $post_type = $doppler_locations_plugin->get_post_type_location();
-                $results = get_posts([ 
-                    'post_type' => $post_type, 
-                    'post_status' => 'any', 
-                    'numberposts' => -1,
-                    'orderby' => $order_by,
-                    'order' => $order
-                ]);
-
-                // Render each row using a basic template
+                // Show volume status
+                if ($post_status == 'any' && $publish_count <= 0) echo '<div class="row empty">No locations</div>';
+                else if ($post_status == 'trash' && $trash_count <= 0) echo '<div class="row empty">Trash is empty</div>';
+                
+                // Loop through each result
                 foreach ($results as $row) {
-                    $doppler_locations_plugin->get_plugin_admin()->render_row($post_type, $row);
+                    $doppler_locations_plugin->get_plugin_admin()->render_row($post_type, $post_status, $row);
                 }
             ?>
         </div>
-        <a class="btn" href="#add-location" value="<?php echo $post_type; ?>">Add New Location</a>
+        <?php if ($post_status == 'any') : ?><a class="btn" href="#add-location" value="<?php echo $post_type; ?>">Add New Location</a><?php endif; ?>
     </div>
 </div>

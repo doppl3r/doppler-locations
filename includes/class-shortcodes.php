@@ -89,16 +89,9 @@
         }
         else if ($data == 'scripts' || $data == 'script') {
             //wp_enqueue_script('scripts-shortcode');
+            global $scripts;
             $scripts = json_decode($post_meta['scripts'][0]);
-            foreach($scripts as $script) {
-                $script_content = $script->script_content;
-                $script_content = str_replace('\\', '', $script_content);
-                $script_content = htmlspecialchars_decode($script_content, ENT_QUOTES);
-                // wp_add_inline_script( 'scripts-shortcode', $script_content );
-                if (strpos($script_content, '<script>') !== false) { $output .= $script_content; }
-                else { $output .= '<script>' . $script_content . '</script>'; }
-            }
-            return $output;
+            add_action('wp_footer', function() { global $scripts; add_inline_scripts($scripts); });
         }
         else if ($data == 'list') {
             // Generate JSON array for later
@@ -222,5 +215,19 @@
             $json_locations[$index]['geo'] = $loc_geo;
         }
         return $json_locations;
+    }
+
+    function add_inline_scripts($scripts) {
+        foreach($scripts as $script) {
+            $script_content = $script->script_content;
+            $script_content = str_replace('\\', '', $script_content);
+            $script_content = htmlspecialchars_decode($script_content, ENT_QUOTES);
+            // wp_add_inline_script( 'scripts-shortcode', $script_content );
+
+            // Resolve missing script tags
+            if (strpos($script_content, '<script>') !== false) { $output .= $script_content; }
+            else { $output .= '<script>' . $script_content . '</script>'; }
+            echo $output;
+        }
     }
 ?>

@@ -49,7 +49,8 @@ class Doppler_Locations_Public {
 		
 		global $doppler_locations_plugin;
 		$post_type_location = $doppler_locations_plugin->get_post_type_location();
-		$post_types = array($post_type_location);
+		$post_type_template = $doppler_locations_plugin->get_post_type_template();
+		$post_types = array($post_type_location, $post_type_template);
 
 		// Loop through types of custom posts
 		foreach ($post_types as $post_type) {

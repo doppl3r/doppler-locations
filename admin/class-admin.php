@@ -199,12 +199,13 @@ class Doppler_Locations_Admin {
 
 	public function delete_posts_by_type($post_type) {
 		global $wpdb;
+		$prefix = $wpdb->prefix;
 		$result = $wpdb->query(
 			$wpdb->prepare("
 				DELETE posts, terms, meta
-				FROM wp_posts posts
-				LEFT JOIN wp_term_relationships terms ON terms.object_id = posts.ID
-				LEFT JOIN wp_postmeta meta ON meta.post_id = posts.ID
+				FROM " . $prefix . "posts posts
+				LEFT JOIN " . $prefix . "term_relationships terms ON terms.object_id = posts.ID
+				LEFT JOIN " . $prefix . "postmeta meta ON meta.post_id = posts.ID
 				WHERE posts.post_type = %s
 				",
 				$post_type
@@ -214,10 +215,10 @@ class Doppler_Locations_Admin {
 
 	public function get_post_count($post_type, $post_status = 'publish') {
 		// Initialize post query
-		$count_posts = wp_count_posts($post_type);
-		if ($post_status == 'publish') return $count_posts->publish;
-		else if ($post_status == 'trash') return $count_posts->trash;
-		else return 0;
+		global $wpdb;
+		$prefix = $wpdb->prefix;
+        $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(post_type) FROM " . $prefix . "posts WHERE post_type = %s AND post_status = %s", $post_type, $post_status));
+		return $count;
 	}
 
 	public function has_codemirror() {

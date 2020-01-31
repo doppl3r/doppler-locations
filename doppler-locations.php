@@ -3,7 +3,7 @@
 /**
  * @wordpress-plugin
  * Plugin Name:       Doppler Locations
- * Description:       Manage store locations and preview them on a map
+ * Description:       Create and manage your business pages directly on your WordPress dashboard. Includes a simplified page and template editor to enhance your online presence. Easily add a map of all your locations using the built-in shortcode feature. For multiple owners, assign users to any location.
  * Version:           1.0.0
  * Author:            Doppler Creative
  * Author URI:        https://www.dopplercreative.com

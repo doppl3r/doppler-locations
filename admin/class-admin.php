@@ -214,9 +214,10 @@ class Doppler_Locations_Admin {
 
 	public function get_post_count($post_type, $post_status = 'publish') {
 		// Initialize post query
-        global $wpdb;
-        $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(post_type) FROM wp_posts WHERE post_type = %s AND post_status = %s", $post_type, $post_status));
-		return $count;
+		$count_posts = wp_count_posts($post_type);
+		if ($post_status == 'publish') return $count_posts->publish;
+		else if ($post_status == 'trash') return $count_posts->trash;
+		else return 0;
 	}
 
 	public function has_codemirror() {

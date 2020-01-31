@@ -25,7 +25,9 @@
 			var postId = $(this).closest('.row').attr('data-post');
 			$('.doppler-body').addClass('loading');
 			$.post(ajaxurl, { 'action': 'trash_post', 'post_id': postId }, function(response) { 
-				location.reload();
+				// Remove row
+				$('.doppler-body').removeClass('loading');
+				$('.posts [data-post=' + postId + ']').remove();
 			});
 		});
 
@@ -33,9 +35,11 @@
 		$(document).on('click', '.doppler-body [href*="restore-post"]', function(e){
 			e.preventDefault();
 			var postId = $(this).closest('.row').attr('data-post');
-			//$('.doppler-body').addClass('loading');
+			$('.doppler-body').addClass('loading');
 			$.post(ajaxurl, { 'action': 'restore_post', 'post_id': postId }, function(response) { 
-				location.reload();
+				// Remove row
+				$('.doppler-body').removeClass('loading');
+				$('.posts [data-post=' + postId + ']').remove();
 			});
 		});
 

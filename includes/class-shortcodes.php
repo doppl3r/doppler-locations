@@ -7,7 +7,7 @@ class Doppler_Shortcodes {
     }
 
     public function run() {
-        add_shortcode('dl', 'Doppler_Shortcodes::doppler_shortcode');
+        if (!shortcode_exists('dl')) { add_shortcode('dl', 'Doppler_Shortcodes::doppler_shortcode'); }
     }
 
     public function doppler_shortcode($atts, $content = null) {
@@ -113,10 +113,8 @@ class Doppler_Shortcodes {
                 // Resolve missing HTML script tag
                 if (strpos($script_content, '<script>') === false) { $script_content = '<script>' . $script_content . '</script>'; }
 
-                // Insert into footer hook or output directly to body
-                if ($script_load == 'footer') add_action('wp_footer', function() { global $script_content; echo $script_content; });
-                else if ($script_load == 'inline') wp_add_inline_script( 'scripts-shortcode', $script_content );
-                else $output .= $script_content;
+                // Append output
+                $output .= $script_content;
             }
             return $output;
         }

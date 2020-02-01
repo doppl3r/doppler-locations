@@ -8,7 +8,7 @@
         <label class="small">Load</label>
         <select name="script_load[]">
             <?php
-                $script_load_options = array('footer', 'body', 'inline');
+                $script_load_options = array('body');
                 foreach($script_load_options as $s) {
                     $selected = '';
                     if ($script_load == $s) $selected = ' selected';

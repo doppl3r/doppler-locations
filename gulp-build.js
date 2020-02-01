@@ -9,6 +9,6 @@ gulp.src(
     ], { base: './' }
 ).pipe(
     gulp.dest(
-        'build'
+        'build/doppler-locations'
     )
 );

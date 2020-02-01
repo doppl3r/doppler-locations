@@ -11,3 +11,11 @@ Create and manage your business pages directly on your WordPress dashboard. Incl
  - Video Player
  - Custom posts (News & Events)
  - Custom HTML/JS scripts per location
+
+ ## Building Google Extension Release
+  - Update release version in doppler-locations.php
+  - Install 'gulp': ```npm install --save-dev gulp```
+  - Install 'gulp-zip': ```npm install --save-dev gulp-zip```
+  - Run gulp-build: ```node gulp-build.js```
+  - Run gulp-dist: ```node gulp-dist.js```
+  - Upload doppler-locations.zip located under ```/dist```

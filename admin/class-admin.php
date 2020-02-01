@@ -167,7 +167,7 @@ class Doppler_Locations_Admin {
 
 	public function render_row($post_type, $post_status_filter, $row) {
 		$type = explode('_', $post_type); // Ex: Convert "doppler_location" to "location"
-		include(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/' . $type[1] . '-row.php');
+		require(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/' . $type[1] . '-row.php');
 	}
 	
 	public function add_meta_row($postmeta) { 
@@ -176,7 +176,7 @@ class Doppler_Locations_Admin {
 	}
 	
 	public function render_meta_row($pm_type, $postmeta) {
-		include(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/location-' . $pm_type . '.php');
+		require(plugin_dir_path(dirname(__FILE__)) . 'admin/assets/php/location-' . $pm_type . '.php');
 	}
 
 	public function trash_post($post_id) {

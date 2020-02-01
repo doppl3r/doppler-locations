@@ -1,5 +1,16 @@
 <?php
-    function doppler_shortcode($atts, $content = null) {
+
+class Doppler_Shortcodes {
+
+    public function __construct($doppler_locations) {
+        $this->doppler_locations = $doppler_locations;
+    }
+
+    public function run() {
+        add_shortcode('dl', 'Doppler_Shortcodes::doppler_shortcode');
+    }
+
+    public function doppler_shortcode($atts, $content = null) {
         global $doppler_locations_plugin;
         $post_id = get_the_ID();
         $post_meta = get_post_meta($post_id);
@@ -111,7 +122,7 @@
         }
         else if ($data == 'list') {
             // Generate array using local function 'get_location'
-            $json_locations = get_locations([
+            $json_locations = Doppler_Shortcodes::get_locations([
                 'post_id' => $post_id, 
                 'post_type' => $post_type, 
                 'post_type_location' => $post_type_location
@@ -167,7 +178,7 @@
             $dir = implode('/', $url) . '/public/assets/';
 
             // Generate array using local function 'get_location'
-            $json_locations = get_locations([
+            $json_locations = Doppler_Shortcodes::get_locations([
                 'post_id' => $post_id, 
                 'post_type' => $post_type, 
                 'post_type_location' => $post_type_location
@@ -187,7 +198,7 @@
         }
     }
 
-    function get_locations($arr){
+    public function get_locations($arr){
         // Use single location if 'location' is set, default = all
         if ($arr['post_type'] == $arr['post_type_location']) $post__in = array($arr['post_id']);
 
@@ -230,7 +241,6 @@
         }
         return $json_locations;
     }
+}
 
-    // Run shortcode function
-    add_shortcode('dl', 'doppler_shortcode');
 ?>

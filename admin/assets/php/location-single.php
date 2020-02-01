@@ -1,7 +1,7 @@
 <?php
     // Save data if form was submitted to this post
     if (isset($_POST['action'])) {
-        require(plugin_dir_path(dirname(__FILE__)) . 'php/location-save.php');
+        require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-save.php');
     }
 
     // Get location data
@@ -41,7 +41,7 @@
     }
 
     if ($permission == false) {
-        require(plugin_dir_path(dirname(__FILE__)) . 'php/location-error.php'); wp_die();
+        require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-error.php'); wp_die();
     }
 ?>
 <div class="doppler-body loading">
@@ -67,12 +67,12 @@
             <div class="tab"><span class="dashicons-before dashicons-admin-network"></span> <span class="text">Users</span></div>
         </div>
         <div class="containers">
-            <div class="container"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-details.php'); ?></div>
-            <div class="container"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-media.php'); ?></div>
-            <div class="container"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-custom-posts.php'); ?></div>
-            <div class="container"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-links.php'); ?></div>
-            <div class="container"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-scripts.php'); ?></div>
-            <div class="container"><?php require(plugin_dir_path(dirname(__FILE__)) . 'php/location-users.php'); ?></div>
+            <div class="container"><?php require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-details.php'); ?></div>
+            <div class="container"><?php require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-media.php'); ?></div>
+            <div class="container"><?php require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-custom-posts.php'); ?></div>
+            <div class="container"><?php require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-links.php'); ?></div>
+            <div class="container"><?php require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-scripts.php'); ?></div>
+            <div class="container"><?php require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-users.php'); ?></div>
         </div>
     </form>
 </div>

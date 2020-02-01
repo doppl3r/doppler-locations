@@ -7,6 +7,7 @@ class Doppler_Locations {
 	protected $post_type_template;
 	protected $plugin_admin;
 	protected $plugin_public;
+	protected $doppler_shortcodes;
 
 	public function __construct() {
 		$this->doppler_locations = 'doppler-locations'; // Slug
@@ -15,9 +16,11 @@ class Doppler_Locations {
 		$this->load_dependencies();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->define_shortcodes();
 	}
 
 	private function load_dependencies() {
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-shortcodes.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-loader.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-admin.php';
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-public.php';
@@ -43,8 +46,13 @@ class Doppler_Locations {
 		$this->loader->add_action('pre_get_posts', $this->plugin_public, 'parse_custom_request'); // Resolve 404 error
 	}
 
+	private function define_shortcodes() {
+		$this->doppler_shortcodes = new Doppler_Shortcodes($this->get_doppler_locations());
+	}
+
 	public function run() {
 		$this->loader->run();
+		$this->doppler_shortcodes->run();
 	}
 
 	public function get_doppler_locations() {
@@ -69,6 +77,10 @@ class Doppler_Locations {
 
 	public function get_plugin_public() {
 		return $this->plugin_public;
+	}
+
+	public function get_plugin_shortcodes() {
+		return $this->doppler_shortcodes;
 	}
 
 	public function get_post_status() {

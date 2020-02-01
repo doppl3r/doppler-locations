@@ -1,7 +1,7 @@
 <?php
     // Save data if form was submitted to this post
     if (isset($_POST['action'])) {
-        require(plugin_dir_path(dirname(__FILE__)) . 'php/template-save.php');
+        require_once(plugin_dir_path(dirname(__FILE__)) . 'php/template-save.php');
     }
 
     // Get template data
@@ -24,7 +24,7 @@
     <form action="" method="post">
         <input type="hidden" name="action" value="save">
         <div class="container">
-            <?php require(plugin_dir_path(dirname(__FILE__)) . 'php/template-details.php'); ?>
+            <?php require_once(plugin_dir_path(dirname(__FILE__)) . 'php/template-details.php'); ?>
         </div>
     </form>
 </div>

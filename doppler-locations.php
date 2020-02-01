@@ -37,11 +37,7 @@ register_deactivation_hook( __FILE__, 'deactivate_doppler_locations' );
 register_uninstall_hook(__FILE__, 'uninstall_doppler_locations');
 
 // Evaluate the main file and include classes
-require plugin_dir_path( __FILE__ ) . 'includes/class-plugin.php';
-
-// Add shortcodes
-require plugin_dir_path( __FILE__ ) . 'includes/class-shortcodes.php';
-
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-plugin.php';
 
 // Run the plugin
 function run_doppler_locations() {

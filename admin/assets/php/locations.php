@@ -2,7 +2,7 @@
     // Render page if user has permission
     $permission = current_user_can('administrator') ? true : false;
     if ($permission == false) {
-        require(plugin_dir_path(dirname(__FILE__)) . 'php/location-error.php'); wp_die();
+        require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-error.php'); wp_die();
     }
 
     // Query for results

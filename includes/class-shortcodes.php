@@ -100,7 +100,7 @@
                 $script_content = htmlspecialchars_decode($script_content, ENT_QUOTES);
 
                 // Resolve missing HTML script tag
-                if (strpos($script_content, '<script>') == false) { $script_content = '<script>' . $script_content . '</script>'; }
+                if (strpos($script_content, '<script>') === false) { $script_content = '<script>' . $script_content . '</script>'; }
 
                 // Insert into footer hook or output directly to body
                 if ($script_load == 'footer') add_action('wp_footer', function() { global $script_content; echo $script_content; });

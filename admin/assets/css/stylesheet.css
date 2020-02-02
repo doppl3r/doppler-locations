@@ -15,6 +15,7 @@ h1, h2, h3, h4, h5, h6, p { line-height: initial; margin: 0; }
 .doppler-body input:disabled,
 .doppler-body select:disabled,
 .doppler-body textarea:disabled { background-color: #f1f1f1; box-shadow: none; color: inherit; }
+.doppler-body ::placeholder { color: #cccccc; opacity: 1; }
 
 /* Grid overrides */
 .doppler-body .row.justify { flex-wrap: nowrap; }

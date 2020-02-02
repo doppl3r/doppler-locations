@@ -32,7 +32,7 @@
                 <div class="row option">
                     <div class="col-6-m name">doppler_location_slug</div>
                     <div class="col-6-m value">
-                        <input type="text" name="doppler_location_slug" value="<?php echo $doppler_location_slug; ?>">
+                    <input type="text" name="doppler_location_slug" placeholder="ex: locations" value="<?php echo $doppler_location_slug; ?>">
                     </div>
                 </div>
             </div>

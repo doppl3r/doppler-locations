@@ -1,7 +1,9 @@
 <?php
     // Save data if form was submitted to this post
     if (isset($_POST['action'])) {
-        $doppler_location_slug = !empty($_POST['doppler_location_slug']) ? $_POST['doppler_location_slug'] : '/';
+        $doppler_location_slug = !empty($_POST['doppler_location_slug']) ? $_POST['doppler_location_slug'] : '';
+        $doppler_location_slug = ltrim($doppler_location_slug, '/');
+        $doppler_location_slug = rtrim($doppler_location_slug, '/');
         update_option('doppler_location_slug', $doppler_location_slug);
         flush_rewrite_rules();
     }

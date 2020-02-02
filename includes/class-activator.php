@@ -8,7 +8,7 @@ class Doppler_Locations_Activator {
         $count = $doppler_locations_plugin->get_plugin_admin()->get_post_count($post_type_template);
 
         // Initialize settings
-        if (get_option('doppler_location_slug') == false) add_option('doppler_location_slug', '/');
+        if (get_option('doppler_location_slug') == false) add_option('doppler_location_slug', '');
 
         // Add default template if no template exists on activation
         if ($count <= 0) {

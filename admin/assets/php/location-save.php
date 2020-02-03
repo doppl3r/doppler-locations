@@ -2,8 +2,8 @@
     // Update post data
     $post_id = $_GET['id'];
     $template_id = $_POST['template_id'];
-    $template_content = ''; // Set empty, the content will come from the template
-    //$template_content = get_post_field('post_content', $template_id);
+    //$template_content = ''; // Set empty, the content will come from the template
+    $template_content = get_post_field('post_content', $template_id);
     $post_arr = array(
         'ID' => $post_id,
         'post_title' => $_POST['post_title'],

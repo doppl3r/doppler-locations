@@ -2,21 +2,14 @@
 
 class Doppler_Locations_Public {
 	private $doppler_locations;
+	private $doppler_shortcodes;
 
 	public function __construct($doppler_locations) {
 		$this->doppler_locations = $doppler_locations;
-	}
 
-	public function apply_template() {
-		global $doppler_locations_plugin;
-		$post_id = get_the_ID();
-		$post_type = get_post_type($post_id);
-		$post_type_location = $doppler_locations_plugin->get_post_type_location();
-		$template_id = get_post_meta($post_id, 'template_id')[0];
-
-		// If post_type = 'location', use the associated template, else use default post content
-		$content_id = ($post_type == $post_type_location) ? $template_id : $post_id;
-		return get_post_field('post_content', $content_id);
+		// Initialize shortcodes
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-shortcodes.php';
+		$this->doppler_shortcodes = new Doppler_Shortcodes($doppler_locations);
 	}
 
 	public function enqueue_styles() {
@@ -115,6 +108,10 @@ class Doppler_Locations_Public {
 			);
 			register_post_type($post_type, $args);
 		}
+	}
+
+	public function run_shortcodes() {
+		if (!is_admin()) $this->doppler_shortcodes->run();
 	}
 
 	public function remove_custom_slug($post_link, $post) {

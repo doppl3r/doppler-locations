@@ -58,7 +58,10 @@
     if (!empty($_POST['custom_post_type'])) {
         foreach($_POST['custom_post_type'] as $key=>$value) {
             $custom_post_content = $_POST['custom_post_content'][$key];
-            $custom_post_content = str_replace("\r\n", "\\n", $custom_post_content);
+            $custom_post_content = stripcslashes($custom_post_content); // Remove single slashes
+            $custom_post_content = str_replace("\r\n", "\\n", $custom_post_content); // Double encode lines
+            $custom_post_content = iconv('UTF-8', 'ASCII//TRANSLIT', $custom_post_content); // Convert to UTF-8
+            $custom_post_content = esc_textarea($custom_post_content); // Escape to HTML codes
 
             $custom_posts[$key] = array(
                 'type' => $_POST['custom_post_type'][$key],

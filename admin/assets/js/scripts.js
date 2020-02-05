@@ -90,6 +90,9 @@
 				var row = response;
 				elem.closest('.container').find('.post-meta-group').append(row);
 				$('.doppler-body').removeClass('loading');
+
+				// Add listener to date range picker
+				if (pm_type == 'custom-post') addDateRangePicker();
 			});
 		});
 
@@ -173,7 +176,16 @@
 			tab.val(index);
 		}
 
-		// Activate default tab/container
+		function addDateRangePicker() {
+			// Add datepicker functionality
+			$('.doppler-body [name*="date"]').datepicker({
+				changeMonth: true,
+				changeYear: true
+			});
+		}
+
+		// Initialize admin page
 		selectTab();
+		addDateRangePicker();
 	});
 })(jQuery);

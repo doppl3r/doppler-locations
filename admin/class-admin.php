@@ -50,11 +50,13 @@ class Doppler_Locations_Admin {
 	public function enqueue_styles() {
 		// Register stylesheets
 		wp_register_style('grix', plugin_dir_url(__FILE__) . 'assets/css/grix.css');
+		wp_register_style('jquery-ui-datepicker', plugin_dir_url(__FILE__) . 'assets/css/jquery-ui-datepicker.css');
 		wp_register_style('codemirror', plugin_dir_url(__FILE__) . 'assets/css/codemirror.css');
 		wp_register_style('stylesheet', plugin_dir_url(__FILE__) . 'assets/css/stylesheet.css');
 
 		// Enqueue stylesheets
 		wp_enqueue_style('grix');
+		wp_enqueue_style('jquery-ui-datepicker');
 		wp_enqueue_style('stylesheet');
 
 		// Enqueue stylesheets (for template editor)
@@ -75,6 +77,9 @@ class Doppler_Locations_Admin {
 		
 		// Enqueue global (admin) scripts
 		wp_enqueue_script('scripts');
+
+		// Enqueue datepicker scripts
+		wp_enqueue_script('jquery-ui-datepicker');
 
 		// Enqueue scripts (for template editor)
 		if ($this->has_codemirror()) {

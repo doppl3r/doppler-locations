@@ -7,7 +7,7 @@ class Doppler_Shortcodes {
     }
 
     public function run() {
-        if (!shortcode_exists('dl')) { add_shortcode('dl', 'Doppler_Shortcodes::doppler_shortcode'); }
+        add_shortcode('doppler_locations', 'Doppler_Shortcodes::doppler_shortcode');
     }
 
     public function doppler_shortcode($atts, $content = null) {

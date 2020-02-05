@@ -18,39 +18,39 @@
         <div class="short-codes">
             <label>Location Details</label>
             <p>
-                [dl data="title"]<br>
-                [dl data="status"]<br>
-                [dl data="display_name"]<br>
-                [dl data="hours"]<br>
-                [dl data="city"]<br>
-                [dl data="state"]<br>
-                [dl data="zip"]<br>
-                [dl data="phone"]<br>
-                [dl data="street"]<br>
-                [dl data="latitude"]<br>
-                [dl data="longitude"]<br>
-                [dl data="guide"]
+                [doppler_locations data="title"]<br>
+                [doppler_locations data="status"]<br>
+                [doppler_locations data="display_name"]<br>
+                [doppler_locations data="hours"]<br>
+                [doppler_locations data="city"]<br>
+                [doppler_locations data="state"]<br>
+                [doppler_locations data="zip"]<br>
+                [doppler_locations data="phone"]<br>
+                [doppler_locations data="street"]<br>
+                [doppler_locations data="latitude"]<br>
+                [doppler_locations data="longitude"]<br>
+                [doppler_locations data="guide"]
             </p>
             <label>Media</label>
             <p>
-                [dl data="media" id="your-id"]<br>
-                [dl data="media" id="group-id"]
+                [doppler_locations data="media" id="your-id"]<br>
+                [doppler_locations data="media" id="group-id"]
             </p>
             <label>Posts</label>
             <p>
-                [dl data="posts" type="news"]<br>
-                [dl data="posts" type="event"]
+                [doppler_locations data="posts" type="news"]<br>
+                [doppler_locations data="posts" type="event"]
             </p>
             <label>Links</label>
-            <p>[dl data="links" id="email"]</p>
+            <p>[doppler_locations data="links" id="email"]</p>
             <label>Scripts</label>
-            <p>[dl data="scripts"]</p>
+            <p>[doppler_locations data="scripts"]</p>
             <label>List</label>
             <p>
-                [dl data="list"]<br>
-                [dl data="list" group="state"]</p>
+                [doppler_locations data="list"]<br>
+                [doppler_locations data="list" group="state"]</p>
             <label>Map</label>
-            <p>[dl data="map"]</p>
+            <p>[doppler_locations data="map"]</p>
         </div>
     </div>
 </div>

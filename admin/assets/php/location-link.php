@@ -1,14 +1,14 @@
 <?php 
     // Requires location-links.php to generate variables
-    $text = $postmeta->text;
+    $title = $postmeta->title;
     $url = $postmeta->url;
     $target = $postmeta->target;
     $id = $postmeta->id;
 ?>
 <div class="row post-meta">
     <div class="col-3">
-        <label class="small">Text</label>
-        <input type="text" name="link_text[]" value="<?php echo $text; ?>">
+        <label class="small">Title</label>
+        <input type="text" name="link_title[]" value="<?php echo $title; ?>">
     </div>
     <div class="col-3">
         <label class="small">URL</label>

@@ -92,7 +92,9 @@
 				$('.doppler-body').removeClass('loading');
 
 				// Add listener to date range picker
-				if (pm_type == 'custom-post') addDateRangePicker();
+				addDateRangePicker(); 
+				updatePostOptions('media', 'medium');
+				updatePostOptions('links', 'link');
 			});
 		});
 
@@ -184,8 +186,32 @@
 			});
 		}
 
+		function updatePostOptions(plural, singular) {
+			// Create a list of options
+			var options = {};
+			$('.container.' + plural + ' .post-meta').each(function(i, item) {
+				var value = $(item).find('[name*="' + singular + '_title"]').val();
+				options[value] = value;
+			});
+
+			// Update post link options
+			$('[name*="custom_post_' + singular + '"]').each(function(i, select) {
+				$(select).empty();
+				var selectValue = $(select).attr('data');
+				for (var key in options) {
+					var optionValue = options[key];
+					var option = $("<option></option>").attr("value", optionValue);
+					if (selectValue == optionValue) option.attr('selected', 'selected');
+					option.text(optionValue);
+					$(select).append(option);
+				}
+			});
+		}
+
 		// Initialize admin page
 		selectTab();
 		addDateRangePicker();
+		updatePostOptions('media', 'medium');
+		updatePostOptions('links', 'link');
 	});
 })(jQuery);

@@ -66,8 +66,10 @@
             $custom_posts[$key] = array(
                 'type' => $_POST['custom_post_type'][$key],
                 'title' => $_POST['custom_post_title'][$key],
-                'date' => $_POST['custom_post_date'][$key],
+                'medium' => $_POST['custom_post_medium'][$key],
                 'link' => $_POST['custom_post_link'][$key],
+                'date' => $_POST['custom_post_date'][$key],
+                'time' => $_POST['custom_post_time'][$key],
                 'content' => $custom_post_content
             );
         }
@@ -76,10 +78,10 @@
 
     // Parse links
     $links = array();
-    if (!empty($_POST['link_text'])) {
-        foreach($_POST['link_text'] as $key=>$value) {
+    if (!empty($_POST['link_title'])) {
+        foreach($_POST['link_title'] as $key=>$value) {
             $links[$key] = array(
-                'text' => $_POST['link_text'][$key],
+                'title' => $_POST['link_title'][$key],
                 'url' => $_POST['link_url'][$key],
                 'target' => $_POST['link_target'][$key],
                 'id' => $_POST['link_id'][$key]

@@ -5,7 +5,7 @@
     $target = $postmeta->target;
     $id = $postmeta->id;
 
-    if (empty($title)) $title = 'Link Title';
+    if (empty($title)) $title = 'Link title';
 ?>
 <div class="row post-meta">
     <div class="col-3">

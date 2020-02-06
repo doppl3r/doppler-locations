@@ -187,12 +187,13 @@
 			});
 		}
 
-		function updatePostOption(plural, singular) {
+		function updatePostOption(plural, singular, targetKey, targetValue) {
 			// Create a list of options
 			var options = {};
 			$('.container.' + plural + ' .post-meta').each(function(i, item) {
-				var value = $(item).find('[name*="' + singular + '_title"]').val();
-				options[value] = value;
+				var key = $(item).find('[name*="' + singular + '_' + targetKey + '"]').val();
+				var value = $(item).find('[name*="' + singular + '_' + targetValue + '"]').val();
+				options[key] = value;
 			});
 
 			// Update post link options
@@ -204,15 +205,15 @@
 					var optionValue = options[key];
 					var option = $("<option></option>").attr("value", optionValue);
 					if (selectValue == optionValue) option.attr('selected', 'selected');
-					option.text(optionValue);
+					option.text(key);
 					$(select).append(option);
 				}
 			});
 		}
 
 		function updatePostOptions() {
-			updatePostOption('media', 'medium');
-			updatePostOption('links', 'link');
+			updatePostOption('media', 'medium', 'title', 'post_id');
+			updatePostOption('links', 'link', 'title', 'title');
 		}
 
 		// Initialize admin page

@@ -67,17 +67,25 @@ class Doppler_Shortcodes {
             foreach($posts as $post) {
                 $custom_post_type = $post->type;
                 $custom_post_title = $post->title;
-                $custom_post_date = $post->date;
+                $custom_post_medium = $post->medium;
                 $custom_post_link = $post->link;
+                $custom_post_date = $post->date;
+                $custom_post_time = $post->time;
                 $custom_post_content = $post->content;
-                
-                if (!isset($type) || $type == $custom_post_type) {
+
+                // Get image url by media id
+                $custom_post_src = wp_get_attachment_url($custom_post_medium);
+
+                // If type attribute is not set, or if type attribute matches custom post type
+                if (empty($type) || $type == $custom_post_type) {
                     $output .= '
                         <ul class="'. $custom_post_type .'">
+                            <li class="medium"><img src="' . $custom_post_src . '" alt=""></li>
                             <li class="title">' . $custom_post_title . '</li>
                             <li class="date">' . $custom_post_date . '</li>
-                            <li class="link">' . $custom_post_link . '</li>
+                            <li class="time">' . $custom_post_time . '</li>
                             <li class="content">' . $custom_post_content . '</li>
+                            <li class="link">' . $custom_post_link . '</li>
                         </ul>
                     ';
                 }

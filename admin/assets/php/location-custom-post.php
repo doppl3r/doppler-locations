@@ -31,11 +31,11 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <label class="small">Media</label>
+                <label class="small"><span class="dashicons-before dashicons-admin-media"></span> Media</label>
                 <select name="custom_post_medium[]" data="<?php echo $medium; ?>"></select>
             </div>
             <div class="col-6">
-                <label class="small">Link</label>
+                <label class="small"><span class="dashicons-before dashicons-admin-links"></span> Link</label>
                 <select name="custom_post_link[]" data="<?php echo $link; ?>"></select>
             </div>
         </div>
@@ -46,7 +46,7 @@
             </div>
             <div class="col-6">
                 <label class="small">Time</label>
-                <input type="text" name="custom_post_time[]" value="<?php echo $time; ?>">
+                <input type="text" name="custom_post_time[]" value="<?php echo $time; ?>" placeholder="ex: 2-3pm">
             </div>
         </div>
     </div>

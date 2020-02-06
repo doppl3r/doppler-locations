@@ -4,6 +4,8 @@
     $url = $postmeta->url;
     $target = $postmeta->target;
     $id = $postmeta->id;
+
+    if (empty($title)) $title = 'Link Title';
 ?>
 <div class="row post-meta">
     <div class="col-3">

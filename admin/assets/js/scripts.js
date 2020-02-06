@@ -93,8 +93,7 @@
 
 				// Add listener to date range picker
 				addDateRangePicker(); 
-				updatePostOptions('media', 'medium');
-				updatePostOptions('links', 'link');
+				updatePostOptions();
 			});
 		});
 
@@ -102,6 +101,7 @@
 		$(document).on('click', '.doppler-body [href*="delete-post-meta"]', function(e){
 			e.preventDefault();
 			$(this).closest('.post-meta').remove();
+			updatePostOptions();
 		});
 
 		// Add tab click functionality
@@ -144,6 +144,7 @@
 				row.find('[name*="medium_post_id"]').val(attachment.id);
 				row.find('[name*="medium_url"]').val(attachment.url);
 				row.find('[name*="medium_title"]').val(attachment.title);
+				updatePostOptions();
 			});
 			
 			// Predefine selected
@@ -186,7 +187,7 @@
 			});
 		}
 
-		function updatePostOptions(plural, singular) {
+		function updatePostOption(plural, singular) {
 			// Create a list of options
 			var options = {};
 			$('.container.' + plural + ' .post-meta').each(function(i, item) {
@@ -197,6 +198,7 @@
 			// Update post link options
 			$('[name*="custom_post_' + singular + '"]').each(function(i, select) {
 				$(select).empty();
+				$(select).append('<option value="none">None</option>');
 				var selectValue = $(select).attr('data');
 				for (var key in options) {
 					var optionValue = options[key];
@@ -208,10 +210,15 @@
 			});
 		}
 
+		function updatePostOptions() {
+			updatePostOption('media', 'medium');
+			updatePostOption('links', 'link');
+		}
+
 		// Initialize admin page
 		selectTab();
 		addDateRangePicker();
-		updatePostOptions('media', 'medium');
-		updatePostOptions('links', 'link');
+		updatePostOptions();
+		
 	});
 })(jQuery);

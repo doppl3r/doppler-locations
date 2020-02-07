@@ -41,11 +41,11 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <label class="small">Date</label>
+                <label class="small"><span class="dashicons-before dashicons-calendar-alt"></span> Date</label>
                 <input type="text" name="custom_post_date[]" value="<?php echo $date; ?>" autocomplete="off">
             </div>
             <div class="col-6">
-                <label class="small">Time</label>
+                <label class="small"><span class="dashicons-before dashicons-clock"></span> Time</label>
                 <input type="text" name="custom_post_time[]" value="<?php echo $time; ?>" placeholder="ex: 2-3pm">
             </div>
         </div>

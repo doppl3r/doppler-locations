@@ -64,6 +64,8 @@ class Doppler_Shortcodes {
         }
         else if ($data == 'posts') {
             $posts = json_decode($post_meta['custom_posts'][0]);
+            $links = json_decode($post_meta['links'][0]);
+
             foreach($posts as $post) {
                 $custom_post_type = $post->type;
                 $custom_post_title = $post->title;
@@ -75,6 +77,19 @@ class Doppler_Shortcodes {
 
                 // Get image url by media id
                 $custom_post_src = wp_get_attachment_url($custom_post_medium);
+
+                // Get link href by url
+                foreach($links as $link) {
+                    $link_title = $link->title;
+                    $link_url = $link->url;
+                    $link_target = $link->target;
+                    $link_id = $link->id;
+
+                    if ($custom_post_link == $link_url) {
+                        $custom_post_link = '<a href="' . $link_url . '" target="' . $link_target . '">' . $link_title . '</a>';
+                        break;
+                    }
+                }
 
                 // If type attribute is not set, or if type attribute matches custom post type
                 if (empty($type) || $type == $custom_post_type) {
@@ -95,13 +110,13 @@ class Doppler_Shortcodes {
         else if ($data == 'links' || $data == 'link') {
             $links = json_decode($post_meta['links'][0]);
             foreach($links as $link) {
-                $link_text = $link->text;
+                $link_title = $link->title;
                 $link_url = $link->url;
                 $link_target = $link->target;
                 $link_id = $link->id;
                 
                 if (!isset($id) || $id == $link_id) {
-                    $output .= '<a href="'. $link_url .'" target="' . $link_target . '">' . $link_text . '</a>';
+                    $output .= '<a href="'. $link_url .'" target="' . $link_target . '">' . $link_title . '</a>';
                 }
             }
             return $output;

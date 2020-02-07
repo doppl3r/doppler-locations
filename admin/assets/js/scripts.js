@@ -213,7 +213,7 @@
 
 		function updatePostOptions() {
 			updatePostOption('media', 'medium', 'title', 'post_id');
-			updatePostOption('links', 'link', 'title', 'title');
+			updatePostOption('links', 'link', 'title', 'url');
 		}
 
 		// Initialize admin page

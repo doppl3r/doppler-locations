@@ -115,19 +115,21 @@ class Doppler_Shortcodes {
 
             // Loop through each list group. Ex: states
             foreach($group_array as $group_key => $group_item) {
-                if (empty($group)) $group_title = 'List';
-                else $group_title = $group_key;
-                
                 // Initialize single group start, content, and end
-                $group_start = '<li><a class="title" aria-selected="false" href="#">' . $group_title . '</a><ul class="container">';
-                $group_end = '</ul></li>';
-                $group_has_location == false;
+                $group_has_data == false;
                 $group_output = '';
+                $group_start = '';
+                $group_end = '';
+
+                if (!empty($group)) {
+                    $group_start = '<li><a class="title" aria-selected="false" href="#">' . $group_key . '</a><ul class="container">';
+                    $group_end = '</ul></li>';
+                }
 
                 // Loop through each group item
                 foreach($group_item as $loc_key => $loc) {
                     if ($type == 'location' || empty($type)) {
-                        $group_has_location = true;
+                        $group_has_data = true;
                         $group_output .=
                             '<li>' .
                                 '<ul class="location">' .
@@ -169,7 +171,7 @@ class Doppler_Shortcodes {
             
                             // If type attribute is not set, or if type attribute matches custom post type
                             if (empty($type) || $type == $custom_post_type) {
-                                $group_has_location = true;
+                                $group_has_data = true;
                                 $group_output .= '
                                     <ul class="'. $custom_post_type .'">
                                         <li class="medium"><img src="' . $custom_post_src . '" alt=""></li>
@@ -185,11 +187,11 @@ class Doppler_Shortcodes {
                     }
                 }
                 // Add group to list of groups only if group has posts
-                if ($group_has_location == true) {
+                if ($group_has_data == true) {
                     $output .= $group_start . $group_output . $group_end;
                 }
             }
-            $output = '<ul class="doppler-list">' .  $output . '</ul>';
+            $output = '<div class="doppler-list">' .  $output . '</div>';
             return $output;
         }
         else if ($data == 'map') {

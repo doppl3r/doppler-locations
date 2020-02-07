@@ -38,19 +38,28 @@
             </p>
             <label>Posts</label>
             <p>
-                [doppler_locations data="posts" type="news"]<br>
-                [doppler_locations data="posts" type="event"]
+                [doppler_locations data="list" type="event"]<br>
+                [doppler_locations data="list" type="news"]
             </p>
             <label>Links</label>
-            <p>[doppler_locations data="links" id="email"]</p>
+            <p>
+                [doppler_locations data="links" id="email"]
+            </p>
             <label>Scripts</label>
-            <p>[doppler_locations data="scripts"]</p>
+            <p>
+                [doppler_locations data="scripts"]
+            </p>
             <label>List</label>
             <p>
                 [doppler_locations data="list"]<br>
-                [doppler_locations data="list" group="state"]</p>
+                [doppler_locations data="list" type="location" group="state"]<br>
+                [doppler_locations data="list" type="event" group="state"]<br>
+                [doppler_locations data="list" type="post group="state"]
+            </p>
             <label>Map</label>
-            <p>[doppler_locations data="map"]</p>
+            <p>
+                [doppler_locations data="map"]
+            </p>
         </div>
     </div>
 </div>

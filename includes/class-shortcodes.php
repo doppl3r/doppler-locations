@@ -83,15 +83,23 @@ class Doppler_Shortcodes {
             foreach($group_array as $group_key => $group_item) {
                 if (empty($group)) $group_title = 'Posts';
                 else $group_title = $group_key;
-                $output .= '<li><a class="title" aria-selected="false" href="#">' . $group_title . '</a><ul class="container">';
-                
+
+                // Initialize single group start, content, and end
+                $group_start = '<li><a class="title" aria-selected="false" href="#">' . $group_title . '</a><ul class="container">';
+                $group_end = '</ul></li>';
+                $group_has_posts = false;
+
                 // Loop through each group item
                 foreach($group_item as $loc_key => $loc) {
                     $posts = json_decode($group_item[$loc_key]['posts']);
                     $links = json_decode($group_item[$loc_key]['links']);
 
-                    // Loop through each post
+                    // Check if posts exist for location
                     if (!empty($posts)) {
+                        $group_output = '';
+                        $group_has_posts = true;
+
+                        // Loop through each post
                         foreach($posts as $post) {
                             $custom_post_type = $post->type;
                             $custom_post_title = $post->title;
@@ -119,7 +127,7 @@ class Doppler_Shortcodes {
             
                             // If type attribute is not set, or if type attribute matches custom post type
                             if (empty($type) || $type == $custom_post_type) {
-                                $output .= '
+                                $group_output .= '
                                     <ul class="'. $custom_post_type .'">
                                         <li class="medium"><img src="' . $custom_post_src . '" alt=""></li>
                                         <li class="title">' . $custom_post_title . '</li>
@@ -133,7 +141,10 @@ class Doppler_Shortcodes {
                         }
                     }
                 }
-                $output .= '</ul></li>';
+                // Add group to list of groups only if group has posts
+                if ($group_has_posts == true) {
+                    $output .= $group_start . $group_output . $group_end;
+                }
             }
             $output = '<ul class="doppler-list">' .  $output . '</ul>';
             return $output;
@@ -193,19 +204,32 @@ class Doppler_Shortcodes {
             foreach($group_array as $group_key => $group_item) {
                 if (empty($group)) $group_title = 'Locations';
                 else $group_title = $group_key;
-                $output .= '<li><a class="title" aria-selected="false" href="#">' . $group_title . '</a><ul class="container">';
+                
+                // Initialize single group start, content, and end
+                $group_start = '<li><a class="title" aria-selected="false" href="#">' . $group_title . '</a><ul class="container">';
+                $group_end = '</ul></li>';
+                $group_has_location == false;
+
                 // Loop through each group item
-                foreach($group_item as $loc_key => $loc) {
-                    $output .=
-                        '<li>' .
-                            '<ul class="location">' .
-                                '<li class="location-title"><a href="' . $group_item[$loc_key]['link'] . '">' . $group_item[$loc_key]['display_name'] . '</a></li>' .
-                                '<li class="location-phone"><a href="tel:' . $group_item[$loc_key]['phone'] . '">' . $group_item[$loc_key]['phone'] . '</a></li>' .
-                                '<li class="location-address"><a href="https://www.google.com/maps/place/' . $group_item[$loc_key]['address'] . '" target="_blank">' . $group_item[$loc_key]['address'] . '</a></li>' .
-                            '</ul>' .
-                        '</li>';
+                if (!empty($group_item)){
+                    $group_output = '';
+                    $group_has_location = true;
+
+                    foreach($group_item as $loc_key => $loc) {
+                        $group_output .=
+                            '<li>' .
+                                '<ul class="location">' .
+                                    '<li class="location-title"><a href="' . $group_item[$loc_key]['link'] . '">' . $group_item[$loc_key]['display_name'] . '</a></li>' .
+                                    '<li class="location-phone"><a href="tel:' . $group_item[$loc_key]['phone'] . '">' . $group_item[$loc_key]['phone'] . '</a></li>' .
+                                    '<li class="location-address"><a href="https://www.google.com/maps/place/' . $group_item[$loc_key]['address'] . '" target="_blank">' . $group_item[$loc_key]['address'] . '</a></li>' .
+                                '</ul>' .
+                            '</li>';
+                    }
                 }
-                $output .= '</ul></li>';
+                // Add group to list of groups only if group has posts
+                if ($group_has_location == true) {
+                    $output .= $group_start . $group_output . $group_end;
+                }
             }
             $output = '<ul class="doppler-list">' .  $output . '</ul>';
             return $output;

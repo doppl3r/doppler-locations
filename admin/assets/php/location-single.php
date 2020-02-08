@@ -73,6 +73,7 @@
             <div class="container links"><?php require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-links.php'); ?></div>
             <div class="container scripts"><?php require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-scripts.php'); ?></div>
             <div class="container users"><?php require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-users.php'); ?></div>
+            <div class="container active"></div>
         </div>
     </form>
 </div>

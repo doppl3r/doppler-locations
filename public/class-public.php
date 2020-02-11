@@ -39,7 +39,6 @@ class Doppler_Locations_Public {
 	}
 
 	public function register_custom_posts() {
-		
 		global $doppler_locations_plugin;
 		$post_type_location = $doppler_locations_plugin->get_post_type_location();
 		$post_types = array($post_type_location);
@@ -117,7 +116,7 @@ class Doppler_Locations_Public {
 	public function remove_custom_slug($post_link, $post) {
 		global $doppler_locations_plugin;
 		$post_type_location = $doppler_locations_plugin->get_post_type_location();
-		if ($post_type_location === $post->post_type && 'publish' === $post->post_status) { $post_link = str_replace( '/' . $post->post_type . '/', '/', $post_link ); }
+		if ($post->post_type === $post_type_location && $post->post_status === 'publish') { $post_link = str_replace( '/' . $post->post_type . '/', '/', $post_link ); }
 		return $post_link;
 	}
 

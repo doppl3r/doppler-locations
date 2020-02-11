@@ -38,7 +38,7 @@ class Doppler_Locations {
 		
 		// Register custom posts and replace location content with associated template content
 		$this->loader->add_action('init', $this->plugin_public, 'run_shortcodes'); // Shortcodes
-		$this->loader->add_action('init', $this->plugin_public, 'register_custom_posts'); // Register custom post type
+		$this->loader->add_action('post_type_link', $this->plugin_public, 'register_custom_posts'); // Register custom post type
 		$this->loader->add_action('post_type_link', $this->plugin_public, 'remove_custom_slug', 10, 3); // Change URL
 		$this->loader->add_action('pre_get_posts', $this->plugin_public, 'parse_custom_request'); // Resolve 404 error
 	}

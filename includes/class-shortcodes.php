@@ -38,7 +38,6 @@ class Doppler_Shortcodes {
                 $output .= '<li><span>'. $key. '</span> <span>' . $open . ' - ' . $close . '</span></li>';
             }
             $output = '<ul>' . $output . '</ul>';
-            return $output;
         }
         else if ($data == 'media') {
             $media = json_decode($post_meta['media'][0]);
@@ -60,7 +59,6 @@ class Doppler_Shortcodes {
                     }
                 }
             }
-            return $output;
         }
         else if ($data == 'links' || $data == 'link') {
             $links = json_decode($post_meta['links'][0]);
@@ -74,7 +72,6 @@ class Doppler_Shortcodes {
                     $output .= '<a href="'. $link_url .'" target="' . $link_target . '">' . $link_title . '</a>';
                 }
             }
-            return $output;
         }
         else if ($data == 'scripts' || $data == 'script') {
             $scripts = json_decode($post_meta['scripts'][0]);
@@ -94,7 +91,6 @@ class Doppler_Shortcodes {
                 // Append output
                 $output .= $script_content;
             }
-            return $output;
         }
         else if ($data == 'lists' || $data == 'list') {
             // Generate array using local function 'get_location'
@@ -192,7 +188,6 @@ class Doppler_Shortcodes {
                 }
             }
             $output = '<div class="doppler-list">' .  $output . '</div>';
-            return $output;
         }
         else if ($data == 'map') {
             // Build style attribute
@@ -227,12 +222,14 @@ class Doppler_Shortcodes {
 
             // Render leaflet map HTML
             $output .= '<div id="leaflet-map" ' . $style . '></div>';
-            return $output;
         }
         else { 
             // Default condition assumes a post meta tag search by $data value
-            return $post_meta[$data][0]; 
+            $output = $post_meta[$data][0]; 
         }
+
+        // Return output value (default empty)
+        return $output;
     }
 
     public function get_locations($arr){

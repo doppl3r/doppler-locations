@@ -24,7 +24,7 @@
                 foreach($t_arr as $t) {
                     $selected = '';
                     if ($target == $t) $selected = ' selected';
-                    echo '<option value="' . $t . '"' . $selected . '>' . ucfirst($t) . '</option>';
+                    echo '<option value="' . $t . '"' . $selected . '>' . $t . '</option>';
                 }
             ?>
         </select>

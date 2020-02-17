@@ -15,11 +15,11 @@
                 <label class="small">Type</label>
                 <select name="custom_post_type[]">
                     <?php
-                        $p_arr = array('event', 'news');
+                        $p_arr = array('event', 'news', 'other');
                         foreach($p_arr as $p) {
                             $selected = '';
                             if ($type == $p) $selected = ' selected';
-                            echo '<option value="' . $p . '"' . $selected . '>' . ucfirst($p) . '</option>';
+                            echo '<option value="' . $p . '"' . $selected . '>' . $p . '</option>';
                         }
                     ?>
                 </select>

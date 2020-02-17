@@ -31,6 +31,15 @@
             <div class="col"><label class="small"><a href="#order-post-meta-down" class="dashicons-before dashicons-arrow-down-alt"></a></label></div>
             <div class="col"><label class="small"><a href="#delete-post-meta-medium" class="dashicons-before dashicons-trash"></a></label></div>
         </div>
-        <input type="text" name="medium_group[]" value="<?php echo $group; ?>">
+        <select name="medium_group[]">
+            <?php
+                $g_arr = array('slider', 'gallery', 'none');
+                foreach($g_arr as $g) {
+                    $selected = '';
+                    if ($group == $g) $selected = ' selected';
+                    echo '<option value="' . $g . '"' . $selected . '>' . $g . '</option>';
+                }
+            ?>
+        </select>
     </div>
 </div>

@@ -12,7 +12,7 @@
                 foreach($script_load_options as $s) {
                     $selected = '';
                     if ($script_load == $s) $selected = ' selected';
-                    echo '<option value="' . $s . '"' . $selected . '>' . ucfirst($s) . '</option>';
+                    echo '<option value="' . $s . '"' . $selected . '>' . $s . '</option>';
                 }
             ?>
         </select>

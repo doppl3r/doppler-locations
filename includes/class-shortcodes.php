@@ -71,8 +71,10 @@ class Doppler_Shortcodes {
                 $link_target = $link->target;
                 $link_group = $link->group;
                 
+                // Return link by type or HTML anchor
                 if (!isset($group) || $group == $link_group) {
-                    $output .= '<a href="'. $link_url .'" target="' . $link_target . '">' . $link_title . '</a>';
+                    if ($type == 'url') $output .= $link_url;
+                    else $output .= '<a href="'. $link_url .'" target="' . $link_target . '">' . $link_title . '</a>';
                 }
             }
         }
@@ -89,7 +91,7 @@ class Doppler_Shortcodes {
                 $script_content = htmlspecialchars_decode($script_content, ENT_QUOTES);
 
                 // Resolve missing HTML script tag
-                if (strpos($script_content, '<script>') === false) { $script_content = '<script>' . $script_content . '</script>'; }
+                //if (strpos($script_content, '<script>') === false) { $script_content = '<script>' . $script_content . '</script>'; }
 
                 // Append output
                 $output .= $script_content;
@@ -146,7 +148,7 @@ class Doppler_Shortcodes {
                         foreach($posts as $post) {
                             $custom_post_type = $post->type;
                             $custom_post_title = $post->title;
-                            $custom_post_medium = $post->medium;
+                            $custom_post_medium_id = $post->medium_id;
                             $custom_post_link = $post->link;
                             $custom_post_date = $post->date;
                             $custom_post_time = $post->time;
@@ -189,6 +191,7 @@ class Doppler_Shortcodes {
                 if ($group_has_data == true) {
                     $output .= $group_start . $group_output . $group_end;
                 }
+                else $output .= 'No posts available at this time.';
             }
             $output = '<div class="doppler-list">' .  $output . '</div>';
         }

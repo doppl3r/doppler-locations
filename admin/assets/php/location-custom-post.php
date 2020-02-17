@@ -2,7 +2,7 @@
     // Requires location-custom-posts.php to generate variables
     $type = $postmeta->type;
     $title = $postmeta->title;
-    $medium = $postmeta->medium;
+    $medium_id = $postmeta->medium_id;
     $link = $postmeta->link;
     $date = $postmeta->date;
     $time = $postmeta->time;
@@ -31,12 +31,12 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <label class="small"><span class="dashicons-before dashicons-admin-media"></span> Media</label>
-                <select name="custom_post_medium[]" data="<?php echo $medium; ?>"></select>
+                <label class="small"><span class="dashicons-before dashicons-admin-media"></span> Media ID</label>
+                <select name="custom_post_medium_id[]" data="<?php echo $medium_id; ?>"></select>
             </div>
             <div class="col-6">
                 <label class="small"><span class="dashicons-before dashicons-admin-links"></span> Link</label>
-                <select name="custom_post_link[]" data="<?php echo $link; ?>"></select>
+                <input type="text" name="custom_post_link[]" value="<?php echo $link; ?>">
             </div>
         </div>
         <div class="row">

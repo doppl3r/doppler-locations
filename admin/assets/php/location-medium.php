@@ -21,8 +21,8 @@
         </div>
     </div>
     <div class="col-3">
-        <label class="small">Title</label>
-        <input type="text" name="medium_title[]" value="<?php echo $title; ?>">
+        <label class="small">ID</label>
+        <input type="text" name="disabled_medium_post_id[]" value="<?php echo $post_id; ?>" disabled>
     </div>
     <div class="col-3">
         <div class="row justify">
@@ -33,7 +33,7 @@
         </div>
         <select name="medium_group[]">
             <?php
-                $g_arr = array('slider', 'gallery', 'none');
+                $g_arr = array('none', 'slider', 'gallery');
                 foreach($g_arr as $g) {
                     $selected = '';
                     if ($group == $g) $selected = ' selected';

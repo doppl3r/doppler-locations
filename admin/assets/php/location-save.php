@@ -35,20 +35,10 @@
     $media = array();
     if (!empty($_POST['medium_post_id'])) {
         foreach($_POST['medium_post_id'] as $key=>$value) {
-            $medium_post_id = $_POST['medium_post_id'][$key];
-            $medium_post_title = $_POST['medium_title'][$key];
             $media[$key] = array(
-                'post_id' => $medium_post_id,
+                'post_id' => $_POST['medium_post_id'][$key],
                 'group' => $_POST['medium_group'][$key]
             );
-            if (isset($medium_post_title)) {
-                $medium_post_arr = array(
-                    'ID' => $medium_post_id,
-                    'post_title' => $medium_post_title,
-                    'post_name' => ''
-                );
-                wp_update_post($medium_post_arr);
-            }
         }
     }
     update_post_meta($post_id, 'media', json_encode($media));
@@ -66,7 +56,7 @@
             $custom_posts[$key] = array(
                 'type' => $_POST['custom_post_type'][$key],
                 'title' => $_POST['custom_post_title'][$key],
-                'medium' => $_POST['custom_post_medium'][$key],
+                'medium_id' => $_POST['custom_post_medium_id'][$key],
                 'link' => $_POST['custom_post_link'][$key],
                 'date' => $_POST['custom_post_date'][$key],
                 'time' => $_POST['custom_post_time'][$key],

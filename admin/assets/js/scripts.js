@@ -143,7 +143,6 @@
 				row.find('.thumbnail div').html(type);
 				row.find('[name*="medium_post_id"]').val(attachment.id);
 				row.find('[name*="medium_url"]').val(attachment.url);
-				row.find('[name*="medium_title"]').val(attachment.title);
 				updatePostOptions();
 			});
 			
@@ -199,7 +198,7 @@
 			// Update post link options
 			$('[name*="custom_post_' + singular + '"]').each(function(i, select) {
 				$(select).empty();
-				$(select).append('<option value="none">None</option>');
+				$(select).append('<option value="none">none</option>');
 				var selectValue = $(select).attr('data');
 				for (var key in options) {
 					var optionValue = options[key];
@@ -212,8 +211,7 @@
 		}
 
 		function updatePostOptions() {
-			updatePostOption('media', 'medium', 'title', 'post_id');
-			updatePostOption('links', 'link', 'title', 'url');
+			updatePostOption('media', 'medium', 'post_id', 'post_id');
 		}
 
 		// Initialize admin page

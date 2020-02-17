@@ -12,18 +12,21 @@ class Doppler_Shortcodes {
 
     public function doppler_shortcode($atts, $content = null) {
         global $doppler_locations_plugin;
-        $post_id = get_the_ID();
-        $post_meta = get_post_meta($post_id);
-        $post_type = get_post_type($post_id);
-        $post_type_location = $doppler_locations_plugin->get_post_type_location();
+        $id = $atts['id'];
         $data = $atts['data'];
         $type = $atts['type'];
-        $id = $atts['id'];
         $width = $atts['width'];
         $height = $atts['height'];
         $group = $atts['group'];
         $style = '';
         $output = '';
+
+        // Get post data
+        if (isset($id)) $post_id = $id;
+        else $post_id = get_the_ID();
+        $post_meta = get_post_meta($post_id);
+        $post_type = get_post_type($post_id);
+        $post_type_location = $doppler_locations_plugin->get_post_type_location();
 
         // Apply grix grid system if shortcode is used
         wp_enqueue_style('grix');
@@ -42,7 +45,7 @@ class Doppler_Shortcodes {
         else if ($data == 'media') {
             $media = json_decode($post_meta['media'][0]);
             foreach($media as $medium) {
-                $medium_id = $medium->id;
+                $medium_group = $medium->group;
                 $medium_post_id = $medium->post_id;
                 $medium_url = wp_get_attachment_url($medium_post_id);
                 $medium_title = get_the_title($medium_post_id);
@@ -50,7 +53,7 @@ class Doppler_Shortcodes {
                 $medium_type = explode("/", get_post_mime_type($medium_post_id))[0];
                 
                 // Loop through all assets or by group id
-                if (!isset($id) || $id == $medium_id) {
+                if (!isset($group) || $group == $medium_group) {
                     switch ($medium_type) {
                         case "image": $output .= '<img alt="' . $medium_alt . '" src="' . $medium_url . '" />'; break;
                         case "audio": $output .= '<audio src="' . $medium_url . '" controls>' . $medium_title . '</audio>'; break;
@@ -66,9 +69,9 @@ class Doppler_Shortcodes {
                 $link_title = $link->title;
                 $link_url = $link->url;
                 $link_target = $link->target;
-                $link_id = $link->id;
+                $link_group = $link->group;
                 
-                if (!isset($id) || $id == $link_id) {
+                if (!isset($group) || $group == $link_group) {
                     $output .= '<a href="'. $link_url .'" target="' . $link_target . '">' . $link_title . '</a>';
                 }
             }
@@ -157,7 +160,7 @@ class Doppler_Shortcodes {
                                 $link_title = $link->title;
                                 $link_url = $link->url;
                                 $link_target = $link->target;
-                                $link_id = $link->id;
+                                $link_group = $link->group;
             
                                 if ($custom_post_link == $link_url) {
                                     $custom_post_link = '<a href="' . $link_url . '" target="' . $link_target . '">' . $link_title . '</a>';

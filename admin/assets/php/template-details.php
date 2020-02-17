@@ -33,8 +33,7 @@
             </p>
             <label>Media</label>
             <p>
-                [doppler_locations data="media" id="your-id"]<br>
-                [doppler_locations data="media" id="group-id"]
+                [doppler_locations data="media" group="gallery"]
             </p>
             <label>Posts</label>
             <p>
@@ -43,7 +42,7 @@
             </p>
             <label>Links</label>
             <p>
-                [doppler_locations data="links" id="email"]
+                [doppler_locations data="links" group="email"]
             </p>
             <label>Scripts</label>
             <p>

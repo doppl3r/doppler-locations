@@ -33,13 +33,13 @@
 
     // Parse media
     $media = array();
-    if (!empty($_POST['medium_id'])) {
-        foreach($_POST['medium_id'] as $key=>$value) {
+    if (!empty($_POST['medium_post_id'])) {
+        foreach($_POST['medium_post_id'] as $key=>$value) {
             $medium_post_id = $_POST['medium_post_id'][$key];
             $medium_post_title = $_POST['medium_title'][$key];
             $media[$key] = array(
                 'post_id' => $medium_post_id,
-                'id' => $_POST['medium_id'][$key]
+                'group' => $_POST['medium_group'][$key]
             );
             if (isset($medium_post_title)) {
                 $medium_post_arr = array(
@@ -84,7 +84,7 @@
                 'title' => $_POST['link_title'][$key],
                 'url' => $_POST['link_url'][$key],
                 'target' => $_POST['link_target'][$key],
-                'id' => $_POST['link_id'][$key]
+                'group' => $_POST['link_group'][$key]
             );
         }
     }

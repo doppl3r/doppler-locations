@@ -77,15 +77,20 @@
                 <label for="zip">Zip</label>
                 <input name="zip" id="zip" type="text" value="<?php echo $zip; ?>">
             </div>
+            <div class="col-6">
+                <label for="street">Street</label>
+                <input name="street" id="street" type="text" value="<?php echo $street; ?>">
+            </div>
+            
+        </div>
+        <div class="row">
             <div class="col-6 phone">
                 <label for="phone">Phone</label>
                 <input name="phone" id="phone" type="tel" value="<?php echo $phone; ?>">
             </div>
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <label for="street">Street</label>
-                <input name="street" id="street" type="text" value="<?php echo $street; ?>">
+            <div class="col-6 email">
+                <label for="email">Email</label>
+                <input name="email" id="email" type="email" value="<?php echo $email; ?>">
             </div>
         </div>
         <div class="row">

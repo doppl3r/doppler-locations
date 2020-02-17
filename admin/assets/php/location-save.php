@@ -19,8 +19,9 @@
     update_post_meta($post_id, 'city', $_POST['city']);
     update_post_meta($post_id, 'state', $_POST['state']);
     update_post_meta($post_id, 'zip', $_POST['zip']);
-    update_post_meta($post_id, 'phone', $_POST['phone']);
     update_post_meta($post_id, 'street', $_POST['street']);
+    update_post_meta($post_id, 'phone', $_POST['phone']);
+    update_post_meta($post_id, 'email', $_POST['email']);
     update_post_meta($post_id, 'latitude', $_POST['latitude']);
     update_post_meta($post_id, 'longitude', $_POST['longitude']);
     update_post_meta($post_id, 'guide', $_POST['guide']);

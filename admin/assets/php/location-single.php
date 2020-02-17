@@ -19,8 +19,9 @@
     $city = get_post_meta($post_id, 'city')[0];
     $state = get_post_meta($post_id, 'state')[0];
     $zip = get_post_meta($post_id, 'zip')[0];
-    $phone = get_post_meta($post_id, 'phone')[0];
     $street = get_post_meta($post_id, 'street')[0];
+    $phone = get_post_meta($post_id, 'phone')[0];
+    $email = get_post_meta($post_id, 'email')[0];
     $latitude = get_post_meta($post_id, 'latitude')[0];
     $longitude = get_post_meta($post_id, 'longitude')[0];
     $guide = get_post_meta($post_id, 'guide')[0];

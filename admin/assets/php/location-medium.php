@@ -22,7 +22,7 @@
     </div>
     <div class="col-3">
         <label class="small">ID</label>
-        <input type="text" name="disabled_medium_post_id[]" value="<?php echo $post_id; ?>" disabled>
+        <input type="text" name="medium_post_id[]" value="<?php echo $post_id; ?>" disabled>
     </div>
     <div class="col-3">
         <div class="row justify">

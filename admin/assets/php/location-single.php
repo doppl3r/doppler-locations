@@ -60,17 +60,15 @@
         <input type="hidden" name="tab" value="<?php echo $tab; ?>">
         <div class="tabs">
             <div class="tab"><span class="dashicons-before dashicons-location"></span> <span class="text">General</span></div>
-            <div class="tab"><span class="dashicons-before dashicons-admin-media"></span> <span class="text">Media</span></div>
             <div class="tab"><span class="dashicons-before dashicons-editor-quote"></span> <span class="text">Posts</span></div>
-            <div class="tab"><span class="dashicons-before dashicons-admin-links"></span> <span class="text">Links</span></div>
+            <div class="tab"><span class="dashicons-before dashicons-admin-media"></span> <span class="text">Media</span></div>
             <div class="tab"><span class="dashicons-before dashicons-editor-code"></span> <span class="text">Scripts</span></div>
             <div class="tab"><span class="dashicons-before dashicons-admin-network"></span> <span class="text">Users</span></div>
         </div>
         <div class="containers">
             <div class="container details"><?php require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-details.php'); ?></div>
-            <div class="container media"><?php require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-media.php'); ?></div>
             <div class="container posts"><?php require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-custom-posts.php'); ?></div>
-            <div class="container links"><?php require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-links.php'); ?></div>
+            <div class="container media"><?php require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-media.php'); ?></div>
             <div class="container scripts"><?php require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-scripts.php'); ?></div>
             <div class="container users"><?php require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-users.php'); ?></div>
             <div class="container active loading"></div>

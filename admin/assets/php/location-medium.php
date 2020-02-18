@@ -24,7 +24,7 @@
         <label class="small">Group</label>
         <select name="medium_group[]">
             <?php
-                $g_arr = array('none', 'slider', 'gallery');
+                $g_arr = array('slider', 'gallery', 'other');
                 foreach($g_arr as $g) {
                     $selected = '';
                     if ($group == $g) $selected = ' selected';

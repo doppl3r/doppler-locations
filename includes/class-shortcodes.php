@@ -91,7 +91,6 @@ class Doppler_Shortcodes {
                 if ($group_has_data == true) {
                     $output .= $group_start . $group_output . $group_end;
                 }
-                else $output .= '<p>No media available at this time.</p>';
             }
         }
         else if ($data == 'links' || $data == 'link') {

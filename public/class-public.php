@@ -46,7 +46,8 @@ class Doppler_Locations_Public {
 		// Loop through types of custom posts
 		foreach ($post_types as $post_type) {
 			// Initialize post type slug
-			$doppler_slug = get_option($post_type . '_slug');
+			$slug = get_option($post_type . '_slug');
+			$public = get_option($post_type . '_public') === 'true';
 
 			// Define strings by post type
 			$singular = str_replace('_', ' ', $post_type);
@@ -91,17 +92,18 @@ class Doppler_Locations_Public {
 				'supports'              => array('title', 'editor'),
 				'taxonomies'            => array($post_type),
 				'hierarchical'          => false,
-				'public'                => true,
 				'show_ui'               => true,
 				'show_in_menu'          => false,
 				'menu_position'         => 5,
 				'show_in_admin_bar'     => true,
 				'show_in_nav_menus'     => false,
 				'can_export'            => true,
-				'has_archive'           => true,
-				'rewrite'            	=> array( 'slug' => $doppler_slug ),
-				'exclude_from_search'   => false,
-				'publicly_queryable'    => true,
+				'public'                => $public,
+				'query_var'				=> $public,
+				'has_archive'           => $public,
+				'publicly_queryable'    => $public,
+				'exclude_from_search'   => !$public, // opposite
+				'rewrite'            	=> array('slug' => $slug),
 				'capability_type'       => 'page',
 				'show_in_rest'          => true,
 			);

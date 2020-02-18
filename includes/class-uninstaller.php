@@ -9,6 +9,7 @@ class Doppler_Locations_Uninstaller {
 
 		// Delete options
 		delete_option('doppler_location_slug');
+		delete_option('doppler_location_public');
 
 		// Delete all posts with post_type "location" or "template"
 		$post_types = array($post_type_location, $post_type_template);

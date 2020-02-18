@@ -9,6 +9,7 @@ class Doppler_Locations_Activator {
 
         // Initialize settings
         if (get_option('doppler_location_slug') == false) add_option('doppler_location_slug', 'locations');
+        if (get_option('doppler_location_public') == false) add_option('doppler_location_public', 'true');
 
         // Add default template if no template exists on activation
         if ($count <= 0) {

@@ -4,12 +4,15 @@
         $doppler_location_slug = !empty($_POST['doppler_location_slug']) ? $_POST['doppler_location_slug'] : '';
         $doppler_location_slug = ltrim($doppler_location_slug, '/');
         $doppler_location_slug = rtrim($doppler_location_slug, '/');
+        $doppler_location_public = !empty($_POST['doppler_location_public']) ? $_POST['doppler_location_public'] : true;
         update_option('doppler_location_slug', $doppler_location_slug);
+        update_option('doppler_location_public', $doppler_location_public);
         flush_rewrite_rules();
     }
 
     // Initialize variables
     $doppler_location_slug = get_option('doppler_location_slug');
+    $doppler_location_public = get_option('doppler_location_public');
 ?>
 <div class="doppler-body loading">
     <div class="nav row">
@@ -32,7 +35,24 @@
                 <div class="row option">
                     <div class="col-6-m name">doppler_location_slug</div>
                     <div class="col-6-m value">
-                    <input type="text" name="doppler_location_slug" placeholder="ex: locations" value="<?php echo $doppler_location_slug; ?>">
+                        <input type="text" name="doppler_location_slug" placeholder="ex: locations" value="<?php echo $doppler_location_slug; ?>">
+                    </div>
+                </div>
+            </div>
+            <div class="posts options">
+                <div class="row option">
+                    <div class="col-6-m name">doppler_location_public</div>
+                    <div class="col-6-m value">
+                        <select name="doppler_location_public">
+                        <?php
+                            $public_options = array('true', 'false');
+                            foreach($public_options as $s) {
+                                $selected = '';
+                                if ($doppler_location_public == $s) $selected = ' selected';
+                                echo '<option value="' . $s . '"' . $selected . '>' . $s . '</option>';
+                            }
+                        ?>
+                    </select>
                     </div>
                 </div>
             </div>

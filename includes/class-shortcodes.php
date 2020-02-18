@@ -121,9 +121,6 @@ class Doppler_Shortcodes {
                 $script_content = str_replace('\\', '', $script_content);
                 $script_content = htmlspecialchars_decode($script_content, ENT_QUOTES);
 
-                // Resolve missing HTML script tag
-                //if (strpos($script_content, '<script>') === false) { $script_content = '<script>' . $script_content . '</script>'; }
-
                 // Append output
                 $output .= $script_content;
             }
@@ -186,7 +183,7 @@ class Doppler_Shortcodes {
                             $custom_post_content = $post->content;
             
                             // Get image url by media id
-                            $custom_post_src = wp_get_attachment_url($custom_post_medium);
+                            $custom_post_src = wp_get_attachment_url($custom_post_medium_id);
             
                             // Get link href by url
                             foreach($links as $link) {

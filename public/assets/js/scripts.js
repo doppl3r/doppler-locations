@@ -11,7 +11,7 @@
 
 	// Add slider functionality
 	$(document).ready(function(){
-		$('.doppler-slider').slick();
+		$('.doppler-slider').slick({ dots: true });
 	});
 	
 })(jQuery);

@@ -46,6 +46,11 @@ class Doppler_Shortcodes {
             // Initialize media array
             $media = json_decode($post_meta['media'][0]);
 
+            if ($group == 'slider') {
+                wp_enqueue_style('slick');
+                wp_enqueue_script('slick');
+            }
+
             // Populate group_array by list value
             $group_array = [];
             foreach($media as $group_key => $element) {
@@ -61,11 +66,6 @@ class Doppler_Shortcodes {
                 $group_output = '';
                 $group_start = '<div class="doppler-' . $group_key . '">';
                 $group_end = '</div>';
-
-                if ($group_key == 'slider') {
-                    wp_enqueue_style('slick');
-                    wp_enqueue_script('slick');
-                }
 
                 foreach($group_item as $loc_key => $medium) {
                     $medium_group = $medium->group;

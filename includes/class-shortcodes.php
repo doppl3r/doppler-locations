@@ -43,23 +43,48 @@ class Doppler_Shortcodes {
             $output = '<ul>' . $output . '</ul>';
         }
         else if ($data == 'media') {
+            // Initialize media array
             $media = json_decode($post_meta['media'][0]);
-            foreach($media as $medium) {
-                $medium_group = $medium->group;
-                $medium_post_id = $medium->post_id;
-                $medium_url = wp_get_attachment_url($medium_post_id);
-                $medium_title = get_the_title($medium_post_id);
-                $medium_alt = get_post_meta($medium_post_id, '_wp_attachment_image_alt')[0];
-                $medium_type = explode("/", get_post_mime_type($medium_post_id))[0];
-                
-                // Loop through all assets or by group id
-                if (!isset($group) || $group == $medium_group) {
-                    switch ($medium_type) {
-                        case "image": $output .= '<img alt="' . $medium_alt . '" src="' . $medium_url . '" />'; break;
-                        case "audio": $output .= '<audio src="' . $medium_url . '" controls>' . $medium_title . '</audio>'; break;
-                        case "video": $output .= '<video src="' . $medium_url . '" controls>' . $medium_title . '</video>'; break;
-                        default: $output .= '<a href="' . $medium_url . '" target="_blank">' . $medium_title . '</a>'; break;
+
+            // Populate group_array by list value
+            $group_array = [];
+            foreach($media as $group_key => $element) {
+                if (empty($group)) $group_id = $group_key;
+                else $group_id = $group;
+                $group_array[$element->group][] = $element;
+            }
+
+            // Loop through each list group. Ex: states
+            foreach($group_array as $group_key => $group_item) {
+                // Initialize single group start, content, and end
+                $group_has_data = false;
+                $group_output = '';
+                $group_start = '<div class="doppler-' . $group_key . '">';
+                $group_end = '</div>';
+
+                foreach($group_item as $loc_key => $medium) {
+                    $medium_group = $medium->group;
+                    $medium_post_id = $medium->post_id;
+                    $medium_url = wp_get_attachment_url($medium_post_id);
+                    $medium_title = get_the_title($medium_post_id);
+                    $medium_alt = get_post_meta($medium_post_id, '_wp_attachment_image_alt')[0];
+                    $medium_type = explode("/", get_post_mime_type($medium_post_id))[0];
+                    
+                    // Loop through all assets or by group id
+                    if (!isset($group) || $group == $medium_group) {
+                        $group_has_data = true;
+                        switch ($medium_type) {
+                            case "image": $group_output .= '<div class="item"><img alt="' . $medium_alt . '" src="' . $medium_url . '" /></div>'; break;
+                            case "audio": $group_output .= '<div class="item"><audio src="' . $medium_url . '" controls>' . $medium_title . '</audio></div>'; break;
+                            case "video": $group_output .= '<div class="item"><video src="' . $medium_url . '" controls>' . $medium_title . '</video></div>'; break;
+                            default: $group_output .= '<div class="item"><a href="' . $medium_url . '" target="_blank">' . $medium_title . '</a></div>'; break;
+                        }
                     }
+                }
+
+                // Add group to list of groups only if group has posts
+                if ($group_has_data == true) {
+                    $output .= $group_start . $group_output . $group_end;
                 }
             }
         }
@@ -117,7 +142,7 @@ class Doppler_Shortcodes {
             // Loop through each list group. Ex: states
             foreach($group_array as $group_key => $group_item) {
                 // Initialize single group start, content, and end
-                $group_has_data == false;
+                $group_has_data = false;
                 $group_output = '';
                 $group_start = '';
                 $group_end = '';

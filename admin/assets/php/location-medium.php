@@ -21,16 +21,7 @@
         </div>
     </div>
     <div class="col-3">
-        <label class="small">ID</label>
-        <input type="text" name="medium_post_id[]" value="<?php echo $post_id; ?>" disabled>
-    </div>
-    <div class="col-3">
-        <div class="row justify">
-            <div class="col"><label class="small">Group</label></div>
-            <div class="col"><label class="small"><a href="#order-post-meta-up" class="dashicons-before dashicons-arrow-up-alt"></a></label></div>
-            <div class="col"><label class="small"><a href="#order-post-meta-down" class="dashicons-before dashicons-arrow-down-alt"></a></label></div>
-            <div class="col"><label class="small"><a href="#delete-post-meta-medium" class="dashicons-before dashicons-trash"></a></label></div>
-        </div>
+        <label class="small">Group</label>
         <select name="medium_group[]">
             <?php
                 $g_arr = array('none', 'slider', 'gallery');
@@ -41,5 +32,15 @@
                 }
             ?>
         </select>
+    </div>
+    <div class="col-3">
+        
+        <div class="row justify">
+            <div class="col"><label class="small">ID</label></div>
+            <div class="col"><label class="small"><a href="#order-post-meta-up" class="dashicons-before dashicons-arrow-up-alt"></a></label></div>
+            <div class="col"><label class="small"><a href="#order-post-meta-down" class="dashicons-before dashicons-arrow-down-alt"></a></label></div>
+            <div class="col"><label class="small"><a href="#delete-post-meta-medium" class="dashicons-before dashicons-trash"></a></label></div>
+        </div>
+        <input type="text" name="medium_post_id[]" value="<?php echo $post_id; ?>" disabled>
     </div>
 </div>

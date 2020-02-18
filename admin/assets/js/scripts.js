@@ -6,7 +6,7 @@
 		$('.doppler-body').removeClass('loading');
 
 		// Add post meta drag and drop functionality for reordering
-		$('.doppler-body .post-meta-group').sortable();
+		$('.doppler-body .post-meta-group').sortable({ axis: "y" });
 
 		// Add post button(s)
 		$(document).on('click', '.doppler-body [href*="add-location"], .doppler-body [href*="add-template"]', function(e){

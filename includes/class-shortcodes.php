@@ -54,13 +54,18 @@ class Doppler_Shortcodes {
                 $group_array[$element->group][] = $element;
             }
 
-            // Loop through each list group. Ex: states
+            // Loop through each list group. Ex: slider
             foreach($group_array as $group_key => $group_item) {
                 // Initialize single group start, content, and end
                 $group_has_data = false;
                 $group_output = '';
                 $group_start = '<div class="doppler-' . $group_key . '">';
                 $group_end = '</div>';
+
+                if ($group_key == 'slider') {
+                    wp_enqueue_style('slick');
+                    wp_enqueue_script('slick');
+                }
 
                 foreach($group_item as $loc_key => $medium) {
                     $medium_group = $medium->group;

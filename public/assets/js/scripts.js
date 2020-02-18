@@ -8,5 +8,10 @@
 		var ariaSelected = $(this).attr(attr);
 		$(this).attr(attr, (ariaSelected == 'false' ? true : false)); // toggle true/false
 	});
+
+	// Add slider functionality
+	$(document).ready(function(){
+		$('.doppler-slider').slick();
+	});
 	
 })(jQuery);

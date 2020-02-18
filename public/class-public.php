@@ -18,6 +18,7 @@ class Doppler_Locations_Public {
 
 		// Enqueue is in the shortcode
 		wp_register_style('grix', plugin_dir_url(__FILE__) . 'assets/css/grix.css');
+		wp_register_style('slick', plugin_dir_url(__FILE__) . 'assets/css/slick.css');
 		wp_register_style('leaflet', plugin_dir_url(__FILE__) . 'assets/css/leaflet.css');
 		wp_register_style('leaflet-doppler-locations', plugin_dir_url(__FILE__) . 'assets/css/leaflet-doppler-locations.css');
 
@@ -31,6 +32,7 @@ class Doppler_Locations_Public {
 		wp_register_script('scripts-shortcode', '');
 
 		// Enqueue is in the shortcode
+		wp_register_script('slick', plugin_dir_url(__FILE__) . 'assets/js/slick.js');
 		wp_register_script('leaflet', plugin_dir_url(__FILE__) . 'assets/js/leaflet.js');
 		wp_register_script('leaflet-doppler-locations', plugin_dir_url(__FILE__) . 'assets/js/leaflet-doppler-locations.js');
 

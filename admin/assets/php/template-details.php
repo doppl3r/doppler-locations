@@ -33,7 +33,7 @@
             </p>
             <label>Media</label>
             <p>
-                [doppler_locations data="media" group="slider"]
+                [doppler_locations data="media" group="slider"]<br>
                 [doppler_locations data="media" group="gallery"]
             </p>
             <label>Posts</label>

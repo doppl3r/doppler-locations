@@ -74,12 +74,35 @@
 			});
 		});
 
-		// Save posts
+		// Save content dynamically
 		$(document).on('click', '.doppler-body [href*="save"]', function(e){
 			e.preventDefault();
+
+			// Initialize variables for POST action
+			var action = '';
+			var data = '';
+			var href = $(this).attr('href');
+			var postType = href.substring(href.indexOf('-') + 1);
+
+			// Define action type from button href
+			if (postType == 'location') action = 'save_all_post_content';
+			else if (postType == 'template') {
+				window.htmlEditor.save(); // Save editor to textarea
+				action = 'save_template';
+			}
+
+			// Serialize data from from
+			data = $('.doppler-body form').serialize();
+
+			// Perform ajax POST call
 			$('.doppler-body').addClass('loading');
-			$('.doppler-body form').submit();
+			$.post(ajaxurl, { 'action': action, 'data': data }, function(response) { 
+				// Append new row
+				$('.doppler-body').removeClass('loading');
+				//console.log(response);
+			});
 		});
+
 
 		// Add post meta rows (ex: custom posts, links etc.)
 		$(document).on('click', '.doppler-body [href*="add-post-meta"]', function(e){

@@ -15,15 +15,22 @@ class Doppler_Save {
         $this->save_users();
     }
 
+    public function get_post_data() {
+        $data = $_POST;
+        if (isset($_POST['data'])) parse_str($_POST['data'], $data);
+        return $data;
+    }
+
     public function save_general() {
         // Update post data
-        $post_id = $_GET['id'];
-        $template_id = $_POST['template_id'];
+        $data = $this->get_post_data();
+        $post_id = $data['id'];
+        $template_id = $data['template_id'];
         //$template_content = ''; // Set empty, the content will come from the template
         $template_content = get_post_field('post_content', $template_id);
         $post_arr = array(
             'ID' => $post_id,
-            'post_title' => $_POST['post_title'],
+            'post_title' => $data['post_title'],
             'post_name' => '',
             'post_content' => $template_content
         );
@@ -31,22 +38,22 @@ class Doppler_Save {
 
         // Add postmeta to newly inserted page
         update_post_meta($post_id, 'template_id', $template_id);
-        update_post_meta($post_id, 'status', $_POST['status']);
-        update_post_meta($post_id, 'display_name', $_POST['display_name']);
-        update_post_meta($post_id, 'city', $_POST['city']);
-        update_post_meta($post_id, 'state', $_POST['state']);
-        update_post_meta($post_id, 'zip', $_POST['zip']);
-        update_post_meta($post_id, 'street', $_POST['street']);
-        update_post_meta($post_id, 'phone', $_POST['phone']);
-        update_post_meta($post_id, 'email', $_POST['email']);
-        update_post_meta($post_id, 'latitude', $_POST['latitude']);
-        update_post_meta($post_id, 'longitude', $_POST['longitude']);
-        update_post_meta($post_id, 'guide', $_POST['guide']);
+        update_post_meta($post_id, 'status', $data['status']);
+        update_post_meta($post_id, 'display_name', $data['display_name']);
+        update_post_meta($post_id, 'city', $data['city']);
+        update_post_meta($post_id, 'state', $data['state']);
+        update_post_meta($post_id, 'zip', $data['zip']);
+        update_post_meta($post_id, 'street', $data['street']);
+        update_post_meta($post_id, 'phone', $data['phone']);
+        update_post_meta($post_id, 'email', $data['email']);
+        update_post_meta($post_id, 'latitude', $data['latitude']);
+        update_post_meta($post_id, 'longitude', $data['longitude']);
+        update_post_meta($post_id, 'guide', $data['guide']);
 
         // Convert hours into array
         $hours = array();
         $days = array('mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun');
-        foreach($days as $day) { $hours[$day] = $_POST[$day . '_open'] . '-' . $_POST[$day . '_close']; }
+        foreach($days as $day) { $hours[$day] = $data[$day . '_open'] . '-' . $data[$day . '_close']; }
         update_post_meta($post_id, 'hours', json_encode($hours));
 
         // Flush rewrite rules when page data is saved
@@ -55,23 +62,24 @@ class Doppler_Save {
 
     public function save_posts() {
         // Parse custom posts
-        $post_id = $_GET['id'];
+        $data = $this->get_post_data();
+        $post_id = $data['id'];
         $custom_posts = array();
-        if (!empty($_POST['custom_post_type'])) {
-            foreach($_POST['custom_post_type'] as $key=>$value) {
-                $custom_post_content = $_POST['custom_post_content'][$key];
+        if (!empty($data['custom_post_type'])) {
+            foreach($data['custom_post_type'] as $key=>$value) {
+                $custom_post_content = $data['custom_post_content'][$key];
                 $custom_post_content = stripcslashes($custom_post_content); // Remove single slashes
                 $custom_post_content = str_replace("\r\n", "\\n", $custom_post_content); // Double encode lines
                 $custom_post_content = iconv('UTF-8', 'ASCII//TRANSLIT', $custom_post_content); // Convert to UTF-8
                 $custom_post_content = esc_textarea($custom_post_content); // Escape to HTML codes
 
                 $custom_posts[$key] = array(
-                    'type' => $_POST['custom_post_type'][$key],
-                    'title' => $_POST['custom_post_title'][$key],
-                    'medium_id' => $_POST['custom_post_medium_id'][$key],
-                    'link' => $_POST['custom_post_link'][$key],
-                    'date' => $_POST['custom_post_date'][$key],
-                    'time' => $_POST['custom_post_time'][$key],
+                    'type' => $data['custom_post_type'][$key],
+                    'title' => $data['custom_post_title'][$key],
+                    'medium_id' => $data['custom_post_medium_id'][$key],
+                    'link' => $data['custom_post_link'][$key],
+                    'date' => $data['custom_post_date'][$key],
+                    'time' => $data['custom_post_time'][$key],
                     'content' => $custom_post_content
                 );
             }
@@ -81,13 +89,14 @@ class Doppler_Save {
 
     public function save_media() {
         // Parse media
-        $post_id = $_GET['id'];
+        $data = $this->get_post_data();
+        $post_id = $data['id'];
         $media = array();
-        if (!empty($_POST['medium_post_id'])) {
-            foreach($_POST['medium_post_id'] as $key=>$value) {
+        if (!empty($data['medium_post_id'])) {
+            foreach($data['medium_post_id'] as $key=>$value) {
                 $media[$key] = array(
-                    'post_id' => $_POST['medium_post_id'][$key],
-                    'group' => $_POST['medium_group'][$key]
+                    'post_id' => $data['medium_post_id'][$key],
+                    'group' => $data['medium_group'][$key]
                 );
             }
         }
@@ -96,15 +105,16 @@ class Doppler_Save {
 
     public function save_links() {
         // Parse links
-        $post_id = $_GET['id'];
+        $data = $this->get_post_data();
+        $post_id = $data['id'];
         $links = array();
-        if (!empty($_POST['link_title'])) {
-            foreach($_POST['link_title'] as $key=>$value) {
+        if (!empty($data['link_title'])) {
+            foreach($data['link_title'] as $key=>$value) {
                 $links[$key] = array(
-                    'title' => $_POST['link_title'][$key],
-                    'url' => $_POST['link_url'][$key],
-                    'target' => $_POST['link_target'][$key],
-                    'group' => $_POST['link_group'][$key]
+                    'title' => $data['link_title'][$key],
+                    'url' => $data['link_url'][$key],
+                    'target' => $data['link_target'][$key],
+                    'group' => $data['link_group'][$key]
                 );
             }
         }
@@ -113,19 +123,20 @@ class Doppler_Save {
 
     public function save_scripts() {
         // Parse scripts
-        $post_id = $_GET['id'];
+        $data = $this->get_post_data();
+        $post_id = $data['id'];
         $scripts = array();
-        if (!empty($_POST['script_content'])) {
-            foreach($_POST['script_content'] as $key=>$value) {
+        if (!empty($data['script_content'])) {
+            foreach($data['script_content'] as $key=>$value) {
                 // Prevent json_encode from converting Javascript
-                $script = $_POST['script_content'][$key];
+                $script = $data['script_content'][$key];
                 $script = str_replace("\\", "\\\\", $script);
                 $script = str_replace("\r\n", "\\n", $script);
                 $script = esc_textarea($script);
 
                 // Add script to list
                 $scripts[$key] = array(
-                    'script_load' => $_POST['script_load'][$key],
+                    'script_load' => $data['script_load'][$key],
                     'script_content' => $script
                 );
             }
@@ -135,12 +146,13 @@ class Doppler_Save {
 
     public function save_users() {
         // Parse users
-        $post_id = $_GET['id'];
+        $data = $this->get_post_data();
+        $post_id = $data['id'];
         $users = array();
-        if (!empty($_POST['user_login'])) {
-            foreach($_POST['user_login'] as $key=>$value) {
+        if (!empty($data['user_login'])) {
+            foreach($data['user_login'] as $key=>$value) {
                 $users[$key] = array(
-                    'user_login' => $_POST['user_login'][$key]
+                    'user_login' => $data['user_login'][$key]
                 );
             }
         }
@@ -149,15 +161,17 @@ class Doppler_Save {
 
     public function save_template() {
         // Update post data
-        $post_id = $_GET['id'];
+        $data = $this->get_post_data();
+        $post_id = $data['id'];
         $post_arr = array(
             'ID' => $post_id,
-            'post_title' => $_POST['post_title'],
-            'post_excerpt' => $_POST['post_excerpt'],
-            'post_content' => $_POST['post_content'],
+            'post_title' => $data['post_title'],
+            'post_excerpt' => $data['post_excerpt'],
+            'post_content' => $data['post_content'],
             'post_name' => ''
         );
         wp_update_post($post_arr);
+        var_dump($data);
     }
 }
 ?>

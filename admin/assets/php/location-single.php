@@ -60,6 +60,7 @@
         </div>
     </div>
     <form action="" method="post">
+        <input type="hidden" name="id" value="<?php echo $post_id; ?>">
         <input type="hidden" name="action" value="save">
         <input type="hidden" name="tab" value="<?php echo $tab; ?>">
         <div class="tabs">

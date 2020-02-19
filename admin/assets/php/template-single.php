@@ -21,10 +21,11 @@
         </div>
         <div class="col-6">
             <a class="btn" href="?page=doppler-locations-template">Back</a>
-            <a class="btn blue" href="#save-location">Save</a>
+            <a class="btn blue" href="#save-template">Save</a>
         </div>
     </div>
     <form action="" method="post">
+        <input type="hidden" name="id" value="<?php echo $post_id; ?>">
         <input type="hidden" name="action" value="save">
         <div class="container">
             <?php require_once(plugin_dir_path(dirname(__FILE__)) . 'php/template-details.php'); ?>

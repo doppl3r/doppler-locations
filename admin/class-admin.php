@@ -18,6 +18,8 @@ class Doppler_Locations_Admin {
 		add_action('wp_ajax_restore_post', array($this, 'restore_post'));
 		add_action('wp_ajax_delete_post', array($this, 'delete_post'));
 		add_action('wp_ajax_add_meta_row', array($this, 'add_meta_row'));
+		add_action('wp_ajax_save_template', array($this->doppler_save, 'save_template'));
+		add_action('wp_ajax_save_all_post_content', array($this->doppler_save, 'save_all_post_content'));
 	}
 
 	public function get_doppler_save() {

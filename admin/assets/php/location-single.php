@@ -1,11 +1,14 @@
 <?php
-    // Save data if form was submitted to this post
-    if (isset($_POST['action'])) {
-        require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-save.php');
-    }
-
     // Get location data
     global $current_user, $doppler_locations_plugin;
+
+    // Save data if form was submitted to this post
+    if (isset($_POST['action'])) {
+        // Update all page content (no ajax)
+        $doppler_locations_plugin->get_plugin_admin()->get_doppler_save()->save_all_post_content();
+    }
+
+    // Initialize post content for single page
     $post_type_location = $doppler_locations_plugin->get_post_type_location();
     $post_type_template = $doppler_locations_plugin->get_post_type_template();
     $tab = isset($_POST['tab']) ? $_POST['tab'] : 0;

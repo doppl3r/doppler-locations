@@ -1,7 +1,10 @@
 <?php
+    // Get plugin object
+    global $doppler_locations_plugin;
+
     // Save data if form was submitted to this post
     if (isset($_POST['action'])) {
-        require_once(plugin_dir_path(dirname(__FILE__)) . 'php/template-save.php');
+        $doppler_locations_plugin->get_plugin_admin()->get_doppler_save()->save_template();
     }
 
     // Get template data

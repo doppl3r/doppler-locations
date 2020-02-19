@@ -2,15 +2,26 @@
 
 class Doppler_Locations_Admin {
 	private $doppler_locations;
+	private $doppler_save;
 
 	public function __construct($doppler_locations) {
 		$this->doppler_locations = $doppler_locations;
+
+		// Initialize save class
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-save.php';
+		$this->doppler_save = new Doppler_Save($doppler_locations);
+
+		// Add menu and ajax functions for admin page
 		add_action('admin_menu', array($this, 'add_menu_page')); /* Add admin menu and page */
 		add_action('wp_ajax_add_post', array($this, 'add_post'));
 		add_action('wp_ajax_trash_post', array($this, 'trash_post'));
 		add_action('wp_ajax_restore_post', array($this, 'restore_post'));
 		add_action('wp_ajax_delete_post', array($this, 'delete_post'));
 		add_action('wp_ajax_add_meta_row', array($this, 'add_meta_row'));
+	}
+
+	public function get_doppler_save() {
+		return $this->doppler_save;
 	}
 
 	public function add_menu_page() {

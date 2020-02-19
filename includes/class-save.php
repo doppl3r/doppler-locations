@@ -173,5 +173,16 @@ class Doppler_Save {
         wp_update_post($post_arr);
         var_dump($data);
     }
+
+    public function save_settings() {
+        $data = $this->get_post_data();
+        $doppler_location_slug = !empty($data['doppler_location_slug']) ? $data['doppler_location_slug'] : '';
+        $doppler_location_slug = ltrim($doppler_location_slug, '/');
+        $doppler_location_slug = rtrim($doppler_location_slug, '/');
+        $doppler_location_public = !empty($data['doppler_location_public']) ? $data['doppler_location_public'] : true;
+        update_option('doppler_location_slug', $doppler_location_slug);
+        update_option('doppler_location_public', $doppler_location_public);
+        flush_rewrite_rules();
+    }
 }
 ?>

@@ -86,6 +86,7 @@
 
 			// Define action type from button href
 			if (postType == 'location') action = 'save_all_post_content';
+			else if (postType == 'settings') action = 'save_settings';
 			else if (postType == 'template') {
 				window.htmlEditor.save(); // Save editor to textarea
 				action = 'save_template';

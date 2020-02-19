@@ -1,13 +1,10 @@
 <?php
+    // Get plugin object
+    global $doppler_locations_plugin;
+
     // Save data if form was submitted to this post
     if (isset($_POST['action'])) {
-        $doppler_location_slug = !empty($_POST['doppler_location_slug']) ? $_POST['doppler_location_slug'] : '';
-        $doppler_location_slug = ltrim($doppler_location_slug, '/');
-        $doppler_location_slug = rtrim($doppler_location_slug, '/');
-        $doppler_location_public = !empty($_POST['doppler_location_public']) ? $_POST['doppler_location_public'] : true;
-        update_option('doppler_location_slug', $doppler_location_slug);
-        update_option('doppler_location_public', $doppler_location_public);
-        flush_rewrite_rules();
+        $doppler_locations_plugin->get_plugin_admin()->get_doppler_save()->save_settings();
     }
 
     // Initialize variables

@@ -34,6 +34,7 @@
     $scripts = json_decode(get_post_meta($post_id, 'scripts')[0]);
     $users = json_decode(get_post_meta($post_id, 'users')[0]);
     $permission = current_user_can('administrator') ? true : false;
+    $is_mobile = wp_is_mobile() ? 'mobile' : 'desktop';
 
     // Check users to see if they have permission to edit the page ID
     if (!empty($users)) {
@@ -48,7 +49,7 @@
         require_once(plugin_dir_path(dirname(__FILE__)) . 'php/location-error.php'); wp_die();
     }
 ?>
-<div class="doppler-body loading">
+<div class="doppler-body loading <?php echo $is_mobile; ?>">
     <div class="nav row">
         <div class="col-6">
             <h1>Location Details</h1>

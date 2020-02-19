@@ -13,8 +13,9 @@
     $post_title = $post->post_title;
     $post_excerpt = get_the_excerpt($post_id);
     $post_content = $post->post_content;
+    $is_mobile = wp_is_mobile() ? 'mobile' : 'desktop';
 ?>
-<div class="doppler-body loading">
+<div class="doppler-body loading <?php echo $is_mobile; ?>">
     <div class="nav row">
         <div class="col-6">
             <h1>Template Details</h1>

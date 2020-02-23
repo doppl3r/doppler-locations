@@ -280,7 +280,7 @@ class Doppler_Shortcodes {
         // Generate JSON for Javascript object
         foreach($locations as $index => $loc) {
             $loc_title = get_the_title($loc->ID);
-            $loc_url = get_post_permalink($loc->ID);;
+            $loc_url = get_post_permalink($loc->ID);
             $loc_display_name = get_post_meta($loc->ID, 'display_name')[0];
             $loc_phone = get_post_meta($loc->ID, 'phone')[0];
             $loc_street = get_post_meta($loc->ID, 'street')[0];
@@ -292,14 +292,18 @@ class Doppler_Shortcodes {
             $loc_long = get_post_meta($loc->ID, 'longitude')[0];
             $loc_links = get_post_meta($loc->ID, 'links')[0];
             $loc_posts = get_post_meta($loc->ID, 'custom_posts')[0];
+            $loc_map_link = get_post_meta($loc->ID, 'map_link')[0];
             $loc_geo = array($loc_lat, $loc_long);
 
             // Fix any missing names
             if (empty($loc_display_name)) $loc_display_name = $loc_title;
 
+            // Fix empty map link
+            if (empty($loc_map_link)) $loc_map_link = $loc_url;
+
             // Populate JSON array
             $json_locations[$index]['display_name'] = $loc_display_name;
-            $json_locations[$index]['link'] = $loc_url;
+            $json_locations[$index]['link'] = $loc_map_link;
             $json_locations[$index]['phone'] = $loc_phone;
             $json_locations[$index]['street'] = $loc_street;
             $json_locations[$index]['city'] = $loc_city;

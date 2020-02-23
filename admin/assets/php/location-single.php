@@ -17,6 +17,7 @@
     $url_view = get_post_permalink($post_id);
     $template = get_post_meta($post_id, 'template_id')[0];
     $status = get_post_meta($post_id, 'status')[0];
+    $map_link = get_post_meta($post_id, 'map_link')[0];
     $display_name = get_post_meta($post_id, 'display_name')[0];
     $hours = json_decode(get_post_meta($post_id, 'hours')[0]);
     $city = get_post_meta($post_id, 'city')[0];

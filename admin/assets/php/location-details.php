@@ -1,7 +1,11 @@
 <div class="row">
-    <div class="col-6 post-title">
-        <label for="post-title">Title</label>
+    <div class="col-3 post-title">
+        <label for="post-title">Page Title</label>
         <input id="post-title" name="post_title" type="text" value="<?php echo $post->post_title; ?>">
+    </div>
+    <div class="col-3 display-name">
+        <label for="display-name">Display Name</label>
+        <input id="display-name" name="display_name" type="text" value="<?php echo $display_name; ?>">
     </div>
     <div class="col-3 template-id">
         <label for="template-id">Template</label>
@@ -33,10 +37,7 @@
 <div class="row">
     <div class="col-6">
         <div class="row">
-            <div class="col-12 display-name">
-                <label for="display-name">Display Name</label>
-                <input id="display-name" name="display_name" type="text" value="<?php echo $display_name; ?>">
-            </div>
+            
         </div>
         <div class="row">
             <div class="col-12 hours">
@@ -104,9 +105,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-6">
                 <label for="guide">Guide</label>
                 <input name="guide" id="guide" type="text" value="<?php echo $guide; ?>">
+            </div>
+            <div class="col-6 map-link">
+                <label for="map-link">Map Link</label>
+                <input id="map-link" name="map_link" type="text" value="<?php echo $map_link; ?>">
             </div>
         </div>
     </div>

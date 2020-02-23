@@ -39,6 +39,7 @@ class Doppler_Save {
         // Add postmeta to newly inserted page
         update_post_meta($post_id, 'template_id', $template_id);
         update_post_meta($post_id, 'status', $data['status']);
+        update_post_meta($post_id, 'map_link', $data['map_link']);
         update_post_meta($post_id, 'display_name', $data['display_name']);
         update_post_meta($post_id, 'city', $data['city']);
         update_post_meta($post_id, 'state', $data['state']);
